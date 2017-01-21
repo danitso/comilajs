@@ -3,7 +3,7 @@
 
 ## Synopsis
 
-This library aims to add basic CLI ([Common Language Infrastructure](
+This library aims to provide basic CLI ([Common Language Infrastructure](
 https://en.wikipedia.org/wiki/Common_Language_Infrastructure)) support in
 browsers without the use of plugins.
 
