@@ -15,7 +15,8 @@ having to completely rewrite them.
 
 ## Installation
 
-1. Download the latest stable release [here](releases/latest)
+1. Download the latest stable release [here](
+https://github.com/danitso/comlajs/releases)
 2. Extract the contents of the archive to a directory within your project root
 
 ## Usage
