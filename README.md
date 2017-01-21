@@ -11,7 +11,7 @@ browsers without the use of plugins.
 
 This library was created as a component of a larger commercial project which
 enables regular .NET applications to run as responsive web applications without
-having to completely rewrite them.
+having to rewrite them completely.
 
 ## Installation
 
