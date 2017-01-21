@@ -1,4 +1,4 @@
-[ComlaJS](https://www.comlajs.org/)
+[ComlaJS](http://www.comlajs.org/)
 ===================================
 
 ## Synopsis
