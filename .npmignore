@@ -1,0 +1,17 @@
+# Files to ignore
+
+*.7z
+*.diff
+*.gz
+*.log
+*.patch
+*.rar
+*.tmp
+*.zip
+
+/*.git*
+
+# Directories to ignore
+
+/.idea
+/build

@@ -1,0 +1,29 @@
+{
+  "name": "ComlaJS",
+  "version": "0.1.0",
+  "description": "Common Intermediate Language for JavaScript",
+  "main": "lib/Main.js",
+  "scripts": {
+    "build": "webpack && cd ./build && uglifyjs comla.js --comments \"/^!/\" -c -m --mangle-props --mangle-regex \"/^_/\" -o comla.min.js --source-map comla.min.js.map"
+  },
+  "keywords": [
+    "cil",
+    "clr",
+    "dotnet",
+    "library",
+    "runtime"
+  ],
+  "author": {
+    "name": "Danitso",
+    "url": "http://www.danitso.com/"
+  },
+  "homepage": "http://www.comlajs.org/",
+  "license": "LGPL-3.0",
+  "private": true,
+  "dependencies": {
+    "extend": "^3.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^1.13.3"
+  }
+}
