@@ -31,7 +31,7 @@ browser. This is achieved by targeting `comlajs.javascript.dll`.
 
 ## Limitations
 
-This library does not include an implementation of the `mscorlib`.
+This library does not include an implementation of `mscorlib`.
 
 In case `mscorlib` references are found, the `System` namespace will be mapped
 to `ComlaJS` before all referenced libraries are scanned for a namespace match.
