@@ -107,7 +107,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  this.run = function (path) {
 	    console.log('#### This library is not yet able to run applications ####');
-	    console.log('----------------------------------------------------------')
+	    console.log('----------------------------------------------------------');
 	    console.log('Dumping information about the executable:');
 
 	    var reader = new CLIReader(path);
