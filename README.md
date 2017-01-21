@@ -48,5 +48,5 @@ features they require.
 
 ## License
 
-This project is lincesed under the GNU Lesser General Public License - see the
+This library is licensed under the GNU Lesser General Public License - see the
 [LICENSE](LICENSE) file for details.
