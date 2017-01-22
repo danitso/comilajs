@@ -1,7 +1,7 @@
 {
   "name": "ComlaJS",
   "version": "0.1.0",
-  "description": "Common Intermediate Language for JavaScript",
+  "description": "Common Language Runtime for web applications",
   "main": "lib/Main.js",
   "scripts": {
     "build": "webpack && cd ./build && uglifyjs comla.js --comments \"/^!/\" -c -m --mangle-props --mangle-regex \"/^_/\" -o comla.min.js --source-map comla.min.js.map"

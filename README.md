@@ -3,15 +3,14 @@
 
 ## Synopsis
 
-This library aims to provide basic CLI ([Common Language Infrastructure](
-https://en.wikipedia.org/wiki/Common_Language_Infrastructure)) support in
-browsers without the use of plugins.
+This library aims to provide a lightweight Common Language Runtime for use in
+web applications without the need for plugins or server-side execution.
 
 ## Motivation
 
-This library was created as a component of a larger commercial project which
-enables regular .NET applications to run as responsive web applications without
-having to rewrite them completely.
+This library was developed as part of a larger commercial project which enables
+regular .NET applications to run as responsive web applications without having
+to rewrite them completely.
 
 ## Installation
 
