@@ -117,10 +117,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      console.log(reader.readCOFFHeader());
 	      console.log(reader.readOptionalHeader());
 	      console.log(reader.readSectionHeaders());
+	      console.log(reader.readResourceDirectory());
 	      console.log(reader.readCORHeader());
 	      console.log(reader.readMetadataHeader());
 	      console.log(reader.readTablesHeader());
 	      console.log(reader.readTables());
+	      console.log(reader.readMethods());
 	    }, function() {
 	      console.log('Failed to load the file');
 	    });
@@ -188,14 +190,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var ModuleRow = __webpack_require__(40);
 	var ParamRow = __webpack_require__(41);
 	var PEReader = __webpack_require__(42);
-	var PropertyMapRow = __webpack_require__(48);
-	var PropertyRow = __webpack_require__(49);
-	var StandAloneSigRow = __webpack_require__(50);
+	var PropertyMapRow = __webpack_require__(51);
+	var PropertyRow = __webpack_require__(52);
+	var StandAloneSigRow = __webpack_require__(53);
 	var TableIndexes = __webpack_require__(6);
-	var TablesHeader = __webpack_require__(51);
-	var TypeDefRow = __webpack_require__(52);
-	var TypeRefRow = __webpack_require__(53);
-	var TypeSpecRow = __webpack_require__(54);
+	var TablesHeader = __webpack_require__(54);
+	var TypeDefRow = __webpack_require__(55);
+	var TypeRefRow = __webpack_require__(56);
+	var TypeSpecRow = __webpack_require__(57);
 
 	/**
 	 * Class CLIReader.
@@ -3681,7 +3683,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Extend = __webpack_require__(19);
 	var IOException = __webpack_require__(29);
 	var OptionalHeader = __webpack_require__(46);
-	var SectionHeader = __webpack_require__(47);
+	var ResourceDirectory = __webpack_require__(47);
+	var SectionHeader = __webpack_require__(50);
 
 	/**
 	 * Class PEReader.
@@ -3727,6 +3730,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this._optionalHeader = null;
 
 	  /**
+	   * The resource directory.
+	   *
+	   * @type {ResourceDirectory}
+	   *
+	   * @protected
+	   */
+	  this._resourceDirectory = null;
+
+	  /**
+	   * The resource directory file offset.
+	   *
+	   * @type {number}
+	   *
+	   * @protected
+	   */
+	  this._resourceDirectoryFileOffset = null;
+
+	  /**
 	   * The section headers.
 	   *
 	   * @type {Array<SectionHeader>}
@@ -3757,6 +3778,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    return -1;
+	  };
+
+	  /**
+	   * Retrieves the resource directory file offset.
+	   *
+	   * @return {number}
+	   *   Returns the offset.
+	   */
+	  this.getResourceDirectoryFileOffset = function() {
+	    if (!this._resourceDirectoryFileOffset) {
+	      var sectionHeaders = this.readSectionHeaders();
+	      var sectionHeader = null;
+
+	      for (var i = 0; i < sectionHeaders.length; i++) {
+	        if (sectionHeaders[i].name === '.rsrc') {
+	          sectionHeader = sectionHeaders[i];
+	          break;
+	        }
+	      }
+
+	      if (sectionHeader) {
+	        this._resourceDirectoryFileOffset = sectionHeader.pointerToRawData;
+	      }
+	      else {
+	        this._resourceDirectoryFileOffset = -1;
+	      }
+	    }
+
+	    return this._resourceDirectoryFileOffset;
 	  };
 
 	  /**
@@ -3830,6 +3880,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    return this._optionalHeader;
+	  };
+
+	  /**
+	   * Reads the resource directory.
+	   *
+	   * @return {ResourceDirectory}
+	   *   Returns the resource directory.
+	   *
+	   * @throws {IOException}
+	   */
+	  this.readResourceDirectory = function() {
+	    if (this.getResourceDirectoryFileOffset() < 1) {
+	      return this._resourceDirectory;
+	    }
+
+	    this.setPosition(this.getResourceDirectoryFileOffset());
+	    this._resourceDirectory = new ResourceDirectory(this);
+	    return this._resourceDirectory;
 	  };
 
 	  /**
@@ -4706,6 +4774,251 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * This file is part of ComlaJS.
+	 *
+	 * ComlaJS is free software: you can redistribute it and/or modify it
+	 * under the terms of the GNU Lesser General Public License as published by
+	 * the Free Software Foundation, either version 3 of the License, or
+	 * (at your option) any later version.
+	 *
+	 * ComlaJS is distributed in the hope that it will be useful,
+	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	 * GNU Lesser General Public License for more details.
+	 *
+	 * You should have received a copy of the GNU Lesser General Public License
+	 * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+	 */
+
+	/**
+	 * Class ResourceDirectory.
+	 *
+	 * @param {PEReader} reader
+	 *   The PE reader.
+	 *
+	 * @constructor
+	 * @struct
+	 */
+	function ResourceDirectory (reader) {
+
+	  /**
+	   * The characteristics.
+	   *
+	   * @type {number}
+	   */
+	  this.characteristics = reader.readUInt(4);
+
+	  /**
+	   * The time/date stamp describing the creation time of the resource.
+	   *
+	   * @type {number}
+	   */
+	  this.timeDateStamp = reader.readUInt(4);
+
+	  /**
+	   * The major version number.
+	   *
+	   * @type {number}
+	   */
+	  this.majorVersion = reader.readUInt(2);
+
+	  /**
+	   * The minor version number.
+	   *
+	   * @type {number}
+	   */
+	  this.minorVersion = reader.readUInt(2);
+
+	  /**
+	   * The number of array elements that use names and that follow this structure.
+	   *
+	   * @type {number}
+	   */
+	  this.numberOfNamedEntries = reader.readUInt(2);
+
+	  /**
+	   * The number of array elements that use integer IDs, and which follow this
+	   * structure.
+	   *
+	   * @type {number}
+	   */
+	  this.numberOfIdEntries = reader.readUInt(2);
+
+	  /**
+	   * The resource directory entries.
+	   *
+	   * @type {Array<ResourceDirectoryEntry>}
+	   */
+	  this.entries = new Array(this.numberOfIdEntries + this.numberOfNamedEntries);
+
+	  // Parse the resource directory entries.
+	  var position = reader.getPosition();
+
+	  for (var i = 0; i < this.entries.length; i++) {
+	    reader.setPosition(position + (i * 8));
+	    this.entries[i] = new ResourceDirectoryEntry(reader);
+	  }
+
+	}
+
+	module.exports = ResourceDirectory;
+
+	var ResourceDirectoryEntry = __webpack_require__(48);
+
+
+/***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * This file is part of ComlaJS.
+	 *
+	 * ComlaJS is free software: you can redistribute it and/or modify it
+	 * under the terms of the GNU Lesser General Public License as published by
+	 * the Free Software Foundation, either version 3 of the License, or
+	 * (at your option) any later version.
+	 *
+	 * ComlaJS is distributed in the hope that it will be useful,
+	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	 * GNU Lesser General Public License for more details.
+	 *
+	 * You should have received a copy of the GNU Lesser General Public License
+	 * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+	 */
+
+	var ResourceDataEntry = __webpack_require__(49);
+	var ResourceDirectory = __webpack_require__(47);
+
+	/**
+	 * Class ResourceDirectoryEntry.
+	 *
+	 * @param {PEReader} reader
+	 *   The PE reader.
+	 *
+	 * @constructor
+	 * @struct
+	 */
+	function ResourceDirectoryEntry (reader) {
+
+	  /**
+	   * The name.
+	   *
+	   * @type {number}
+	   */
+	  this.name = reader.readUInt(4);
+
+	  /**
+	   * The offset to the raw data.
+	   *
+	   * @type {number}
+	   */
+	  this.offsetToData = reader.readUInt(4);
+
+	  /**
+	   * The data entry.
+	   *
+	   * @type {ResourceDataEntry}
+	   */
+	  this.data = null;
+
+	  /**
+	   * The resource directory.
+	   *
+	   * @type {ResourceDirectory}
+	   *   The resource directory or NULL if this entry does not point to one.
+	   */
+	  this.directory = null;
+
+	  // Read either a resource directory or a data entry.
+	  if (this.offsetToData >>> 31 === 1) {
+	    this.offsetToData = reader.getResourceDirectoryFileOffset() +
+	      (this.offsetToData << 1 >>> 1);
+	    reader.setPosition(this.offsetToData);
+	    this.directory = new ResourceDirectory(reader);
+	  }
+	  else {
+	    this.offsetToData = reader.getResourceDirectoryFileOffset() +
+	      this.offsetToData;
+	    reader.setPosition(this.offsetToData);
+	    this.data = new ResourceDataEntry(reader);
+	  }
+
+	}
+
+	module.exports = ResourceDirectoryEntry;
+
+
+/***/ },
+/* 49 */
+/***/ function(module, exports) {
+
+	/**
+	 * This file is part of ComlaJS.
+	 *
+	 * ComlaJS is free software: you can redistribute it and/or modify it
+	 * under the terms of the GNU Lesser General Public License as published by
+	 * the Free Software Foundation, either version 3 of the License, or
+	 * (at your option) any later version.
+	 *
+	 * ComlaJS is distributed in the hope that it will be useful,
+	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	 * GNU Lesser General Public License for more details.
+	 *
+	 * You should have received a copy of the GNU Lesser General Public License
+	 * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+	 */
+
+	/**
+	 * Class ResourceDataEntry.
+	 *
+	 * @param {PEReader} reader
+	 *   The PE reader.
+	 *
+	 * @constructor
+	 * @struct
+	 */
+	function ResourceDataEntry (reader) {
+
+	  /**
+	   * The offset to the raw data.
+	   *
+	   * @type {number}
+	   */
+	  this.offsetToData = reader.readUInt(4);
+
+	  /**
+	   * The data size.
+	   *
+	   * @type {number}
+	   */
+	  this.size = reader.readUInt(4);
+
+	  /**
+	   * The code page.
+	   *
+	   * @type {number}
+	   */
+	  this.codePage = reader.readUInt(4);
+
+	  /**
+	   * The reserved value.
+	   *
+	   * @type {number}
+	   */
+	  this.reserved = reader.readUInt(4);
+
+	}
+
+	module.exports = ResourceDataEntry;
+
+
+/***/ },
+/* 50 */
 /***/ function(module, exports) {
 
 	/**
@@ -4814,7 +5127,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 48 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4872,7 +5185,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 49 */
+/* 52 */
 /***/ function(module, exports) {
 
 	/**
@@ -4930,7 +5243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 50 */
+/* 53 */
 /***/ function(module, exports) {
 
 	/**
@@ -4974,7 +5287,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 51 */
+/* 54 */
 /***/ function(module, exports) {
 
 	/**
@@ -5089,7 +5402,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 52 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5179,7 +5492,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 53 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5245,7 +5558,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 54 */
+/* 57 */
 /***/ function(module, exports) {
 
 	/**
