@@ -189,14 +189,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var ModuleRow = __webpack_require__(40);
 	var ParamRow = __webpack_require__(41);
 	var PEReader = __webpack_require__(42);
-	var PropertyMapRow = __webpack_require__(51);
-	var PropertyRow = __webpack_require__(52);
-	var StandAloneSigRow = __webpack_require__(53);
+	var PropertyMapRow = __webpack_require__(52);
+	var PropertyRow = __webpack_require__(53);
+	var StandAloneSigRow = __webpack_require__(54);
 	var TableIndexes = __webpack_require__(6);
-	var TablesHeader = __webpack_require__(54);
-	var TypeDefRow = __webpack_require__(55);
-	var TypeRefRow = __webpack_require__(56);
-	var TypeSpecRow = __webpack_require__(57);
+	var TablesHeader = __webpack_require__(55);
+	var TypeDefRow = __webpack_require__(56);
+	var TypeRefRow = __webpack_require__(57);
+	var TypeSpecRow = __webpack_require__(58);
 
 	/**
 	 * Class CLIReader.
@@ -3680,10 +3680,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	var COFFHeader = __webpack_require__(44);
 	var DOSHeader = __webpack_require__(45);
 	var Extend = __webpack_require__(19);
+	var ImageAttributes = __webpack_require__(46);
 	var IOException = __webpack_require__(29);
-	var OptionalHeader = __webpack_require__(46);
-	var ResourceDirectory = __webpack_require__(47);
-	var SectionHeader = __webpack_require__(50);
+	var OptionalHeader = __webpack_require__(47);
+	var ResourceDirectory = __webpack_require__(48);
+	var SectionHeader = __webpack_require__(51);
 
 	/**
 	 * Class PEReader.
@@ -3765,6 +3766,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *   Returns a file offset.
 	   */
 	  this.getFileOffset = function (rva) {
+	    // Determine which section the address belongs to and convert it to a file
+	    // offset.
 	    var sectionHeaders = this.readSectionHeaders();
 
 	    for (var i = 0; i < sectionHeaders.length; i++) {
@@ -3783,10 +3786,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Retrieves the resource directory file offset.
 	   *
 	   * @return {number}
-	   *   Returns the offset.
+	   *   Returns the file offset or -1 if the resource directory is empty.
 	   */
 	  this.getResourceDirectoryFileOffset = function() {
 	    if (!this._resourceDirectoryFileOffset) {
+	      // Locate the resource section in order to determine the file offset.
 	      var sectionHeaders = this.readSectionHeaders();
 	      var sectionHeader = null;
 
@@ -3819,14 +3823,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  this.readCOFFHeader = function () {
 	    if (!this._coffHeader) {
-	      // Move the stream cursor to the position of the COFF header as
-	      // specified by the DOS header.
+	      // Move the stream cursor to the position of the COFF header as specified
+	      // by the DOS header.
 	      this.setPosition(this.readDOSHeader().lfanew);
 
-	      // Read the header and throw an exception if the header seems to be invalid.
+	      // Read the header and throw an exception if the header seems to be
+	      // invalid.
 	      this._coffHeader = new COFFHeader(this);
 
-	      if (this._coffHeader.signature !== "PE\0\0") {
+	      if (this._coffHeader.signature !== ImageAttributes.IMAGE_NT_SIGNATURE) {
 	        throw new IOException('Invalid COFF header');
 	      }
 	    }
@@ -3848,10 +3853,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Reset the position to the beginning of the stream.
 	      this.setPosition(0);
 
-	      // Read the header from the buffer and throw an exception if the header is invalid.
+	      // Read the header from the buffer and throw an exception if the header is
+	      // invalid.
 	      this._dosHeader = new DOSHeader(this);
 
-	      if (this._dosHeader.magic !== 'MZ') {
+	      if (this._dosHeader.magic !== ImageAttributes.IMAGE_DOS_SIGNATURE) {
 	        throw new IOException('Invalid DOS header');
 	      }
 	    }
@@ -3866,16 +3872,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *   Returns the header values.
 	   *
 	   * @throws {IOException}
+	   *   Thrown if the header is invalid.
 	   */
 	  this.readOptionalHeader = function () {
-	    if ((!this._optionalHeader) && (this.readCOFFHeader().SizeOfOptionalHeader > 0)) {
-	      // Move the stream cursor to the position of the optional
-	      // header as specified by the DOS header and the size of the
-	      // COFF header.
+	    if ((!this._optionalHeader) &&
+	      (this.readCOFFHeader().sizeOfOptionalHeader > 0)) {
+	      // Move the stream cursor to the position of the optional header as
+	      // specified by the DOS header and the size of the COFF header.
 	      this.setPosition(this.readDOSHeader().lfanew + 24);
 
 	      // Read the entire header including the data directories.
 	      this._optionalHeader = new OptionalHeader(this);
+
+	      if ((this._optionalHeader.magic !==
+	        ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) &&
+	        (this._optionalHeader.magic !==
+	        ImageAttributes.IMAGE_NT_OPTIONAL_HDR32_MAGIC) &&
+	        (this._optionalHeader.magic !==
+	        ImageAttributes.IMAGE_ROM_OPTIONAL_HDR_MAGIC)) {
+	        throw new IOException('Invalid optional header');
+	      }
 	    }
 
 	    return this._optionalHeader;
@@ -3886,8 +3902,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @return {ResourceDirectory}
 	   *   Returns the resource directory.
-	   *
-	   * @throws {IOException}
 	   */
 	  this.readResourceDirectory = function() {
 	    if (this.getResourceDirectoryFileOffset() < 1) {
@@ -3909,10 +3923,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (!this._sectionHeaders) {
 	      // Move the stream cursor to the position of the section headers.
 	      this.setPosition(this.readDOSHeader().lfanew + 24 +
-	        this.readCOFFHeader().SizeOfOptionalHeader);
+	        this.readCOFFHeader().sizeOfOptionalHeader);
 
 	      // Read each of the section headers.
-	      this._sectionHeaders = new Array(this.readCOFFHeader().NumberOfSections);
+	      this._sectionHeaders = new Array(this.readCOFFHeader().numberOfSections);
 
 	      for (var i = 0; i < this._sectionHeaders.length; i++) {
 	        this._sectionHeaders[i] = new SectionHeader(this);
@@ -4274,30 +4288,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * The signature.
 	   *
-	   * @type {string}
+	   * @type {number}
 	   */
-	  this.signature = reader.readString(4);
+	  this.signature = reader.readUInt(4);
 
 	  /**
 	   * The architecture type of the computer.
 	   *
 	   * @type {number}
 	   */
-	  this.Machine = reader.readUInt(2);
+	  this.machine = reader.readUInt(2);
 
 	  /**
 	   * The number of sections.
 	   *
 	   * @type {number}
 	   */
-	  this.NumberOfSections = reader.readUInt(2);
+	  this.numberOfSections = reader.readUInt(2);
 
 	  /**
 	   * The low 32 bits of the time stamp of the image.
 	   *
 	   * @type {number}
 	   */
-	  this.TimeDateStamp = reader.readUInt(4);
+	  this.timeDateStamp = reader.readUInt(4);
 
 	  /**
 	   * The offset of the symbol table, in bytes, or zero if no COFF symbol table
@@ -4305,14 +4319,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @type {number}
 	   */
-	  this.PointerToSymbolTable = reader.readUInt(4);
+	  this.pointerToSymbolTable = reader.readUInt(4);
 
 	  /**
 	   * The number of symbols in the symbol table.
 	   *
 	   * @type {number}
 	   */
-	  this.NumberOfSymbols = reader.readUInt(4);
+	  this.numberOfSymbols = reader.readUInt(4);
 
 	  /**
 	   * The size of the optional header, in bytes. This value should be 0 for
@@ -4320,7 +4334,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @type {number}
 	   */
-	  this.SizeOfOptionalHeader = reader.readUInt(2);
+	  this.sizeOfOptionalHeader = reader.readUInt(2);
 
 	  /**
 	   * The characteristics of the image. This member can be one or more of the
@@ -4370,9 +4384,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * The magic number.
 	   *
-	   * @type {string}
+	   * @type {number}
 	   */
-	  this.magic = reader.readString(2);
+	  this.magic = reader.readUInt(2);
 
 	  /**
 	   * The number of bytes on the last page in the file.
@@ -4507,6 +4521,75 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 46 */
+/***/ function(module, exports) {
+
+	/**
+	 * This file is part of ComlaJS.
+	 *
+	 * ComlaJS is free software: you can redistribute it and/or modify it
+	 * under the terms of the GNU Lesser General Public License as published by
+	 * the Free Software Foundation, either version 3 of the License, or
+	 * (at your option) any later version.
+	 *
+	 * ComlaJS is distributed in the hope that it will be useful,
+	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	 * GNU Lesser General Public License for more details.
+	 *
+	 * You should have received a copy of the GNU Lesser General Public License
+	 * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+	 */
+
+	/**
+	 * Class ImageAttributes.
+	 *
+	 * @constructor
+	 * @struct
+	 */
+	function ImageAttributes () {
+
+	  /**
+	   * The DOS header signature.
+	   *
+	   * @const {number}
+	   */
+	  this.IMAGE_DOS_SIGNATURE = 0x5a4d;
+
+	  /**
+	   * The file is an executable image.
+	   *
+	   * @const {number}
+	   */
+	  this.IMAGE_NT_OPTIONAL_HDR64_MAGIC = 0x20b;
+
+	  /**
+	   * The file is an executable image.
+	   *
+	   * @const {number}
+	   */
+	  this.IMAGE_NT_OPTIONAL_HDR32_MAGIC = 0x10b;
+
+	  /**
+	   * The NT header signature.
+	   *
+	   * @const {number}
+	   */
+	  this.IMAGE_NT_SIGNATURE = 0x4550;
+
+	  /**
+	   * The file is a ROM image.
+	   *
+	   * @const {number}
+	   */
+	  this.IMAGE_ROM_OPTIONAL_HDR_MAGIC = 0x107;
+
+	}
+
+	module.exports = new ImageAttributes();
+
+
+/***/ },
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4527,6 +4610,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	var DataDirectoryHeader = __webpack_require__(13);
+	var ImageAttributes = __webpack_require__(46);
 
 	/**
 	 * Class OptionalHeader.
@@ -4603,7 +4687,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @type {number}
 	   */
-	  this.baseOfData = reader.readUInt((this.magic === 0x20b) ? 0 : 4);
+	  this.baseOfData = reader.readUInt(
+	    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 0 : 4);
 
 	  /**
 	   * The preferred address of the first byte of the image when it is loaded in
@@ -4611,7 +4696,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @type {number}
 	   */
-	  this.imageBase = reader.readUInt((this.magic === 0x20b) ? 8 : 4);
+	  this.imageBase = reader.readUInt(
+	    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
 
 	  /**
 	   * The alignment of sections loaded in memory, in bytes.
@@ -4717,28 +4803,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @type {number}
 	   */
-	  this.sizeOfStackReserve = reader.readUInt((this.magic === 0x20b) ? 8 : 4);
+	  this.sizeOfStackReserve = reader.readUInt(
+	    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
 
 	  /**
 	   * The number of bytes to commit for the stack.
 	   *
 	   * @type {number}
 	   */
-	  this.sizeOfStackCommit = reader.readUInt((this.magic === 0x20b) ? 8 : 4);
+	  this.sizeOfStackCommit = reader.readUInt(
+	    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
 
 	  /**
 	   * The number of bytes to reserve for the local heap.
 	   *
 	   * @type {number}
 	   */
-	  this.sizeOfHeapReserve = reader.readUInt((this.magic === 0x20b) ? 8 : 4);
+	  this.sizeOfHeapReserve = reader.readUInt(
+	    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
 
 	  /**
 	   * The number of bytes to commit for the local heap.
 	   *
 	   * @type {number}
 	   */
-	  this.sizeOfHeapCommit = reader.readUInt((this.magic === 0x20b) ? 8 : 4);
+	  this.sizeOfHeapCommit = reader.readUInt(
+	    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
 
 	  /**
 	   * This member is obsolete.
@@ -4772,7 +4862,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4865,11 +4955,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = ResourceDirectory;
 
-	var ResourceDirectoryEntry = __webpack_require__(48);
+	var ResourceDirectoryEntry = __webpack_require__(49);
 
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4889,8 +4979,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
 	 */
 
-	var ResourceDataEntry = __webpack_require__(49);
-	var ResourceDirectory = __webpack_require__(47);
+	var ResourceDataEntry = __webpack_require__(50);
+	var ResourceDirectory = __webpack_require__(48);
 
 	/**
 	 * Class ResourceDirectoryEntry.
@@ -4952,7 +5042,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports) {
 
 	/**
@@ -5017,7 +5107,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports) {
 
 	/**
@@ -5126,7 +5216,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5184,7 +5274,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports) {
 
 	/**
@@ -5242,7 +5332,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports) {
 
 	/**
@@ -5286,7 +5376,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports) {
 
 	/**
@@ -5401,7 +5491,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 55 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5491,7 +5581,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5557,7 +5647,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 57 */
+/* 58 */
 /***/ function(module, exports) {
 
 	/**
