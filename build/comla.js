@@ -89,7 +89,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
 	 */
 
-	var CLIReader = __webpack_require__(1);
+	var CLIParser = __webpack_require__(1);
 
 	/**
 	 * Class Main.
@@ -110,7 +110,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    console.log('----------------------------------------------------------');
 	    console.log('Dumping information about the executable:');
 
-	    var reader = new CLIReader(path);
+	    var reader = new CLIParser(path);
 
 	    reader.loadFile(function() {
 	      console.log(reader.readDOSHeader());
@@ -177,7 +177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var GenericParamConstraintRow = __webpack_require__(26);
 	var ImplMapRow = __webpack_require__(27);
 	var InterfaceImplRow = __webpack_require__(28);
-	var IOException = __webpack_require__(29);
+	var ParserException = __webpack_require__(29);
 	var ManifestResourceRow = __webpack_require__(31);
 	var MetadataHeader = __webpack_require__(32);
 	var MemberRefRow = __webpack_require__(34);
@@ -188,7 +188,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var ModuleRefRow = __webpack_require__(39);
 	var ModuleRow = __webpack_require__(40);
 	var ParamRow = __webpack_require__(41);
-	var PEReader = __webpack_require__(42);
+	var PEParser = __webpack_require__(42);
 	var PropertyMapRow = __webpack_require__(52);
 	var PropertyRow = __webpack_require__(53);
 	var StandAloneSigRow = __webpack_require__(54);
@@ -199,7 +199,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var TypeSpecRow = __webpack_require__(58);
 
 	/**
-	 * Class CLIReader.
+	 * Class CLIParser.
 	 *
 	 * @param {string} path
 	 *   The file path.
@@ -207,12 +207,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   The file contents.
 	 *
 	 * @constructor
-	 * @extends {PEReader}
+	 * @extends {PEParser}
 	 */
-	function CLIReader (path, data) {
+	function CLIParser (path, data) {
 
 	  // Invoke the parent constructor.
-	  Extend(true, this, new PEReader(path, data));
+	  Extend(true, this, new PEParser(path, data));
 
 	  /**
 	   * The COR header.
@@ -292,7 +292,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {CORHeader}
 	   *   Returns the header as an object.
 	   *
-	   * @throws {IOException}
+	   * @throws {ParserException}
 	   *   Thrown if the header is missing or is invalid.
 	   */
 	  this.readCORHeader = function () {
@@ -300,7 +300,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Verify that the CLR (formerly COM) data directory is available.
 	      if ((this.readOptionalHeader().dataDirectory.length < 15) ||
 	        (this.readOptionalHeader().dataDirectory[14].size < 1)) {
-	        throw new IOException('The CLR data directory is missing');
+	        throw new ParserException('The CLR data directory is missing');
 	      }
 
 	      // Move the stream cursor to the position of the COR header.
@@ -311,7 +311,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this._corHeader = new CORHeader(this);
 
 	      if (this._corHeader.sizeOfHeader !== 72) {
-	        throw new IOException('Invalid COR header');
+	        throw new ParserException('Invalid COR header');
 	      }
 	    }
 
@@ -332,7 +332,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var streamHeader = this.getStreamHeader('#GUID');
 
 	    if (!streamHeader) {
-	      throw new IOException('The GUID stream is missing');
+	      throw new ParserException('The GUID stream is missing');
 	    }
 
 	    // Move the stream cursor to the position of the string.
@@ -375,14 +375,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {MetadataHeader}
 	   *   Returns the header values.
 	   *
-	   * @throws {IOException}
+	   * @throws {ParserException}
 	   *   Thrown if the header is missing or is invalid.
 	   */
 	  this.readMetadataHeader = function () {
 	    if (!this._metadataHeader) {
 	      // Verify that the metadata directory is available.
 	      if (this.readCORHeader().metadata.size < 1) {
-	        throw new IOException('The metadata header is missing');
+	        throw new ParserException('The metadata header is missing');
 	      }
 
 	      // Move the stream cursor to the position of the metadata header.
@@ -393,7 +393,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this._metadataHeader = new MetadataHeader(this);
 
 	      if (this._metadataHeader.signature !== 0x424A5342) {
-	        throw new IOException('Invalid metadata header');
+	        throw new ParserException('Invalid metadata header');
 	      }
 	    }
 
@@ -414,7 +414,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var streamHeader = this.getStreamHeader('#Strings');
 
 	    if (!streamHeader) {
-	      throw new IOException('The string stream is missing');
+	      throw new ParserException('The string stream is missing');
 	    }
 
 	    // Move the stream cursor to the position of the string.
@@ -493,7 +493,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {TablesHeader}
 	   *   Returns the header as an object.
 	   *
-	   * @throws {IOException}
+	   * @throws {ParserException}
 	   *   Thrown if the table stream is missing or if the header is invalid.
 	   */
 	  this.readTablesHeader = function () {
@@ -502,7 +502,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var streamHeader = this.getStreamHeader('#~');
 
 	      if (!streamHeader) {
-	        throw new IOException('The stream for the tables is missing');
+	        throw new ParserException('The stream for the tables is missing');
 	      }
 
 	      // Move the stream cursor to the position of the tables header.
@@ -513,7 +513,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      if ((this._tablesHeader.reserved1 !== 0) ||
 	        (this._tablesHeader.reserved2 !== 1)) {
-	        throw new IOException('Invalid tables header');
+	        throw new ParserException('Invalid tables header');
 	      }
 	    }
 
@@ -645,14 +645,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return TypeSpecRow;
 
 	      default:
-	        throw new IOException('Unsupported metadata table at index ' +
+	        throw new ParserException('Unsupported metadata table at index ' +
 	          tableIndex);
 	    }
 	  };
 
 	}
 
-	module.exports = CLIReader;
+	module.exports = CLIParser;
 
 
 /***/ },
@@ -679,7 +679,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class AssemblyOSRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -737,7 +737,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class AssemblyProcessorRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -784,7 +784,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class AssemblyRefOSRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -851,7 +851,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class RowReference.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 * @param {Array<number>} tableIndexes
 	 *   The table indexes.
@@ -1228,7 +1228,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class AssemblyRefProcessorRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -1281,7 +1281,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class AssemblyRefRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -1381,7 +1381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class AssemblyRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -1484,7 +1484,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class ClassLayoutRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -1547,7 +1547,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class ConstantRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -1611,7 +1611,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class CORHeader.
 	 *
-	 * @param {BinaryReader} reader
+	 * @param {BinaryParser} reader
 	 *   The binary reader.
 	 *
 	 * @constructor
@@ -1732,7 +1732,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class DataDirectoryHeader.
 	 *
-	 * @param {BinaryReader} reader
+	 * @param {BinaryParser} reader
 	 *   The binary reader.
 	 *
 	 * @constructor
@@ -1786,7 +1786,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class ConstantRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -1873,7 +1873,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class DeclSecurityRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -1938,7 +1938,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class EventMapRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -1996,7 +1996,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class EventRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -2061,7 +2061,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class ExportedTypeRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -2228,7 +2228,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class FieldRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -2289,7 +2289,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class FieldRVARow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -2345,7 +2345,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class FieldLayoutRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -2401,7 +2401,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class FieldMarshalRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -2455,7 +2455,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class FileRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -2516,7 +2516,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class GenericParamRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -2587,7 +2587,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class GenericParamConstraintRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -2647,7 +2647,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class ImplMapRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -2720,7 +2720,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class InterfaceImplRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -2778,7 +2778,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Extend = __webpack_require__(19);
 
 	/**
-	 * Class IOException.
+	 * Class ParserException.
 	 *
 	 * @param {string} message
 	 *   The message.
@@ -2786,14 +2786,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @constructor
 	 * @extends {CustomException}
 	 */
-	function IOException (message) {
+	function ParserException (message) {
 
 	  // Invoke the parent constructor.
-	  Extend(true, this, new CustomException(message, 'IOException'));
+	  Extend(true, this, new CustomException(message, 'ParserException'));
 
 	}
 
-	module.exports = IOException;
+	module.exports = ParserException;
 
 
 /***/ },
@@ -2906,7 +2906,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class ManifestResourceRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -2977,7 +2977,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class MetadataHeader.
 	 *
-	 * @param {BinaryReader} reader
+	 * @param {BinaryParser} reader
 	 *   The binary reader.
 	 *
 	 * @constructor
@@ -3097,7 +3097,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class StreamHeader.
 	 *
-	 * @param {BinaryReader} reader
+	 * @param {BinaryParser} reader
 	 *   The binary reader.
 	 *
 	 * @constructor
@@ -3158,7 +3158,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class MemberRefRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -3225,7 +3225,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class NestedClassRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -3283,7 +3283,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class MethodDefRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -3367,7 +3367,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class MethodImplRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -3436,7 +3436,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class MethodSemanticsRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -3499,7 +3499,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class ModuleRefRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -3543,7 +3543,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class ModuleRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -3621,7 +3621,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class ParamRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -3676,18 +3676,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
 	 */
 
-	var BinaryReader = __webpack_require__(43);
+	var BinaryParser = __webpack_require__(43);
 	var COFFHeader = __webpack_require__(44);
 	var DOSHeader = __webpack_require__(45);
 	var Extend = __webpack_require__(19);
 	var ImageAttributes = __webpack_require__(46);
-	var IOException = __webpack_require__(29);
+	var ParserException = __webpack_require__(29);
 	var OptionalHeader = __webpack_require__(47);
 	var ResourceDirectory = __webpack_require__(48);
 	var SectionHeader = __webpack_require__(51);
 
 	/**
-	 * Class PEReader.
+	 * Class PEParser.
 	 *
 	 * @param {string} path
 	 *   The file path.
@@ -3695,12 +3695,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   The file contents.
 	 *
 	 * @constructor
-	 * @extends {BinaryReader}
+	 * @extends {BinaryParser}
 	 */
-	function PEReader (path, data) {
+	function PEParser (path, data) {
 
 	  // Invoke the parent constructor.
-	  Extend(true, this, new BinaryReader(path, data));
+	  Extend(true, this, new BinaryParser(path, data));
 
 	  /**
 	   * The COFF header.
@@ -3818,7 +3818,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {COFFHeader}
 	   *   Returns the header as an object.
 	   *
-	   * @throws {IOException}
+	   * @throws {ParserException}
 	   *   Thrown if the header is invalid.
 	   */
 	  this.readCOFFHeader = function () {
@@ -3832,7 +3832,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this._coffHeader = new COFFHeader(this);
 
 	      if (this._coffHeader.signature !== ImageAttributes.IMAGE_NT_SIGNATURE) {
-	        throw new IOException('Invalid COFF header');
+	        throw new ParserException('Invalid COFF header');
 	      }
 	    }
 
@@ -3845,7 +3845,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {DOSHeader}
 	   *   Returns the header as an object.
 	   *
-	   * @throws {IOException}
+	   * @throws {ParserException}
 	   *   Thrown if the header is invalid.
 	   */
 	  this.readDOSHeader = function () {
@@ -3858,7 +3858,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this._dosHeader = new DOSHeader(this);
 
 	      if (this._dosHeader.magic !== ImageAttributes.IMAGE_DOS_SIGNATURE) {
-	        throw new IOException('Invalid DOS header');
+	        throw new ParserException('Invalid DOS header');
 	      }
 	    }
 
@@ -3871,7 +3871,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {OptionalHeader}
 	   *   Returns the header values.
 	   *
-	   * @throws {IOException}
+	   * @throws {ParserException}
 	   *   Thrown if the header is invalid.
 	   */
 	  this.readOptionalHeader = function () {
@@ -3890,7 +3890,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        ImageAttributes.IMAGE_NT_OPTIONAL_HDR32_MAGIC) &&
 	        (this._optionalHeader.magic !==
 	        ImageAttributes.IMAGE_ROM_OPTIONAL_HDR_MAGIC)) {
-	        throw new IOException('Invalid optional header');
+	        throw new ParserException('Invalid optional header');
 	      }
 	    }
 
@@ -3938,7 +3938,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	}
 
-	module.exports = PEReader;
+	module.exports = PEParser;
 
 
 /***/ },
@@ -3963,7 +3963,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	/**
-	 * Class BinaryReader.
+	 * Class BinaryParser.
 	 *
 	 * @param {string} path
 	 *   The file path.
@@ -3972,7 +3972,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @constructor
 	 */
-	function BinaryReader (path, data) {
+	function BinaryParser (path, data) {
 
 	  /**
 	   * The file contents.
@@ -4039,7 +4039,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {Function} error
 	   *   The error callback.
 	   *
-	   * @return {BinaryReader}
+	   * @return {BinaryParser}
 	   *   Returns this instance.
 	   */
 	  this.loadFile = function (success, error) {
@@ -4222,7 +4222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {string} path
 	   *   The file path.
 	   *
-	   * @return {BinaryReader}
+	   * @return {BinaryParser}
 	   *   Returns this instance.
 	   *
 	   * @modifies {this}
@@ -4238,7 +4238,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {number} position
 	   *   The new position.
 	   *
-	   * @return {BinaryReader}
+	   * @return {BinaryParser}
 	   *   Returns this instance.
 	   *
 	   * @modifies {this}
@@ -4250,7 +4250,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	}
 
-	module.exports = BinaryReader;
+	module.exports = BinaryParser;
 
 
 /***/ },
@@ -4277,7 +4277,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class COFFHeader.
 	 *
-	 * @param {BinaryReader} reader
+	 * @param {BinaryParser} reader
 	 *   The binary reader.
 	 *
 	 * @constructor
@@ -4373,7 +4373,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class DOSHeader.
 	 *
-	 * @param {BinaryReader} reader
+	 * @param {BinaryParser} reader
 	 *   The binary reader.
 	 *
 	 * @constructor
@@ -4615,7 +4615,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class OptionalHeader.
 	 *
-	 * @param {BinaryReader} reader
+	 * @param {BinaryParser} reader
 	 *   The binary reader.
 	 *
 	 * @constructor
@@ -4885,7 +4885,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class ResourceDirectory.
 	 *
-	 * @param {PEReader} reader
+	 * @param {PEParser} reader
 	 *   The PE reader.
 	 *
 	 * @constructor
@@ -4985,7 +4985,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class ResourceDirectoryEntry.
 	 *
-	 * @param {PEReader} reader
+	 * @param {PEParser} reader
 	 *   The PE reader.
 	 *
 	 * @constructor
@@ -5065,7 +5065,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class ResourceDataEntry.
 	 *
-	 * @param {PEReader} reader
+	 * @param {PEParser} reader
 	 *   The PE reader.
 	 *
 	 * @constructor
@@ -5130,7 +5130,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class SectionHeader.
 	 *
-	 * @param {BinaryReader} reader
+	 * @param {BinaryParser} reader
 	 *   The binary reader.
 	 *
 	 * @constructor
@@ -5242,7 +5242,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class PropertyMapRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -5297,7 +5297,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class PropertyRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -5355,7 +5355,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class StandAloneSigRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -5399,7 +5399,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class TablesHeader.
 	 *
-	 * @param {BinaryReader} reader
+	 * @param {BinaryParser} reader
 	 *   The binary reader.
 	 *
 	 * @constructor
@@ -5517,7 +5517,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class TypeDefRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -5607,7 +5607,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class TypeRefRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
@@ -5670,7 +5670,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Class TypeSpecRow.
 	 *
-	 * @param {CLIReader} reader
+	 * @param {CLIParser} reader
 	 *   The CLI reader.
 	 *
 	 * @constructor
