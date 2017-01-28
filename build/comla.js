@@ -122,7 +122,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      console.log(reader.readMetadataHeader());
 	      console.log(reader.readTablesHeader());
 	      console.log(reader.readTables());
-	      console.log(reader.readMethods());
 	    }, function() {
 	      console.log('Failed to load the file');
 	    });
