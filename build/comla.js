@@ -4911,7 +4911,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.name = reader.readUInt(4);
 
 	  /**
-	   * The offset to the raw data.
+	   * The file offset to the raw data.
 	   *
 	   * @type {number}
 	   */
@@ -4984,11 +4984,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	function ResourceDataEntry (reader) {
 
 	  /**
-	   * The offset to the raw data.
+	   * The file offset to the raw data.
 	   *
 	   * @type {number}
 	   */
-	  this.offsetToData = reader.readUInt(4);
+	  this.offsetToData = reader.getFileOffset(reader.readUInt(4));
 
 	  /**
 	   * The data size.
