@@ -1,17 +1,32 @@
-# Files to ignore
-
-*.7z
-*.diff
-*.gz
-*.log
-*.patch
-*.rar
-*.tmp
-*.zip
-
-/*.git*
-
 # Directories to ignore
 
 /.idea
 /build
+/example/assets
+/example/project/bin/*
+/example/project/obj
+/example/project/.vs
+/node_modules
+
+# Extensions to ignore
+
+*.7z
+*.diff
+*.dll
+*.exe
+*.gz
+*.log
+*.patch
+*.rar
+*.sln.docstates
+*.suo
+*.tmp
+*.user
+*.userosscache
+*.userprefs
+*.VisualState.xml
+*.zip
+
+# Exceptions
+
+!/example/project/bin/*.exe*

@@ -1,4 +1,13 @@
-# Files to ignore
+# Directories to ignore
+
+/.idea
+/example/assets
+/example/project/bin/*
+/example/project/obj
+/example/project/.vs
+/node_modules
+
+# Extensions to ignore
 
 *.7z
 *.diff
@@ -17,12 +26,6 @@
 *.VisualState.xml
 *.zip
 
-# Directories to ignore
+# Exceptions
 
-/.idea
-/build/test
-/example/assets
-/example/project/bin
-/example/project/obj
-/example/project/.vs
-/node_modules
+!/example/project/bin/*.exe*

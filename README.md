@@ -4,7 +4,7 @@
 ## Synopsis
 
 This library aims to provide a lightweight Common Language Runtime for web
-applications without the need for browser plug-ins or server-side execution.
+applications without the need for browser plugins or server-side execution.
 
 ## Motivation
 
