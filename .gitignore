@@ -2,15 +2,27 @@
 
 *.7z
 *.diff
+*.dll
+*.exe
 *.gz
 *.log
 *.patch
 *.rar
+*.sln.docstates
+*.suo
 *.tmp
+*.user
+*.userosscache
+*.userprefs
+*.VisualState.xml
 *.zip
 
 # Directories to ignore
 
 /.idea
 /build/test
+/example/assets
+/example/project/*/bin
+/example/project/*/obj
+/example/project/*/.vs
 /node_modules

@@ -1,11 +1,21 @@
 {
   "name": "ComlaJS",
   "version": "0.1.0",
-  "description": "Common Language Runtime for web applications",
-  "main": "lib/Main.js",
-  "scripts": {
-    "build": "webpack && cd ./build && uglifyjs comla.js --comments \"/^!/\" -c -m --mangle-props --mangle-regex \"/^_/\" -o comla.min.js --source-map comla.min.js.map"
+  "description": "A lightweight Common Language Runtime for web applications",
+  "author": {
+    "name": "Danitso",
+    "url": "http://www.danitso.com/"
   },
+  "dependencies": {
+    "extend": "3.0.0"
+  },
+  "devDependencies": {
+    "copy": "0.3.0",
+    "http-server": "0.9.0",
+    "mkdirp": "0.5.1",
+    "webpack": "2.2.1"
+  },
+  "homepage": "http://www.comlajs.org/",
   "keywords": [
     "cil",
     "clr",
@@ -13,16 +23,14 @@
     "library",
     "runtime"
   ],
-  "author": {
-    "name": "Danitso",
-    "url": "http://www.danitso.com/"
-  },
-  "homepage": "http://www.comlajs.org/",
   "license": "LGPL-3.0",
-  "dependencies": {
-    "extend": "^3.0.0"
+  "main": "lib/Main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danitso/comlajs.git"
   },
-  "devDependencies": {
-    "webpack": "^1.13.3"
+  "scripts": {
+    "build": "webpack && cd ./build && uglifyjs comla.js --comments \"/^!/\" -c -m --mangle-props --mangle-regex \"/^_/\" -o comla.min.js --source-map comla.min.js.map",
+    "example": "npm run build && mkdirp ./example/assets && cd ./build && copy \"*.*\" \"../example/assets\" && cd ../example && http-server -a localhost -p 8081 -c-1 -o -U --cors"
   }
 }
