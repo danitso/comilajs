@@ -22,7 +22,7 @@
 /.idea
 /build/test
 /example/assets
-/example/project/*/bin
-/example/project/*/obj
-/example/project/*/.vs
+/example/project/bin
+/example/project/obj
+/example/project/.vs
 /node_modules
