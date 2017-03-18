@@ -1,6 +1,0 @@
-C:\Users\Dan\Documents\Danitso\comlajs\example\project\bin\example.exe.config
-C:\Users\Dan\Documents\Danitso\comlajs\example\project\bin\example.exe
-C:\Users\Dan\Documents\Danitso\comlajs\example\project\bin\example.pdb
-C:\Users\Dan\Documents\Danitso\comlajs\example\project\obj\Release\example.csprojResolveAssemblyReference.cache
-C:\Users\Dan\Documents\Danitso\comlajs\example\project\obj\Release\example.exe
-C:\Users\Dan\Documents\Danitso\comlajs\example\project\obj\Release\example.pdb
