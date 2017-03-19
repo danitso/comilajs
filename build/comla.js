@@ -411,8 +411,8 @@ module.exports = new TableIndexes();
 /**
  * Class RowReference.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  * @param {Array<number>} tableIndexes
  *   The table indexes.
  *
@@ -889,17 +889,17 @@ var TypeRefRow = __webpack_require__(58);
 var TypeSpecRow = __webpack_require__(59);
 
 /**
- * Class CLIParser.
+ * Class CILParser.
  *
  * @param {string} path
  *   The file path.
- * @param {ArrayBuffer} data
+ * @param {ArrayBuffer} [data]
  *   The file contents.
  *
  * @constructor
  * @extends {PEParser}
  */
-function CLIParser (path, data) {
+function CILParser (path, data) {
 
   // Invoke the parent constructor.
   Extend(true, this, new PEParser(path, data));
@@ -1117,7 +1117,6 @@ function CLIParser (path, data) {
         this.setPosition(this.getFileOffset(tables[TableIndexes.METHOD_DEF][i]
           .rva));
         this._methodHeaders[i] = new MethodHeader(this);
-        console.log(this.readMethodInstructions(this._methodHeaders[i]));
       }
     }
 
@@ -1390,7 +1389,7 @@ function CLIParser (path, data) {
 
 }
 
-module.exports = CLIParser;
+module.exports = CILParser;
 
 
 /***/ }),
@@ -1502,7 +1501,7 @@ module.exports = CustomException;
  *
  * @param {string} path
  *   The file path.
- * @param {ArrayBuffer} data
+ * @param {ArrayBuffer} [data]
  *   The file contents.
  *
  * @constructor
@@ -2535,8 +2534,8 @@ var MethodFlags = __webpack_require__(10);
 /**
  * Class MethodHeader.
  *
- * @param {CLIParser} reader
- *   The CLI parser.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -2545,10 +2544,12 @@ function MethodHeader (reader) {
 
   // Retrieve the first one or two bytes specifying the flags and header size.
   var flags_and_size = reader.readUInt(1);
+  var tiny = true;
 
   if ((flags_and_size & MethodFlags.TINY_FORMAT) === 0) {
     reader.setPosition(reader.getPosition() - 1);
     flags_and_size = reader.readUInt(2);
+    tiny = false;
   }
 
   /**
@@ -2556,32 +2557,28 @@ function MethodHeader (reader) {
    *
    * @type {number}
    */
-  this.flags = ((flags_and_size & MethodFlags.TINY_FORMAT) !== 0) ?
-    flags_and_size & 0x03 : flags_and_size & 0xFFF;
+  this.flags = tiny ? flags_and_size & 0x03 : flags_and_size & 0xFFF;
 
   /**
    * The header size.
    *
    * @type {number}
    */
-  this.size = ((flags_and_size & MethodFlags.TINY_FORMAT) !== 0) ? 1 :
-    flags_and_size >> 12;
+  this.size = tiny ? 1 : flags_and_size >> 12;
 
   /**
    * The maximum number of items on the operand stack.
    *
    * @return {number}
    */
-  this.maxStack = ((flags_and_size & MethodFlags.TINY_FORMAT) !== 0) ? 0 :
-    reader.readUInt(2);
+  this.maxStack = tiny ? 0 : reader.readUInt(2);
 
   /**
    * The size in bytes of the actual method body.
    *
    * @return {number}
    */
-  this.codeSize = ((flags_and_size & MethodFlags.TINY_FORMAT) !== 0) ?
-    flags_and_size >> 2 : reader.readUInt(4);
+  this.codeSize = tiny ? flags_and_size >> 2 : reader.readUInt(4);
 
   /**
    * The metadata token for a signature describing the layout of the local
@@ -2589,8 +2586,7 @@ function MethodHeader (reader) {
    *
    * @return {number}
    */
-  this.localVarSigTok = ((flags_and_size & MethodFlags.TINY_FORMAT) !== 0) ? 0 :
-    reader.readUInt(4);
+  this.localVarSigTok = tiny ? 0 : reader.readUInt(4);
 
   /**
    * The file offset to the code.
@@ -3195,7 +3191,7 @@ var SectionHeader = __webpack_require__(19);
  *
  * @param {string} path
  *   The file path.
- * @param {ArrayBuffer} data
+ * @param {ArrayBuffer} [data]
  *   The file contents.
  *
  * @constructor
@@ -3469,8 +3465,8 @@ module.exports = PEParser;
 /**
  * Class AssemblyOSRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -3527,8 +3523,8 @@ module.exports = AssemblyOSRow;
 /**
  * Class AssemblyProcessorRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -3574,8 +3570,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class AssemblyRefOSRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -3644,8 +3640,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class AssemblyRefProcessorRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -3697,8 +3693,8 @@ module.exports = AssemblyRefProcessorRow;
 /**
  * Class AssemblyRefRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -3797,8 +3793,8 @@ module.exports = AssemblyRefRow;
 /**
  * Class AssemblyRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -3900,8 +3896,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class ClassLayoutRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -3963,8 +3959,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class ConstantRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4028,8 +4024,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class ConstantRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4115,8 +4111,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class DeclSecurityRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4180,8 +4176,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class EventMapRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4238,8 +4234,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class EventRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4303,8 +4299,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class ExportedTypeRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4381,8 +4377,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class FieldLayoutRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4437,8 +4433,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class FieldMarshalRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4494,8 +4490,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class FieldRVARow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4547,8 +4543,8 @@ module.exports = FieldRVARow;
 /**
  * Class FieldRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4605,8 +4601,8 @@ module.exports = FieldRow;
 /**
  * Class FileRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4666,8 +4662,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class GenericParamConstraintRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4726,8 +4722,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class GenericParamRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4797,8 +4793,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class ImplMapRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4870,8 +4866,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class InterfaceImplRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -4930,8 +4926,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class ManifestResourceRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5002,8 +4998,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class MemberRefRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5069,8 +5065,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class MethodDefRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5153,8 +5149,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class MethodImplRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5222,8 +5218,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class MethodSemanticsRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5285,8 +5281,8 @@ module.exports = MethodSemanticsRow;
 /**
  * Class ModuleRefRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5329,8 +5325,8 @@ module.exports = ModuleRefRow;
 /**
  * Class ModuleRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5410,8 +5406,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class NestedClassRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5465,8 +5461,8 @@ module.exports = NestedClassRow;
 /**
  * Class ParamRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5526,8 +5522,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class PropertyMapRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5581,8 +5577,8 @@ module.exports = PropertyMapRow;
 /**
  * Class PropertyRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5639,8 +5635,8 @@ module.exports = PropertyRow;
 /**
  * Class StandAloneSigRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5686,8 +5682,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class TypeDefRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5776,8 +5772,8 @@ var TableIndexes = __webpack_require__(0);
 /**
  * Class TypeRefRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5839,8 +5835,8 @@ module.exports = TypeRefRow;
 /**
  * Class TypeSpecRow.
  *
- * @param {CLIParser} reader
- *   The CLI reader.
+ * @param {CILParser} reader
+ *   The CIL reader.
  *
  * @constructor
  * @struct
@@ -5880,7 +5876,7 @@ module.exports = TypeSpecRow;
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var CLIParser = __webpack_require__(7);
+var CILParser = __webpack_require__(7);
 
 /**
  * Class Main.
@@ -5901,9 +5897,7 @@ function Main () {
     console.log('----------------------------------------------------------');
     console.log('Dumping information about the executable:');
 
-    var reader = new CLIParser(path);
-
-    reader.loadFile(function() {
+    (new CILParser(path)).loadFile(function(reader) {
       console.log(reader.readDOSHeader());
       console.log(reader.readCOFFHeader());
       console.log(reader.readOptionalHeader());
