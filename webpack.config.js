@@ -55,7 +55,7 @@ module.exports = {
     "filename": "[name].js",
     "library": "comlajs",
     "libraryTarget": "umd",
-    "path": __dirname + "/build",
+    "path": __dirname + "/dist",
     "publicPath": "/assets/",
     "sourceMapFilename": '[file].map',
     "umdNamedDefine": true

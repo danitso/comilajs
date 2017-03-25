@@ -1,8 +1,6 @@
 # Directories to ignore
 
 /.idea
-/build
-/demo/assets
 /demo/project/bin/*
 /demo/project/obj
 /demo/project/.vs
