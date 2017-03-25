@@ -22,11 +22,11 @@ folder to your project's public assets folder.
 ## Usage
 
 1. Include the [comla.min.js](dist/comla.min.js) script on the page
-2. Run an application by invoking `comlajs.run('/path/to/application.exe')`
+2. Run an application by invoking `comlajs.run('path/to/application.exe')`
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <title>Application Name</title>
     <meta charset="utf-8"/>
@@ -35,7 +35,7 @@ folder to your project's public assets folder.
 
   <body>
     <script>
-      comlajs.run('/path/to/application.exe');
+      comlajs.run('path/to/application.exe');
     </script>
   </body>
 </html>
