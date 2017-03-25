@@ -17,36 +17,18 @@
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var webpack = require('webpack');
-
-// Generate the copyright notice to use as the file header.
-var pkg = require('./package.json');
-
-pkg.name = pkg.name.substring(0, 1).toUpperCase() +
-  pkg.name.substring(1, pkg.name.length - 2) +
-  pkg.name.substring(pkg.name.length - 2).toUpperCase();
-
-var banner = pkg.name + ' v' + pkg.version + "\n" + 'Copyright (c) ' +
-  new Date().getFullYear() + ' ' + pkg.author.name + "\n" + pkg.homepage +
-  "\n\n" +
-  'This program is free software: you can redistribute it and/or modify it ' +
-  "\n" +
-  'under the terms of the GNU Lesser General Public License as published by' +
-  "\n" +
-  'the Free Software Foundation, either version 3 of the License, or' +
-  "\n" +
-  '(at your option) any later version.' + "\n\n" +
-  'This program is distributed in the hope that it will be useful,' + "\n" +
-  'but WITHOUT ANY WARRANTY; without even the implied warranty of' + "\n" +
-  'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the' + "\n" +
-  'GNU Lesser General Public License for more details.' + "\n\n" +
-  'You should have received a copy of the GNU Lesser General Public License' +
-  "\n" +
-  'along with this program. If not, see <http://www.gnu.org/licenses/>.';
+var FileHeader = require('./src/FileHeader');
+var Webpack = require('webpack');
 
 // Export the webpack configuration.
 module.exports = {
-  "entry": "./src/Main.js",
+  "devServer": {
+    "contentBase": __dirname + "/demo"
+  },
+  "entry": {
+    "comla": __dirname + "/src/Main.js",
+    "comla.min": __dirname + "/src/Main.js"
+  },
   "module": {
     "rules": [
       {
@@ -54,21 +36,45 @@ module.exports = {
         "exclude": /node_modules/,
         "loader": "jshint-loader",
         "options": {
+          "browser": true,
+          "curly": true,
+          "devel": true,
           "emitErrors": true,
-          "failOnHint": true
+          "failOnHint": true,
+          "freeze": true,
+          "nonbsp": true,
+          "nonew": true,
+          "strict": true,
+          "undef": true
         },
         "test": /\.js$/
       }
     ]
   },
   "output": {
-    "filename": "comla.js",
+    "filename": "[name].js",
     "library": "comlajs",
     "libraryTarget": "umd",
-    "path": "./build",
+    "path": __dirname + "/build",
+    "publicPath": "/assets/",
+    "sourceMapFilename": '[file].map',
     "umdNamedDefine": true
   },
   "plugins": [
-    new webpack.BannerPlugin(banner)
+    new Webpack.BannerPlugin(FileHeader.text),
+    new Webpack.optimize.UglifyJsPlugin({
+      "compress": {
+        "warnings": false
+      },
+      "include": /\.min\.js$/,
+      "mangle.props": {
+        "regex": /^_/
+      },
+      "sourceMap": true
+    }),
+    new Webpack.SourceMapDevToolPlugin({
+      "filename": '[file].map',
+      "include": /\.min\.js$/
+    })
   ]
 };

@@ -10,12 +10,10 @@
     "extend": "3.0.0"
   },
   "devDependencies": {
-    "copy": "0.3.0",
-    "http-server": "0.9.0",
     "jshint": "2.9.4",
     "jshint-loader": "0.8.4",
-    "mkdirp": "0.5.1",
-    "webpack": "2.2.1"
+    "webpack": "2.2.1",
+    "webpack-dev-server": "2.4.2"
   },
   "homepage": "http://www.comlajs.org/",
   "keywords": [
@@ -32,7 +30,7 @@
     "url": "https://github.com/danitso/comlajs.git"
   },
   "scripts": {
-    "build": "webpack && cd ./build && uglifyjs comla.js --comments \"/^!/\" -c -m --mangle-props --mangle-regex \"/^_/\" -o comla.min.js --source-map comla.min.js.map",
-    "demo": "npm run build && mkdirp ./demo/assets && cd ./build && copy \"*.*\" \"../demo/assets\" && cd ../demo && http-server -a localhost -p 4768 -c-1 -o -U --cors"
+    "build": "webpack",
+    "demo": "webpack-dev-server"
   }
 }
