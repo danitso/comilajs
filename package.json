@@ -24,7 +24,7 @@
     "runtime"
   ],
   "license": "LGPL-3.0",
-  "main": "lib/Main.js",
+  "main": "src/Main.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/danitso/comlajs.git"

@@ -44,7 +44,7 @@ var banner = pkg.name + ' v' + pkg.version + "\n" + 'Copyright (c) ' +
 
 // Export the webpack configuration.
 module.exports = {
-  "entry": "./lib/Main.js",
+  "entry": "./src/Main.js",
   "output": {
     "filename": "comla.js",
     "library": "comlajs",
