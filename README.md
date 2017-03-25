@@ -20,8 +20,25 @@ https://github.com/danitso/comlajs/releases)
 
 ## Usage
 
-1. Include the [comla.min.js](build/comla.min.js) script on the page
+1. Include the [comla.min.js](dist/comla.min.js) script on the page
 2. Run an application by invoking `comlajs.run('/path/to/executable.exe')`
+
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Application Name</title>
+    <meta charset="utf-8"/>
+    <script src="assets/comla.min.js"></script>
+  </head>
+
+  <body>
+    <script>
+      comlajs.run('/path/to/application.exe');
+    </script>
+  </body>
+</html>
+```
 
 ## Platform Invocation
 
