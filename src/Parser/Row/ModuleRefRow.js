@@ -26,6 +26,8 @@
  */
 function ModuleRefRow (reader) {
 
+  "use strict";
+
   /**
    * The name as an index into the string heap.
    *

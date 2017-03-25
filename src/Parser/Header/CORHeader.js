@@ -28,6 +28,8 @@ var DataDirectoryHeader = require('./DataDirectoryHeader');
  */
 function CORHeader (reader) {
 
+  "use strict";
+
   /**
    * The size of the header, in bytes.
    *

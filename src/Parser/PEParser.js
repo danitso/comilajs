@@ -38,6 +38,8 @@ var SectionHeader = require('./Header/SectionHeader');
  */
 function PEParser (path, data) {
 
+  "use strict";
+
   // Invoke the parent constructor.
   Extend(true, this, new BinaryParser(path, data));
 

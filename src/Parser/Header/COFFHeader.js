@@ -26,6 +26,8 @@
  */
 function COFFHeader (reader) {
 
+  "use strict";
+
   /**
    * The signature.
    *

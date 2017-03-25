@@ -29,6 +29,8 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function FieldRVARow (reader) {
 
+  "use strict";
+
   /**
    * The relative virtual address of the initial value.
    *

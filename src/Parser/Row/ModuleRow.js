@@ -26,6 +26,8 @@
  */
 function ModuleRow (reader) {
 
+  "use strict";
+
   /**
    * The generation.
    *

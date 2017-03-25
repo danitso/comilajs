@@ -29,6 +29,8 @@ var ImageAttributes = require('./../Constant/ImageAttributes');
  */
 function OptionalHeader (reader) {
 
+  "use strict";
+
   /**
    * The state of the image file.
    *

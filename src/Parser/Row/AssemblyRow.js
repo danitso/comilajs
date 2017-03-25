@@ -26,6 +26,8 @@
  */
 function AssemblyRow (reader) {
 
+  "use strict";
+
   /**
    * The id of the hashing algorithm.
    *

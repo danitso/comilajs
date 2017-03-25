@@ -25,6 +25,8 @@
  */
 function Module (reader) {
 
+  "use strict";
+
   /**
    * The blobs.
    *

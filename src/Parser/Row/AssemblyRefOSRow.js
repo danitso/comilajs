@@ -29,6 +29,8 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function AssemblyRefOSRow (reader) {
 
+  "use strict";
+
   /**
    * The OS platform id.
    *

@@ -29,6 +29,8 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function MethodDefRow (reader) {
 
+  "use strict";
+
   /**
    * The relative virtual address.
    *

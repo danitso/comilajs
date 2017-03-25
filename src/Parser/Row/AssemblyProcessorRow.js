@@ -26,6 +26,8 @@
  */
 function AssemblyProcessorRow (reader) {
 
+  "use strict";
+
   /**
    * The processor type.
    *

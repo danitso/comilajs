@@ -29,6 +29,8 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function EventMapRow (reader) {
 
+  "use strict";
+
   /**
    * The reference to the parent row.
    *

@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * This file is part of ComlaJS.
  *
@@ -45,6 +47,20 @@ var banner = pkg.name + ' v' + pkg.version + "\n" + 'Copyright (c) ' +
 // Export the webpack configuration.
 module.exports = {
   "entry": "./src/Main.js",
+  "module": {
+    "rules": [
+      {
+        "enforce": "pre",
+        "exclude": /node_modules/,
+        "loader": "jshint-loader",
+        "options": {
+          "emitErrors": true,
+          "failOnHint": true
+        },
+        "test": /\.js$/
+      }
+    ]
+  },
   "output": {
     "filename": "comla.js",
     "library": "comlajs",

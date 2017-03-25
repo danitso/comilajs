@@ -29,6 +29,8 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function GenericParamConstraintRow (reader) {
 
+  "use strict";
+
   /**
    * The reference to the owner row.
    *

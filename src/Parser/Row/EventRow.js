@@ -29,6 +29,8 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function EventRow (reader) {
 
+  "use strict";
+
   /**
    * The event flags.
    *

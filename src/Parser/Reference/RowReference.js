@@ -28,6 +28,8 @@
  */
 function RowReference (reader, tableIndexes) {
 
+  "use strict";
+
   /**
    * The table index.
    *

@@ -29,6 +29,8 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function TypeDefRow (reader) {
 
+  "use strict";
+
   /**
    * The flags.
    *

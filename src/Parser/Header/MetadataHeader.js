@@ -28,6 +28,8 @@ var StreamHeader = require('./StreamHeader');
  */
 function MetadataHeader (reader) {
 
+  "use strict";
+
   var i;
 
   /**

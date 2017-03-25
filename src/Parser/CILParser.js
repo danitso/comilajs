@@ -74,6 +74,8 @@ var TypeSpecRow = require('./Row/TypeSpecRow');
  */
 function CILParser (path, data) {
 
+  "use strict";
+
   // Invoke the parent constructor.
   Extend(true, this, new PEParser(path, data));
 

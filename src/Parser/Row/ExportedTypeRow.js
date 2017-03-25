@@ -29,6 +29,8 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function ExportedTypeRow (reader) {
 
+  "use strict";
+
   /**
    * The flags.
    *

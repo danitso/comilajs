@@ -28,6 +28,8 @@ var MethodFlags = require('../Constant/MethodFlags');
  */
 function MethodHeader (reader) {
 
+  "use strict";
+
   // Retrieve the first one or two bytes specifying the flags and header size.
   var flags_and_size = reader.readUInt(1);
   var tiny = true;

@@ -29,6 +29,8 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function MethodSemanticsRow (reader) {
 
+  "use strict";
+
   /**
    * The semantics.
    *

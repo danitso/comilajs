@@ -29,6 +29,8 @@ var ResourceDirectory = require('./../Directory/ResourceDirectory');
  */
 function ResourceDirectoryEntry (reader) {
 
+  "use strict";
+
   /**
    * The name.
    *

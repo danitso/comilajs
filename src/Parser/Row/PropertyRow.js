@@ -26,6 +26,8 @@
  */
 function PropertyRow (reader) {
 
+  "use strict";
+
   /**
    * The property flags.
    *

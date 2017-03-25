@@ -29,6 +29,8 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function ConstantRow (reader) {
 
+  "use strict";
+
   /**
    * The type.
    *

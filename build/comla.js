@@ -123,6 +123,8 @@ return /******/ (function(modules) { // webpackBootstrap
  */
 function TableIndexes () {
 
+  "use strict";
+
   /**
    * The table index for the 'Assembly' table.
    *
@@ -421,6 +423,8 @@ module.exports = new TableIndexes();
  */
 function RowReference (reader, tableIndexes) {
 
+  "use strict";
+
   /**
    * The table index.
    *
@@ -590,6 +594,8 @@ module.exports = function extend() {
  */
 function ImageAttributes () {
 
+  "use strict";
+
   /**
    * The DOS header signature.
    *
@@ -661,6 +667,8 @@ module.exports = new ImageAttributes();
  * @struct
  */
 function ResourceDirectory (reader) {
+
+  "use strict";
 
   /**
    * The characteristics.
@@ -762,6 +770,8 @@ var Extend = __webpack_require__(2);
  */
 function ParserException (message) {
 
+  "use strict";
+
   // Invoke the parent constructor.
   Extend(true, this, new CustomException(message, 'ParserException'));
 
@@ -801,6 +811,8 @@ module.exports = ParserException;
  * @struct
  */
 function DataDirectoryHeader (reader) {
+
+  "use strict";
 
   /**
    * The relative virtual address of the table.
@@ -900,6 +912,8 @@ var TypeSpecRow = __webpack_require__(59);
  * @extends {PEParser}
  */
 function CILParser (path, data) {
+
+  "use strict";
 
   // Invoke the parent constructor.
   Extend(true, this, new PEParser(path, data));
@@ -1425,6 +1439,8 @@ module.exports = CILParser;
  */
 function CustomException (message, type) {
 
+  "use strict";
+
   /**
    * The exception message.
    *
@@ -1507,6 +1523,8 @@ module.exports = CustomException;
  * @constructor
  */
 function BinaryParser (path, data) {
+
+  "use strict";
 
   /**
    * The file contents.
@@ -1816,6 +1834,8 @@ module.exports = BinaryParser;
  */
 function MethodFlags () {
 
+  "use strict";
+
   /**
    * The fat format flag.
    *
@@ -1880,6 +1900,8 @@ module.exports = new MethodFlags();
  * @struct
  */
 function ResourceDataEntry (reader) {
+
+  "use strict";
 
   /**
    * The file offset to the raw data.
@@ -1948,6 +1970,8 @@ var ResourceDirectory = __webpack_require__(4);
  * @struct
  */
 function ResourceDirectoryEntry (reader) {
+
+  "use strict";
 
   /**
    * The name.
@@ -2028,6 +2052,8 @@ module.exports = ResourceDirectoryEntry;
  * @struct
  */
 function COFFHeader (reader) {
+
+  "use strict";
 
   /**
    * The signature.
@@ -2126,6 +2152,8 @@ var DataDirectoryHeader = __webpack_require__(6);
  * @struct
  */
 function CORHeader (reader) {
+
+  "use strict";
 
   /**
    * The size of the header, in bytes.
@@ -2247,6 +2275,8 @@ module.exports = CORHeader;
  * @struct
  */
 function DOSHeader (reader) {
+
+  "use strict";
 
   /**
    * The magic number.
@@ -2420,6 +2450,8 @@ var StreamHeader = __webpack_require__(20);
  */
 function MetadataHeader (reader) {
 
+  "use strict";
+
   var i;
 
   /**
@@ -2542,6 +2574,8 @@ var MethodFlags = __webpack_require__(10);
  */
 function MethodHeader (reader) {
 
+  "use strict";
+
   // Retrieve the first one or two bytes specifying the flags and header size.
   var flags_and_size = reader.readUInt(1);
   var tiny = true;
@@ -2634,6 +2668,8 @@ var ImageAttributes = __webpack_require__(3);
  * @struct
  */
 function OptionalHeader (reader) {
+
+  "use strict";
 
   /**
    * The state of the image file.
@@ -2905,6 +2941,8 @@ module.exports = OptionalHeader;
  */
 function SectionHeader (reader) {
 
+  "use strict";
+
   /**
    * The section name.
    *
@@ -3014,6 +3052,8 @@ module.exports = SectionHeader;
  */
 function StreamHeader (reader) {
 
+  "use strict";
+
   /**
    * The file offset to the stream relative to the metadata header.
    *
@@ -3071,6 +3111,8 @@ module.exports = StreamHeader;
  * @struct
  */
 function TablesHeader (reader) {
+
+  "use strict";
 
   var i1, i2;
 
@@ -3198,6 +3240,8 @@ var SectionHeader = __webpack_require__(19);
  * @extends {BinaryParser}
  */
 function PEParser (path, data) {
+
+  "use strict";
 
   // Invoke the parent constructor.
   Extend(true, this, new BinaryParser(path, data));
@@ -3473,6 +3517,8 @@ module.exports = PEParser;
  */
 function AssemblyOSRow (reader) {
 
+  "use strict";
+
   /**
    * The OS platform id.
    *
@@ -3531,6 +3577,8 @@ module.exports = AssemblyOSRow;
  */
 function AssemblyProcessorRow (reader) {
 
+  "use strict";
+
   /**
    * The processor type.
    *
@@ -3577,6 +3625,8 @@ var TableIndexes = __webpack_require__(0);
  * @struct
  */
 function AssemblyRefOSRow (reader) {
+
+  "use strict";
 
   /**
    * The OS platform id.
@@ -3648,6 +3698,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function AssemblyRefProcessorRow (reader) {
 
+  "use strict";
+
   /**
    * The processor type.
    *
@@ -3700,6 +3752,8 @@ module.exports = AssemblyRefProcessorRow;
  * @struct
  */
 function AssemblyRefRow (reader) {
+
+  "use strict";
 
   /**
    * The major version.
@@ -3800,6 +3854,8 @@ module.exports = AssemblyRefRow;
  * @struct
  */
 function AssemblyRow (reader) {
+
+  "use strict";
 
   /**
    * The id of the hashing algorithm.
@@ -3904,6 +3960,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function ClassLayoutRow (reader) {
 
+  "use strict";
+
   /**
    * The packing size.
    *
@@ -3966,6 +4024,8 @@ var TableIndexes = __webpack_require__(0);
  * @struct
  */
 function ConstantRow (reader) {
+
+  "use strict";
 
   /**
    * The type.
@@ -4031,6 +4091,8 @@ var TableIndexes = __webpack_require__(0);
  * @struct
  */
 function CustomAttributeRow (reader) {
+
+  "use strict";
 
   /**
    * The reference to the parent row.
@@ -4119,6 +4181,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function DeclSecurityRow (reader) {
 
+  "use strict";
+
   /**
    * The action.
    *
@@ -4184,6 +4248,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function EventMapRow (reader) {
 
+  "use strict";
+
   /**
    * The reference to the parent row.
    *
@@ -4241,6 +4307,8 @@ var TableIndexes = __webpack_require__(0);
  * @struct
  */
 function EventRow (reader) {
+
+  "use strict";
 
   /**
    * The event flags.
@@ -4306,6 +4374,8 @@ var TableIndexes = __webpack_require__(0);
  * @struct
  */
 function ExportedTypeRow (reader) {
+
+  "use strict";
 
   /**
    * The flags.
@@ -4385,6 +4455,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function FieldLayoutRow (reader) {
 
+  "use strict";
+
   /**
    * The offset.
    *
@@ -4440,6 +4512,8 @@ var TableIndexes = __webpack_require__(0);
  * @struct
  */
 function FieldMarshalRow (reader) {
+
+  "use strict";
 
   /**
    * The reference to the parent row.
@@ -4498,6 +4572,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function FieldRVARow (reader) {
 
+  "use strict";
+
   /**
    * The relative virtual address of the initial value.
    *
@@ -4550,6 +4626,8 @@ module.exports = FieldRVARow;
  * @struct
  */
 function FieldRow (reader) {
+
+  "use strict";
 
   /**
    * The flags.
@@ -4608,6 +4686,8 @@ module.exports = FieldRow;
  * @struct
  */
 function FileRow (reader) {
+
+  "use strict";
 
   /**
    * The OS platform id.
@@ -4670,6 +4750,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function GenericParamConstraintRow (reader) {
 
+  "use strict";
+
   /**
    * The reference to the owner row.
    *
@@ -4729,6 +4811,8 @@ var TableIndexes = __webpack_require__(0);
  * @struct
  */
 function GenericParamRow (reader) {
+
+  "use strict";
 
   /**
    * The index of the generic parameter.
@@ -4800,6 +4884,8 @@ var TableIndexes = __webpack_require__(0);
  * @struct
  */
 function ImplMapRow (reader) {
+
+  "use strict";
 
   /**
    * The mapping flags.
@@ -4874,6 +4960,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function InterfaceImplRow (reader) {
 
+  "use strict";
+
   /**
    * The reference to the class definition row.
    *
@@ -4933,6 +5021,8 @@ var TableIndexes = __webpack_require__(0);
  * @struct
  */
 function ManifestResourceRow (reader) {
+
+  "use strict";
 
   /**
    * The offset.
@@ -5006,6 +5096,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function MemberRefRow (reader) {
 
+  "use strict";
+
   /**
    * The reference to the class definition row.
    *
@@ -5072,6 +5164,8 @@ var TableIndexes = __webpack_require__(0);
  * @struct
  */
 function MethodDefRow (reader) {
+
+  "use strict";
 
   /**
    * The relative virtual address.
@@ -5157,6 +5251,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function MethodImplRow (reader) {
 
+  "use strict";
+
   /**
    * The reference to the class definition row.
    *
@@ -5226,6 +5322,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function MethodSemanticsRow (reader) {
 
+  "use strict";
+
   /**
    * The semantics.
    *
@@ -5289,6 +5387,8 @@ module.exports = MethodSemanticsRow;
  */
 function ModuleRefRow (reader) {
 
+  "use strict";
+
   /**
    * The name as an index into the string heap.
    *
@@ -5332,6 +5432,8 @@ module.exports = ModuleRefRow;
  * @struct
  */
 function ModuleRow (reader) {
+
+  "use strict";
 
   /**
    * The generation.
@@ -5414,6 +5516,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function NestedClassRow (reader) {
 
+  "use strict";
+
   /**
    * The reference to the nested class information row.
    *
@@ -5468,6 +5572,8 @@ module.exports = NestedClassRow;
  * @struct
  */
 function ParamRow (reader) {
+
+  "use strict";
 
   /**
    * The flags.
@@ -5530,6 +5636,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function PropertyMapRow (reader) {
 
+  "use strict";
+
   /**
    * The reference to the parent row.
    *
@@ -5584,6 +5692,8 @@ module.exports = PropertyMapRow;
  * @struct
  */
 function PropertyRow (reader) {
+
+  "use strict";
 
   /**
    * The property flags.
@@ -5643,6 +5753,8 @@ module.exports = PropertyRow;
  */
 function StandAloneSigRow (reader) {
 
+  "use strict";
+
   /**
    * The signature as an index into the blob heap.
    *
@@ -5689,6 +5801,8 @@ var TableIndexes = __webpack_require__(0);
  * @struct
  */
 function TypeDefRow (reader) {
+
+  "use strict";
 
   /**
    * The flags.
@@ -5780,6 +5894,8 @@ var TableIndexes = __webpack_require__(0);
  */
 function TypeRefRow (reader) {
 
+  "use strict";
+
   /**
    * The reference to the type information row.
    *
@@ -5843,6 +5959,8 @@ module.exports = TypeRefRow;
  */
 function TypeSpecRow (reader) {
 
+  "use strict";
+
   /**
    * The signature as an index into the blob heap.
    *
@@ -5885,6 +6003,8 @@ var CILParser = __webpack_require__(7);
  * @final
  */
 function Main () {
+
+  "use strict";
 
   /**
    * Runs an executable.

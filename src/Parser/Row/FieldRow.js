@@ -26,6 +26,8 @@
  */
 function FieldRow (reader) {
 
+  "use strict";
+
   /**
    * The flags.
    *

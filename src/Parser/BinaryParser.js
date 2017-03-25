@@ -27,6 +27,8 @@
  */
 function BinaryParser (path, data) {
 
+  "use strict";
+
   /**
    * The file contents.
    *

@@ -26,6 +26,8 @@
  */
 function ResourceDirectory (reader) {
 
+  "use strict";
+
   /**
    * The characteristics.
    *

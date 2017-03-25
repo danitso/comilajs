@@ -26,6 +26,8 @@
  */
 function AssemblyRefRow (reader) {
 
+  "use strict";
+
   /**
    * The major version.
    *

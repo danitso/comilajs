@@ -26,6 +26,8 @@
  */
 function AssemblyOSRow (reader) {
 
+  "use strict";
+
   /**
    * The OS platform id.
    *

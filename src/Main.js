@@ -25,6 +25,8 @@ var CILParser = require('./Parser/CILParser');
  */
 function Main () {
 
+  "use strict";
+
   /**
    * Runs an executable.
    *

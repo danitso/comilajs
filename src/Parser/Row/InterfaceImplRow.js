@@ -29,6 +29,8 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function InterfaceImplRow (reader) {
 
+  "use strict";
+
   /**
    * The reference to the class definition row.
    *
