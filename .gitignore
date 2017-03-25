@@ -1,10 +1,10 @@
 # Directories to ignore
 
 /.idea
-/example/assets
-/example/project/bin/*
-/example/project/obj
-/example/project/.vs
+/demo/assets
+/demo/project/bin/*
+/demo/project/obj
+/demo/project/.vs
 /node_modules
 
 # Extensions to ignore
@@ -28,4 +28,4 @@
 
 # Exceptions
 
-!/example/project/bin/*.exe*
+!/demo/project/bin/*.exe*

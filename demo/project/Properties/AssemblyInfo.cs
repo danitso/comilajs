@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ComlaJS Example")]
-[assembly: AssemblyDescription("A sample ComlaJS application")]
+[assembly: AssemblyTitle("ComlaJS Demo")]
+[assembly: AssemblyDescription("Demo application for ComlaJS")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Danitso")]
-[assembly: AssemblyProduct("Example")]
+[assembly: AssemblyProduct("Demo")]
 [assembly: AssemblyCopyright("Copyright © 2017 Danitso")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

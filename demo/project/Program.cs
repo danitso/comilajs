@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace example
+namespace demo
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("This is a simple ComlaJS application");
+            Console.WriteLine("This is a ComlaJS demo");
         }
     }
 }

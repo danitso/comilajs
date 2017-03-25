@@ -31,6 +31,6 @@
   },
   "scripts": {
     "build": "webpack && cd ./build && uglifyjs comla.js --comments \"/^!/\" -c -m --mangle-props --mangle-regex \"/^_/\" -o comla.min.js --source-map comla.min.js.map",
-    "example": "npm run build && mkdirp ./example/assets && cd ./build && copy \"*.*\" \"../example/assets\" && cd ../example && http-server -a localhost -p 4768 -c-1 -o -U --cors"
+    "demo": "npm run build && mkdirp ./demo/assets && cd ./build && copy \"*.*\" \"../demo/assets\" && cd ../demo && http-server -a localhost -p 4768 -c-1 -o -U --cors"
   }
 }
