@@ -16,14 +16,15 @@ to rewrite them completely.
 
 1. Download the latest stable release [here](
 https://github.com/danitso/comlajs/releases)
-2. Extract the contents of the archive to a directory within your project root
+2. Extract the contents of the archive and copy the contents of the `dist`
+folder to your project's public assets folder.
 
 ## Usage
 
 1. Include the [comla.min.js](dist/comla.min.js) script on the page
-2. Run an application by invoking `comlajs.run('/path/to/executable.exe')`
+2. Run an application by invoking `comlajs.run('/path/to/application.exe')`
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
