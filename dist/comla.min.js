@@ -1,5 +1,5 @@
 /*!
- * ComlaJS v0.1.0
+ * ComlaJS v0.2.0
  * Copyright (c) 2017 Danitso
  * http://www.comlajs.org/
  * 

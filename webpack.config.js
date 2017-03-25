@@ -36,18 +36,6 @@ module.exports = {
         "enforce": "pre",
         "exclude": /node_modules/,
         "loader": "jshint-loader",
-        "options": {
-          "browser": true,
-          "curly": true,
-          "devel": true,
-          "emitErrors": true,
-          "failOnHint": true,
-          "freeze": true,
-          "nonbsp": true,
-          "nonew": true,
-          "strict": true,
-          "undef": true
-        },
         "test": /\.js$/
       }
     ]
