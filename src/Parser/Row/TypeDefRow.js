@@ -29,7 +29,7 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function TypeDefRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The flags.

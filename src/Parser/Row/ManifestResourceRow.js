@@ -29,7 +29,7 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function ManifestResourceRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The offset.

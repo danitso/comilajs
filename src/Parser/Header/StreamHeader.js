@@ -26,7 +26,7 @@
  */
 function StreamHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The file offset to the stream relative to the metadata header.

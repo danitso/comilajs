@@ -29,7 +29,7 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function ImplMapRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The mapping flags.

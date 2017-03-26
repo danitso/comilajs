@@ -29,7 +29,7 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function NestedClassRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The reference to the nested class information row.

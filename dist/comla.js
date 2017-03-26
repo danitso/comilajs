@@ -123,7 +123,7 @@ return /******/ (function(modules) { // webpackBootstrap
  */
 function TableIndexes () {
 
-  "use strict";
+  'use strict';
 
   /**
    * The table index for the 'Assembly' table.
@@ -423,7 +423,7 @@ module.exports = new TableIndexes();
  */
 function RowReference (reader, tableIndexes) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The table index.
@@ -594,7 +594,7 @@ module.exports = function extend() {
  */
 function ImageAttributes () {
 
-  "use strict";
+  'use strict';
 
   /**
    * The DOS header signature.
@@ -668,7 +668,7 @@ module.exports = new ImageAttributes();
  */
 function ResourceDirectory (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The characteristics.
@@ -770,7 +770,7 @@ var Extend = __webpack_require__(2);
  */
 function ParserException (message) {
 
-  "use strict";
+  'use strict';
 
   // Invoke the parent constructor.
   Extend(true, this, new CustomException(message, 'ParserException'));
@@ -812,7 +812,7 @@ module.exports = ParserException;
  */
 function DataDirectoryHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The relative virtual address of the table.
@@ -913,7 +913,7 @@ var TypeSpecRow = __webpack_require__(59);
  */
 function CILParser (path, data) {
 
-  "use strict";
+  'use strict';
 
   // Invoke the parent constructor.
   Extend(true, this, new PEParser(path, data));
@@ -1230,7 +1230,9 @@ function CILParser (path, data) {
         var rowCount = this._tables[i].length;
 
         for (var r = 0; r < rowCount; r++) {
+          // jscs:disable requireCapitalizedConstructors
           this._tables[i][r] = new rowClass(this);
+          // jscs:enable requireCapitalizedConstructors
         }
       }
     }
@@ -1439,7 +1441,7 @@ module.exports = CILParser;
  */
 function CustomException (message, type) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The exception message.
@@ -1524,7 +1526,7 @@ module.exports = CustomException;
  */
 function BinaryParser (path, data) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The file contents.
@@ -1598,8 +1600,8 @@ function BinaryParser (path, data) {
     var request = new XMLHttpRequest();
     request.open('GET', this.getPath(), true);
     request.responseType = 'arraybuffer';
-    request.onreadystatechange = function(reader) {
-      return function() {
+    request.onreadystatechange = (function (reader) {
+      return function () {
         if (request.readyState === XMLHttpRequest.DONE) {
           if (request.status === 200) {
             // Store the data as an UInt8 array and reset the position.
@@ -1614,7 +1616,7 @@ function BinaryParser (path, data) {
           }
         }
       };
-    }(this);
+    })(this);
     request.send(null);
     return this;
   };
@@ -1669,12 +1671,12 @@ function BinaryParser (path, data) {
         }
       }
       else if (((!boundary) || (s.length % boundary === 0)) &&
-        (s.endsWith("\0"))) {
+        (s.endsWith(String.fromCharCode(0)))) {
         break;
       }
     }
 
-    if ((terminate) && ((i = s.indexOf("\0")) > -1)) {
+    if ((terminate) && ((i = s.indexOf(String.fromCharCode(0))) > -1)) {
       s = s.substring(0, i);
     }
 
@@ -1756,12 +1758,12 @@ function BinaryParser (path, data) {
           break;
         }
       }
-      else if (s.endsWith("\0\0")) {
+      else if (s.endsWith(String.fromCharCode(0, 0))) {
         break;
       }
     }
 
-    if ((terminate) && ((i = s.indexOf("\0\0")) > -1)) {
+    if ((terminate) && ((i = s.indexOf(String.fromCharCode(0, 0))) > -1)) {
       s = s.substring(0, i);
     }
 
@@ -1834,7 +1836,7 @@ module.exports = BinaryParser;
  */
 function MethodFlags () {
 
-  "use strict";
+  'use strict';
 
   /**
    * The fat format flag.
@@ -1901,7 +1903,7 @@ module.exports = new MethodFlags();
  */
 function ResourceDataEntry (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The file offset to the raw data.
@@ -1971,7 +1973,7 @@ var ResourceDirectory = __webpack_require__(4);
  */
 function ResourceDirectoryEntry (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The name.
@@ -2053,7 +2055,7 @@ module.exports = ResourceDirectoryEntry;
  */
 function COFFHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The signature.
@@ -2153,7 +2155,7 @@ var DataDirectoryHeader = __webpack_require__(6);
  */
 function CORHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The size of the header, in bytes.
@@ -2276,7 +2278,7 @@ module.exports = CORHeader;
  */
 function DOSHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The magic number.
@@ -2450,7 +2452,7 @@ var StreamHeader = __webpack_require__(20);
  */
 function MetadataHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   var i;
 
@@ -2574,15 +2576,15 @@ var MethodFlags = __webpack_require__(10);
  */
 function MethodHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   // Retrieve the first one or two bytes specifying the flags and header size.
-  var flags_and_size = reader.readUInt(1);
+  var flagsAndSize = reader.readUInt(1);
   var tiny = true;
 
-  if ((flags_and_size & MethodFlags.TINY_FORMAT) === 0) {
+  if ((flagsAndSize & MethodFlags.TINY_FORMAT) === 0) {
     reader.setPosition(reader.getPosition() - 1);
-    flags_and_size = reader.readUInt(2);
+    flagsAndSize = reader.readUInt(2);
     tiny = false;
   }
 
@@ -2591,14 +2593,14 @@ function MethodHeader (reader) {
    *
    * @type {number}
    */
-  this.flags = tiny ? flags_and_size & 0x03 : flags_and_size & 0xFFF;
+  this.flags = tiny ? flagsAndSize & 0x03 : flagsAndSize & 0xFFF;
 
   /**
    * The header size.
    *
    * @type {number}
    */
-  this.size = tiny ? 1 : flags_and_size >> 12;
+  this.size = tiny ? 1 : flagsAndSize >> 12;
 
   /**
    * The maximum number of items on the operand stack.
@@ -2612,7 +2614,7 @@ function MethodHeader (reader) {
    *
    * @return {number}
    */
-  this.codeSize = tiny ? flags_and_size >> 2 : reader.readUInt(4);
+  this.codeSize = tiny ? flagsAndSize >> 2 : reader.readUInt(4);
 
   /**
    * The metadata token for a signature describing the layout of the local
@@ -2669,7 +2671,7 @@ var ImageAttributes = __webpack_require__(3);
  */
 function OptionalHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The state of the image file.
@@ -2941,7 +2943,7 @@ module.exports = OptionalHeader;
  */
 function SectionHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The section name.
@@ -3052,7 +3054,7 @@ module.exports = SectionHeader;
  */
 function StreamHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The file offset to the stream relative to the metadata header.
@@ -3112,7 +3114,7 @@ module.exports = StreamHeader;
  */
 function TablesHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   var i1, i2;
 
@@ -3241,7 +3243,7 @@ var SectionHeader = __webpack_require__(19);
  */
 function PEParser (path, data) {
 
-  "use strict";
+  'use strict';
 
   // Invoke the parent constructor.
   Extend(true, this, new BinaryParser(path, data));
@@ -3332,7 +3334,7 @@ function PEParser (path, data) {
    * @return {number}
    *   Returns the file offset or -1 if the resource directory is empty.
    */
-  this.getResourceDirectoryFileOffset = function() {
+  this.getResourceDirectoryFileOffset = function () {
     if (!this._resourceDirectoryFileOffset) {
       // Locate the resource section in order to determine the file offset.
       var sectionHeaders = this.readSectionHeaders();
@@ -3447,7 +3449,7 @@ function PEParser (path, data) {
    * @return {ResourceDirectory}
    *   Returns the resource directory.
    */
-  this.readResourceDirectory = function() {
+  this.readResourceDirectory = function () {
     if (this.getResourceDirectoryFileOffset() < 1) {
       return this._resourceDirectory;
     }
@@ -3517,7 +3519,7 @@ module.exports = PEParser;
  */
 function AssemblyOSRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The OS platform id.
@@ -3577,7 +3579,7 @@ module.exports = AssemblyOSRow;
  */
 function AssemblyProcessorRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The processor type.
@@ -3626,7 +3628,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function AssemblyRefOSRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The OS platform id.
@@ -3698,7 +3700,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function AssemblyRefProcessorRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The processor type.
@@ -3753,7 +3755,7 @@ module.exports = AssemblyRefProcessorRow;
  */
 function AssemblyRefRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The major version.
@@ -3855,7 +3857,7 @@ module.exports = AssemblyRefRow;
  */
 function AssemblyRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The id of the hashing algorithm.
@@ -3960,7 +3962,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function ClassLayoutRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The packing size.
@@ -4025,7 +4027,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function ConstantRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The type.
@@ -4092,7 +4094,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function CustomAttributeRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The reference to the parent row.
@@ -4181,7 +4183,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function DeclSecurityRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The action.
@@ -4248,7 +4250,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function EventMapRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The reference to the parent row.
@@ -4308,7 +4310,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function EventRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The event flags.
@@ -4375,7 +4377,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function ExportedTypeRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The flags.
@@ -4455,7 +4457,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function FieldLayoutRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The offset.
@@ -4513,7 +4515,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function FieldMarshalRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The reference to the parent row.
@@ -4572,7 +4574,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function FieldRVARow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The relative virtual address of the initial value.
@@ -4627,7 +4629,7 @@ module.exports = FieldRVARow;
  */
 function FieldRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The flags.
@@ -4687,7 +4689,7 @@ module.exports = FieldRow;
  */
 function FileRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The OS platform id.
@@ -4750,7 +4752,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function GenericParamConstraintRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The reference to the owner row.
@@ -4812,7 +4814,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function GenericParamRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The index of the generic parameter.
@@ -4885,7 +4887,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function ImplMapRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The mapping flags.
@@ -4960,7 +4962,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function InterfaceImplRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The reference to the class definition row.
@@ -5022,7 +5024,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function ManifestResourceRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The offset.
@@ -5096,7 +5098,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function MemberRefRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The reference to the class definition row.
@@ -5165,7 +5167,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function MethodDefRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The relative virtual address.
@@ -5251,7 +5253,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function MethodImplRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The reference to the class definition row.
@@ -5322,7 +5324,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function MethodSemanticsRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The semantics.
@@ -5387,7 +5389,7 @@ module.exports = MethodSemanticsRow;
  */
 function ModuleRefRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The name as an index into the string heap.
@@ -5433,7 +5435,7 @@ module.exports = ModuleRefRow;
  */
 function ModuleRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The generation.
@@ -5516,7 +5518,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function NestedClassRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The reference to the nested class information row.
@@ -5573,7 +5575,7 @@ module.exports = NestedClassRow;
  */
 function ParamRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The flags.
@@ -5636,7 +5638,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function PropertyMapRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The reference to the parent row.
@@ -5693,7 +5695,7 @@ module.exports = PropertyMapRow;
  */
 function PropertyRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The property flags.
@@ -5753,7 +5755,7 @@ module.exports = PropertyRow;
  */
 function StandAloneSigRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The signature as an index into the blob heap.
@@ -5802,7 +5804,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function TypeDefRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The flags.
@@ -5894,7 +5896,7 @@ var TableIndexes = __webpack_require__(0);
  */
 function TypeRefRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The reference to the type information row.
@@ -5959,7 +5961,7 @@ module.exports = TypeRefRow;
  */
 function TypeSpecRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The signature as an index into the blob heap.
@@ -6004,7 +6006,7 @@ var CILParser = __webpack_require__(7);
  */
 function Main () {
 
-  "use strict";
+  'use strict';
 
   /**
    * Runs an executable.
@@ -6017,7 +6019,7 @@ function Main () {
     console.log('----------------------------------------------------------');
     console.log('Dumping information about the executable:');
 
-    (new CILParser(path)).loadFile(function(reader) {
+    (new CILParser(path)).loadFile(function (reader) {
       console.log(reader.readDOSHeader());
       console.log(reader.readCOFFHeader());
       console.log(reader.readOptionalHeader());
@@ -6028,7 +6030,7 @@ function Main () {
       console.log(reader.readTablesHeader());
       console.log(reader.readTables());
       console.log(reader.readMethodHeaders());
-    }, function() {
+    }, function () {
       console.log('Failed to load the file');
     });
   };

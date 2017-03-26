@@ -27,7 +27,7 @@
  */
 function CustomException (message, type) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The exception message.

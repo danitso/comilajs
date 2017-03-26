@@ -26,7 +26,7 @@
  */
 function ResourceDataEntry (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The file offset to the raw data.

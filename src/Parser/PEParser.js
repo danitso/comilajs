@@ -38,7 +38,7 @@ var SectionHeader = require('./Header/SectionHeader');
  */
 function PEParser (path, data) {
 
-  "use strict";
+  'use strict';
 
   // Invoke the parent constructor.
   Extend(true, this, new BinaryParser(path, data));
@@ -129,7 +129,7 @@ function PEParser (path, data) {
    * @return {number}
    *   Returns the file offset or -1 if the resource directory is empty.
    */
-  this.getResourceDirectoryFileOffset = function() {
+  this.getResourceDirectoryFileOffset = function () {
     if (!this._resourceDirectoryFileOffset) {
       // Locate the resource section in order to determine the file offset.
       var sectionHeaders = this.readSectionHeaders();
@@ -244,7 +244,7 @@ function PEParser (path, data) {
    * @return {ResourceDirectory}
    *   Returns the resource directory.
    */
-  this.readResourceDirectory = function() {
+  this.readResourceDirectory = function () {
     if (this.getResourceDirectoryFileOffset() < 1) {
       return this._resourceDirectory;
     }

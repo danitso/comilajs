@@ -29,7 +29,7 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function ClassLayoutRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The packing size.

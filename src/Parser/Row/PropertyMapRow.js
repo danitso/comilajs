@@ -29,7 +29,7 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function PropertyMapRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The reference to the parent row.

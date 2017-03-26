@@ -27,7 +27,7 @@
  */
 function BinaryParser (path, data) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The file contents.
@@ -101,8 +101,8 @@ function BinaryParser (path, data) {
     var request = new XMLHttpRequest();
     request.open('GET', this.getPath(), true);
     request.responseType = 'arraybuffer';
-    request.onreadystatechange = function(reader) {
-      return function() {
+    request.onreadystatechange = (function (reader) {
+      return function () {
         if (request.readyState === XMLHttpRequest.DONE) {
           if (request.status === 200) {
             // Store the data as an UInt8 array and reset the position.
@@ -117,7 +117,7 @@ function BinaryParser (path, data) {
           }
         }
       };
-    }(this);
+    })(this);
     request.send(null);
     return this;
   };
@@ -172,12 +172,12 @@ function BinaryParser (path, data) {
         }
       }
       else if (((!boundary) || (s.length % boundary === 0)) &&
-        (s.endsWith("\0"))) {
+        (s.endsWith(String.fromCharCode(0)))) {
         break;
       }
     }
 
-    if ((terminate) && ((i = s.indexOf("\0")) > -1)) {
+    if ((terminate) && ((i = s.indexOf(String.fromCharCode(0))) > -1)) {
       s = s.substring(0, i);
     }
 
@@ -259,12 +259,12 @@ function BinaryParser (path, data) {
           break;
         }
       }
-      else if (s.endsWith("\0\0")) {
+      else if (s.endsWith(String.fromCharCode(0, 0))) {
         break;
       }
     }
 
-    if ((terminate) && ((i = s.indexOf("\0\0")) > -1)) {
+    if ((terminate) && ((i = s.indexOf(String.fromCharCode(0, 0))) > -1)) {
       s = s.substring(0, i);
     }
 

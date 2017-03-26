@@ -26,7 +26,7 @@
  */
 function FileRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The OS platform id.

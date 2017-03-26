@@ -29,7 +29,7 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function AssemblyRefProcessorRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The processor type.

@@ -25,7 +25,7 @@ var CILParser = require('./Parser/CILParser');
  */
 function Main () {
 
-  "use strict";
+  'use strict';
 
   /**
    * Runs an executable.
@@ -38,7 +38,7 @@ function Main () {
     console.log('----------------------------------------------------------');
     console.log('Dumping information about the executable:');
 
-    (new CILParser(path)).loadFile(function(reader) {
+    (new CILParser(path)).loadFile(function (reader) {
       console.log(reader.readDOSHeader());
       console.log(reader.readCOFFHeader());
       console.log(reader.readOptionalHeader());
@@ -49,7 +49,7 @@ function Main () {
       console.log(reader.readTablesHeader());
       console.log(reader.readTables());
       console.log(reader.readMethodHeaders());
-    }, function() {
+    }, function () {
       console.log('Failed to load the file');
     });
   };

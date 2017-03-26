@@ -26,7 +26,7 @@
  */
 function TablesHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   var i1, i2;
 

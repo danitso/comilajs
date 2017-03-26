@@ -26,7 +26,7 @@
  */
 function DOSHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The magic number.

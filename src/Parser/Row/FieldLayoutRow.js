@@ -29,7 +29,7 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function FieldLayoutRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The offset.

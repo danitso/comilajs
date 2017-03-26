@@ -26,7 +26,7 @@
  */
 function TypeSpecRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The signature as an index into the blob heap.

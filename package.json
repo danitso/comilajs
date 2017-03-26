@@ -10,6 +10,8 @@
     "extend": "3.0.0"
   },
   "devDependencies": {
+    "jscs": "3.0.7",
+    "jscs-loader": "0.3.0",
     "jshint": "2.9.4",
     "jshint-loader": "0.8.4",
     "webpack": "2.2.1",

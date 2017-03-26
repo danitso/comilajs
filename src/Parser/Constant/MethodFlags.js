@@ -23,7 +23,7 @@
  */
 function MethodFlags () {
 
-  "use strict";
+  'use strict';
 
   /**
    * The fat format flag.

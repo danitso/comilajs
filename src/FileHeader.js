@@ -25,7 +25,7 @@ var Pkg = require('../package.json');
  */
 function FileHeader () {
 
-  "use strict";
+  'use strict';
 
   /**
    * The file header.

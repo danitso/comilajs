@@ -26,7 +26,7 @@
  */
 function SectionHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The section name.

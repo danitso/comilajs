@@ -29,7 +29,7 @@ var Extend = require('extend');
  */
 function ParserException (message) {
 
-  "use strict";
+  'use strict';
 
   // Invoke the parent constructor.
   Extend(true, this, new CustomException(message, 'ParserException'));

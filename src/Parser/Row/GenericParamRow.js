@@ -29,7 +29,7 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function GenericParamRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The index of the generic parameter.

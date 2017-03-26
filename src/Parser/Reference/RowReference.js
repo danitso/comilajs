@@ -28,7 +28,7 @@
  */
 function RowReference (reader, tableIndexes) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The table index.

@@ -29,7 +29,7 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function TypeRefRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The reference to the type information row.

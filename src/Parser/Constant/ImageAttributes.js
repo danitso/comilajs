@@ -23,7 +23,7 @@
  */
 function ImageAttributes () {
 
-  "use strict";
+  'use strict';
 
   /**
    * The DOS header signature.

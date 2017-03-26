@@ -28,15 +28,15 @@ var MethodFlags = require('../Constant/MethodFlags');
  */
 function MethodHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   // Retrieve the first one or two bytes specifying the flags and header size.
-  var flags_and_size = reader.readUInt(1);
+  var flagsAndSize = reader.readUInt(1);
   var tiny = true;
 
-  if ((flags_and_size & MethodFlags.TINY_FORMAT) === 0) {
+  if ((flagsAndSize & MethodFlags.TINY_FORMAT) === 0) {
     reader.setPosition(reader.getPosition() - 1);
-    flags_and_size = reader.readUInt(2);
+    flagsAndSize = reader.readUInt(2);
     tiny = false;
   }
 
@@ -45,14 +45,14 @@ function MethodHeader (reader) {
    *
    * @type {number}
    */
-  this.flags = tiny ? flags_and_size & 0x03 : flags_and_size & 0xFFF;
+  this.flags = tiny ? flagsAndSize & 0x03 : flagsAndSize & 0xFFF;
 
   /**
    * The header size.
    *
    * @type {number}
    */
-  this.size = tiny ? 1 : flags_and_size >> 12;
+  this.size = tiny ? 1 : flagsAndSize >> 12;
 
   /**
    * The maximum number of items on the operand stack.
@@ -66,7 +66,7 @@ function MethodHeader (reader) {
    *
    * @return {number}
    */
-  this.codeSize = tiny ? flags_and_size >> 2 : reader.readUInt(4);
+  this.codeSize = tiny ? flagsAndSize >> 2 : reader.readUInt(4);
 
   /**
    * The metadata token for a signature describing the layout of the local

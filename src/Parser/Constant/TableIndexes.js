@@ -23,7 +23,7 @@
  */
 function TableIndexes () {
 
-  "use strict";
+  'use strict';
 
   /**
    * The table index for the 'Assembly' table.

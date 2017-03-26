@@ -74,7 +74,7 @@ var TypeSpecRow = require('./Row/TypeSpecRow');
  */
 function CILParser (path, data) {
 
-  "use strict";
+  'use strict';
 
   // Invoke the parent constructor.
   Extend(true, this, new PEParser(path, data));
@@ -391,7 +391,9 @@ function CILParser (path, data) {
         var rowCount = this._tables[i].length;
 
         for (var r = 0; r < rowCount; r++) {
+          // jscs:disable requireCapitalizedConstructors
           this._tables[i][r] = new rowClass(this);
+          // jscs:enable requireCapitalizedConstructors
         }
       }
     }

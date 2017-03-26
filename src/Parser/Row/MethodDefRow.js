@@ -29,7 +29,7 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function MethodDefRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The relative virtual address.

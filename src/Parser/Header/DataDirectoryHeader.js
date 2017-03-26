@@ -26,7 +26,7 @@
  */
 function DataDirectoryHeader (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The relative virtual address of the table.

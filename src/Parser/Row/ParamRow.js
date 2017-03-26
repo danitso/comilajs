@@ -26,7 +26,7 @@
  */
 function ParamRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The flags.

@@ -29,7 +29,7 @@ var TableIndexes = require('./../Constant/TableIndexes');
  */
 function DeclSecurityRow (reader) {
 
-  "use strict";
+  'use strict';
 
   /**
    * The action.
