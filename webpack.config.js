@@ -18,13 +18,14 @@
  */
 
 var FileHeader = require('./src/FileHeader');
-var OpenBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 var Webpack = require('webpack');
 
 // Export the webpack configuration.
 module.exports = {
   "devServer": {
-    "contentBase": __dirname + "/demo"
+    "contentBase": __dirname + "/demo",
+    "open": true,
+    "port": 4768
   },
   "entry": {
     "comla": __dirname + "/src/Main.js",
@@ -61,7 +62,6 @@ module.exports = {
       },
       "sourceMap": true
     }),
-    new OpenBrowserWebpackPlugin({}),
     new Webpack.SourceMapDevToolPlugin({
       "filename": '[file].map',
       "include": /\.min\.js$/

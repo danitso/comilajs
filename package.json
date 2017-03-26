@@ -12,7 +12,6 @@
   "devDependencies": {
     "jshint": "2.9.4",
     "jshint-loader": "0.8.4",
-    "open-browser-webpack-plugin": "0.0.5",
     "webpack": "2.2.1",
     "webpack-dev-server": "2.4.2"
   },
