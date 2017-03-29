@@ -3,8 +3,8 @@
 
 ## Synopsis
 
-This library aims to provide a lightweight Common Language Runtime for web
-applications without the need for browser plugins or server-side execution.
+This library aims to provide a lightweight Common Language Infrastructure for
+web applications without the need for browser plugins or server-side execution.
 
 ## Motivation
 
@@ -44,16 +44,13 @@ folder to your project's public assets folder.
 ## Platform Invocation
 
 An application must use P/Invoke in order to access the JavaScript engine in the
-browser. This is achieved by targeting `comlajs.javascript.dll`.
+browser. This is achieved by targeting `javascript.dll`.
 
 ## Limitations
 
-This library does not include an implementation of `mscorlib`.
-
-In case `mscorlib` references are found, the `System` namespace will be mapped
-to `ComlaJS` before all referenced libraries are scanned for a namespace match.
-This enables applications to provide custom implementations of the `mscorlib`
-features they require.
+This library provides only the virtual execution system (VES) and as such, it
+cannot directly run applications which rely on classes from `mscorlib`. However,
+custom implementations of these classes can be provided by the applications.
 
 ## Contributing
 

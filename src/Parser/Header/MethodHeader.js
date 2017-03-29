@@ -52,7 +52,7 @@ function MethodHeader (reader) {
    *
    * @type {number}
    */
-  this.size = tiny ? 1 : flagsAndSize >> 12;
+  this.headerSize = tiny ? 1 : flagsAndSize >> 12;
 
   /**
    * The maximum number of items on the operand stack.
