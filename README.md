@@ -8,9 +8,9 @@ web applications without the need for browser plugins or server-side execution.
 
 ## Motivation
 
-This library was developed as part of a larger commercial project which enables
-regular .NET applications to run as responsive web applications without having
-to rewrite them completely.
+This library was developed as a standalone dependency for a commercial project
+which enables regular .NET applications to run as responsive web applications
+without having to rewrite them completely.
 
 ## Installation
 
