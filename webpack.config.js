@@ -25,6 +25,7 @@ module.exports = {
   "devServer": {
     "contentBase": __dirname + "/demo",
     "open": true,
+    "openPage": "",
     "port": 4768
   },
   "entry": {
