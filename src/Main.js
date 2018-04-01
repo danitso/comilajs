@@ -51,20 +51,22 @@ function Main () {
         module = compiler.compile();
       }
       catch (ex) {
-        console.error('Failed to compile the application \'' +
+        console.error('Failed to compile application \'' +
           parser.getPath() + '\': ' + ex.getMessage());
         return;
       }
+
+      console.info('Running application \'' + parser.getPath() + '\'');
 
       try {
         module.run();
       }
       catch (ex) {
-        console.error('Failed to run the application \'' +
+        console.error('Failed to run application \'' +
           parser.getPath() + '\': ' + ex.getMessage());
       }
     }, function (parser, status) {
-      console.error('Failed to download the application \'' + parser.getPath() +
+      console.error('Failed to download application \'' + parser.getPath() +
         '\' (HTTP ' + status + ')');
     });
 

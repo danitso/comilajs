@@ -5802,7 +5802,8 @@ function CILParser (path, data) {
       this._corHeader = new CORHeader(this);
 
       if (this._corHeader.sizeOfHeader !== 72) {
-        throw new ParserException('Invalid COR header');
+        throw new ParserException('Invalid COR header (size: ' +
+          this._corHeader.sizeOfHeader  + ' - expected: 72)');
       }
     }
 
@@ -5823,7 +5824,7 @@ function CILParser (path, data) {
     var streamHeader = this.getStreamHeader('#GUID');
 
     if (!streamHeader) {
-      throw new ParserException('The GUID stream is missing');
+      throw new ParserException('The #GUID stream is missing');
     }
 
     // Move the stream cursor to the position of the string.
@@ -5884,7 +5885,9 @@ function CILParser (path, data) {
       this._metadataHeader = new MetadataHeader(this);
 
       if (this._metadataHeader.signature !== 0x424A5342) {
-        throw new ParserException('Invalid metadata header');
+        throw new ParserException('Invalid metadata header (signature: 0x' +
+          this._metadataHeader.signature.toString(16).toUpperCase() +
+          ' - expected: 0x424A5342)');
       }
     }
 
@@ -5943,7 +5946,7 @@ function CILParser (path, data) {
     var streamHeader = this.getStreamHeader('#Strings');
 
     if (!streamHeader) {
-      throw new ParserException('The string stream is missing');
+      throw new ParserException('The #Strings stream is missing');
     }
 
     // Move the stream cursor to the position of the string.
@@ -6033,7 +6036,7 @@ function CILParser (path, data) {
       var streamHeader = this.getStreamHeader('#~');
 
       if (!streamHeader) {
-        throw new ParserException('The stream for the tables is missing');
+        throw new ParserException('The #~ stream is missing');
       }
 
       // Move the stream cursor to the position of the tables header.
@@ -6042,9 +6045,11 @@ function CILParser (path, data) {
       // Read the header and throw an exception if it is invalid.
       this._tablesHeader = new TablesHeader(this);
 
-      if ((this._tablesHeader.reserved1 !== 0) ||
-        (this._tablesHeader.reserved2 !== 1)) {
-        throw new ParserException('Invalid tables header');
+      if ((this._tablesHeader.majorVersion !== 2) ||
+        (this._tablesHeader.minorVersion !== 0)) {
+        throw new ParserException('Invalid tables header (version: ' +
+          this._tablesHeader.majorVersion + '.' +
+          this._tablesHeader.minorVersion + ' - expected: 2.0)');
       }
     }
 
@@ -6243,20 +6248,22 @@ function Main () {
         module = compiler.compile();
       }
       catch (ex) {
-        console.error('Failed to compile the application \'' +
+        console.error('Failed to compile application \'' +
           parser.getPath() + '\': ' + ex.getMessage());
         return;
       }
+
+      console.info('Running application \'' + parser.getPath() + '\'');
 
       try {
         module.run();
       }
       catch (ex) {
-        console.error('Failed to run the application \'' +
+        console.error('Failed to run application \'' +
           parser.getPath() + '\': ' + ex.getMessage());
       }
     }, function (parser, status) {
-      console.error('Failed to download the application \'' + parser.getPath() +
+      console.error('Failed to download application \'' + parser.getPath() +
         '\' (HTTP ' + status + ')');
     });
 
