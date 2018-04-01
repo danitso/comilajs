@@ -33,24 +33,29 @@ function FileHeader () {
    * @type {string}
    */
   this.text = Pkg.name + ' v' + Pkg.version +
-    "\n" +
+    String.fromCharCode(10) +
     'Copyright (c) ' + new Date().getFullYear() + ' ' + Pkg.author.name +
-    "\n" +
+    String.fromCharCode(10) +
     Pkg.homepage +
-    "\n\n" +
+    String.fromCharCode(10).repeat(2) +
     'This program is free software: you can redistribute it and/or modify it ' +
-    "\n" +
+    String.fromCharCode(10) +
     'under the terms of the GNU Lesser General Public License as published by' +
-    "\n" +
+    String.fromCharCode(10) +
     'the Free Software Foundation, either version 3 of the License, or' +
-    "\n" +
-    '(at your option) any later version.' + "\n\n" +
-    'This program is distributed in the hope that it will be useful,' + "\n" +
-    'but WITHOUT ANY WARRANTY; without even the implied warranty of' + "\n" +
-    'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the' + "\n" +
-    'GNU Lesser General Public License for more details.' + "\n\n" +
+    String.fromCharCode(10) +
+    '(at your option) any later version.' +
+    String.fromCharCode(10).repeat(2) +
+    'This program is distributed in the hope that it will be useful,' +
+    String.fromCharCode(10) +
+    'but WITHOUT ANY WARRANTY; without even the implied warranty of' +
+    String.fromCharCode(10) +
+    'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the' +
+    String.fromCharCode(10) +
+    'GNU Lesser General Public License for more details.' +
+    String.fromCharCode(10).repeat(2) +
     'You should have received a copy of the GNU Lesser General Public License' +
-    "\n" +
+    String.fromCharCode(10) +
     'along with this program. If not, see <http://www.gnu.org/licenses/>.';
 
 }
