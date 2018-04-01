@@ -1,12 +1,13 @@
-# Directories to ignore
+# Directories to ignore.
 
 /.idea
+/build
 /demo/project/bin/*
 /demo/project/obj
 /demo/project/.vs
 /node_modules
 
-# Extensions to ignore
+# Extensions to ignore.
 
 *.7z
 *.diff

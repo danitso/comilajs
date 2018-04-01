@@ -22,70 +22,73 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const Webpack = require('webpack');
 
 // Export the webpack configuration.
-module.exports = {
-  "devServer": {
-    "contentBase": __dirname + "/demo",
-    "open": true,
-    "openPage": "",
-    "port": 4768
-  },
-  "entry": {
-    "comla": __dirname + "/src/Main.js",
-    "comla.min": __dirname + "/src/Main.js"
-  },
-  "mode": "production",
-  "module": {
-    "rules": [
-      {
-        "enforce": "pre",
-        "exclude": /node_modules/,
-        "loader": "jscs-loader",
-        "test": /\.js$/
-      },
-      {
-        "enforce": "pre",
-        "exclude": /node_modules/,
-        "loader": "jshint-loader",
-        "test": /\.js$/
-      }
-    ]
-  },
-  "optimization": {
-    "minimize": true,
-    "minimizer": [
-      new UglifyJSPlugin({
-        "include": /\.min\.js$/,
-        "uglifyOptions": {
-          "compress": {
-            "warnings": false
-          },
-          "mangle": true,
-          "mangle.properties": {
-            "regex": /^_/
-          },
-          "sourceMap": true
+module.exports = function(env, options) {
+  return {
+    "devServer": {
+      "contentBase": __dirname + "/demo",
+      "lazy": true,
+      "open": false,
+      "openPage": "",
+      "port": 4768
+    },
+    "entry": {
+      "comla": __dirname + "/src/Main.js",
+      "comla.min": __dirname + "/src/Main.js"
+    },
+    "mode": "production",
+    "module": {
+      "rules": [
+        {
+          "enforce": "pre",
+          "exclude": /node_modules/,
+          "loader": "jscs-loader",
+          "test": /\.js$/
+        },
+        {
+          "enforce": "pre",
+          "exclude": /node_modules/,
+          "loader": "jshint-loader",
+          "test": /\.js$/
         }
-      }),
+      ]
+    },
+    "optimization": {
+      "minimize": true,
+      "minimizer": [
+        new UglifyJSPlugin({
+          "include": /\.min\.js$/,
+          "uglifyOptions": {
+            "compress": {
+              "warnings": false
+            },
+            "mangle": true,
+            "mangle.properties": {
+              "regex": /^_/
+            },
+            "sourceMap": true
+          }
+        }),
+      ]
+    },
+    "output": {
+      "filename": "[name].js",
+      "library": "comlajs",
+      "libraryTarget": "umd",
+      "path": __dirname + "/" + (options.mode === "production" ? "dist" : "build"),
+      "publicPath": "/assets/",
+      "sourceMapFilename": '[file].map',
+      "umdNamedDefine": true
+    },
+    "performance": {
+      "hints": false
+    },
+    "plugins": [
+      new Webpack.BannerPlugin(FileHeader.text),
+      new Webpack.LoaderOptionsPlugin({options: {}}),
+      new Webpack.SourceMapDevToolPlugin({
+        "filename": '[file].map',
+        "include": /\.min\.js$/
+      })
     ]
-  },
-  "output": {
-    "filename": "[name].js",
-    "library": "comlajs",
-    "libraryTarget": "umd",
-    "path": __dirname + "/dist",
-    "publicPath": "/assets/",
-    "sourceMapFilename": '[file].map',
-    "umdNamedDefine": true
-  },
-  "performance": {
-    "hints": false
-  },
-  "plugins": [
-    new Webpack.BannerPlugin(FileHeader.text),
-    new Webpack.LoaderOptionsPlugin({ options: {} }),
-    new Webpack.SourceMapDevToolPlugin({
-      "filename": '[file].map',
-      "include": /\.min\.js$/
-    })
-  ]
+  }
 };

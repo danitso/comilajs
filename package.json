@@ -33,7 +33,9 @@
     "url": "https://github.com/danitso/comlajs.git"
   },
   "scripts": {
-    "build": "webpack",
-    "demo": "webpack-dev-server"
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development",
+    "start": "webpack-dev-server --mode production",
+    "start:dev": "webpack-dev-server --mode development"
   }
 }
