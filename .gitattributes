@@ -1,5 +1,6 @@
 # Auto detect text files and perform LF normalization.
-* text=auto
+*         text=auto
 
-# JavaScript files must always use LF for tools to work.
-*.js eol=lf
+# We prefer to use UNIX style line endings for most files.
+*.js      eol=lf
+*.json    eol=lf

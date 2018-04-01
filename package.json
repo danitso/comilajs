@@ -14,8 +14,9 @@
     "jscs-loader": "0.3.0",
     "jshint": "2.9.5",
     "jshint-loader": "0.8.4",
-    "webpack": "3.1.0",
-    "webpack-dev-server": "2.5.1"
+    "webpack": "4.4.1",
+    "webpack-cli": "2.0.13",
+    "webpack-dev-server": "3.1.1"
   },
   "homepage": "http://www.comlajs.org/",
   "keywords": [

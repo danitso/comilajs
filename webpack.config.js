@@ -17,8 +17,9 @@
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var FileHeader = require('./src/FileHeader');
-var Webpack = require('webpack');
+const FileHeader = require('./src/FileHeader');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const Webpack = require('webpack');
 
 // Export the webpack configuration.
 module.exports = {
@@ -32,6 +33,7 @@ module.exports = {
     "comla": __dirname + "/src/Main.js",
     "comla.min": __dirname + "/src/Main.js"
   },
+  "mode": "production",
   "module": {
     "rules": [
       {
@@ -48,6 +50,24 @@ module.exports = {
       }
     ]
   },
+  "optimization": {
+    "minimize": true,
+    "minimizer": [
+      new UglifyJSPlugin({
+        "include": /\.min\.js$/,
+        "uglifyOptions": {
+          "compress": {
+            "warnings": false
+          },
+          "mangle": true,
+          "mangle.properties": {
+            "regex": /^_/
+          },
+          "sourceMap": true
+        }
+      }),
+    ]
+  },
   "output": {
     "filename": "[name].js",
     "library": "comlajs",
@@ -57,18 +77,12 @@ module.exports = {
     "sourceMapFilename": '[file].map',
     "umdNamedDefine": true
   },
+  "performance": {
+    "hints": false
+  },
   "plugins": [
     new Webpack.BannerPlugin(FileHeader.text),
-    new Webpack.optimize.UglifyJsPlugin({
-      "compress": {
-        "warnings": false
-      },
-      "include": /\.min\.js$/,
-      "mangle.props": {
-        "regex": /^_/
-      },
-      "sourceMap": true
-    }),
+    new Webpack.LoaderOptionsPlugin({ options: {} }),
     new Webpack.SourceMapDevToolPlugin({
       "filename": '[file].map',
       "include": /\.min\.js$/

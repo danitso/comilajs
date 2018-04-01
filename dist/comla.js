@@ -1,6 +1,6 @@
 /*!
  * ComlaJS v0.3.0
- * Copyright (c) 2017 Danitso
+ * Copyright (c) 2018 Danitso
  * http://www.comlajs.org/
  * 
  * This program is free software: you can redistribute it and/or modify it 
@@ -25,7 +25,7 @@
 		exports["comlajs"] = factory();
 	else
 		root["comlajs"] = factory();
-})(this, function() {
+})(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -72,6 +72,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		}
 /******/ 	};
 /******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
 /******/ 	__webpack_require__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
@@ -87,8 +92,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/assets/";
 /******/
+/******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 60);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -564,175 +570,6 @@ module.exports = function extend() {
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class DataDirectoryHeader.
- *
- * @param {BinaryParser} reader
- *   The binary reader.
- *
- * @constructor
- * @struct
- */
-function DataDirectoryHeader (reader) {
-
-  'use strict';
-
-  /**
-   * The relative virtual address of the table.
-   *
-   * @type {number}
-   */
-  this.virtualAddress = reader.readUInt(4);
-
-  /**
-   * The size of the table, in bytes.
-   *
-   * @type {number}
-   */
-  this.size = reader.readUInt(4);
-
-}
-
-module.exports = DataDirectoryHeader;
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var CustomException = __webpack_require__(32);
-var Extend = __webpack_require__(2);
-
-/**
- * Class ParserException.
- *
- * @param {string} message
- *   The message.
- *
- * @constructor
- * @extends {CustomException}
- */
-function ParserException (message) {
-
-  'use strict';
-
-  // Invoke the parent constructor.
-  Extend(true, this, new CustomException(message, 'ParserException'));
-
-}
-
-module.exports = ParserException;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class ImageAttributes.
- *
- * @constructor
- * @struct
- */
-function ImageAttributes () {
-
-  'use strict';
-
-  /**
-   * The DOS header signature.
-   *
-   * @const {number}
-   */
-  this.IMAGE_DOS_SIGNATURE = 0x5a4d;
-
-  /**
-   * The file is an executable image.
-   *
-   * @const {number}
-   */
-  this.IMAGE_NT_OPTIONAL_HDR64_MAGIC = 0x20b;
-
-  /**
-   * The file is an executable image.
-   *
-   * @const {number}
-   */
-  this.IMAGE_NT_OPTIONAL_HDR32_MAGIC = 0x10b;
-
-  /**
-   * The NT header signature.
-   *
-   * @const {number}
-   */
-  this.IMAGE_NT_SIGNATURE = 0x4550;
-
-  /**
-   * The file is a ROM image.
-   *
-   * @const {number}
-   */
-  this.IMAGE_ROM_OPTIONAL_HDR_MAGIC = 0x107;
-
-}
-
-module.exports = new ImageAttributes();
-
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -827,11 +664,82 @@ function ResourceDirectory (reader) {
 
 module.exports = ResourceDirectory;
 
-var ResourceDirectoryEntry = __webpack_require__(51);
+var ResourceDirectoryEntry = __webpack_require__(16);
 
 
 /***/ }),
-/* 7 */
+/* 4 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class ImageAttributes.
+ *
+ * @constructor
+ * @struct
+ */
+function ImageAttributes () {
+
+  'use strict';
+
+  /**
+   * The DOS header signature.
+   *
+   * @const {number}
+   */
+  this.IMAGE_DOS_SIGNATURE = 0x5a4d;
+
+  /**
+   * The file is an executable image.
+   *
+   * @const {number}
+   */
+  this.IMAGE_NT_OPTIONAL_HDR64_MAGIC = 0x20b;
+
+  /**
+   * The file is an executable image.
+   *
+   * @const {number}
+   */
+  this.IMAGE_NT_OPTIONAL_HDR32_MAGIC = 0x10b;
+
+  /**
+   * The NT header signature.
+   *
+   * @const {number}
+   */
+  this.IMAGE_NT_SIGNATURE = 0x4550;
+
+  /**
+   * The file is a ROM image.
+   *
+   * @const {number}
+   */
+  this.IMAGE_ROM_OPTIONAL_HDR_MAGIC = 0x107;
+
+}
+
+module.exports = new ImageAttributes();
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -851,51 +759,127 @@ var ResourceDirectoryEntry = __webpack_require__(51);
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var CILParser = __webpack_require__(8);
+var CustomException = __webpack_require__(35);
+var Extend = __webpack_require__(2);
 
 /**
- * Class Main.
+ * Class ParserException.
+ *
+ * @param {string} message
+ *   The message.
  *
  * @constructor
- * @final
+ * @extends {CustomException}
  */
-function Main () {
+function ParserException (message) {
+
+  'use strict';
+
+  // Invoke the parent constructor.
+  Extend(true, this, new CustomException(message, 'ParserException'));
+
+}
+
+module.exports = ParserException;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class DataDirectoryHeader.
+ *
+ * @param {BinaryParser} reader
+ *   The binary reader.
+ *
+ * @constructor
+ * @struct
+ */
+function DataDirectoryHeader (reader) {
 
   'use strict';
 
   /**
-   * Runs an executable.
+   * The relative virtual address of the table.
    *
-   * @param {string} path
-   *   The path.
+   * @type {number}
    */
-  this.run = function (path) {
-    console.log('#### This library is not yet able to run applications ####');
-    console.log('----------------------------------------------------------');
-    console.log('Dumping information about the executable:');
+  this.virtualAddress = reader.readUInt(4);
 
-    (new CILParser(path)).loadFile(function (reader) {
-      console.log(reader.readDOSHeader());
-      console.log(reader.readCOFFHeader());
-      console.log(reader.readOptionalHeader());
-      console.log(reader.readSectionHeaders());
-      console.log(reader.readResourceDirectory());
-      console.log(reader.readCORHeader());
-      console.log(reader.readMetadataHeader());
-      console.log(reader.readTablesHeader());
-      console.log(reader.readTables());
-      console.log(reader.readMethodHeaders());
-      console.log(JSON.stringify(reader.readMethodInstructions(
-        reader.readMethodHeaders()[0])));
-      console.log(reader.readStringFromHeap(10));
-    }, function () {
-      console.log('Failed to load the file');
-    });
-  };
+  /**
+   * The size of the table, in bytes.
+   *
+   * @type {number}
+   */
+  this.size = reader.readUInt(4);
 
 }
 
-module.exports = new Main();
+module.exports = DataDirectoryHeader;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class TypeSpecRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function TypeSpecRow (reader) {
+
+  'use strict';
+
+  /**
+   * The signature as an index into the blob heap.
+   *
+   * @type {number}
+   */
+  this.signature = reader.readBlobIndex();
+
+}
+
+module.exports = TypeSpecRow;
 
 
 /***/ }),
@@ -919,51 +903,4572 @@ module.exports = new Main();
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var AssemblyOSRow = __webpack_require__(9);
-var AssemblyProcessorRow = __webpack_require__(10);
-var AssemblyRefOSRow = __webpack_require__(11);
-var AssemblyRefProcessorRow = __webpack_require__(12);
-var AssemblyRefRow = __webpack_require__(13);
-var AssemblyRow = __webpack_require__(14);
-var ClassLayoutRow = __webpack_require__(15);
-var ConstantRow = __webpack_require__(16);
-var CORHeader = __webpack_require__(17);
-var CustomAttributeRow = __webpack_require__(18);
-var DeclSecurityRow = __webpack_require__(19);
-var EventMapRow = __webpack_require__(20);
-var EventRow = __webpack_require__(21);
-var ExportedTypeRow = __webpack_require__(22);
-var Extend = __webpack_require__(2);
-var FieldRow = __webpack_require__(23);
-var FieldRVARow = __webpack_require__(24);
-var FieldLayoutRow = __webpack_require__(25);
-var FieldMarshalRow = __webpack_require__(26);
-var FileRow = __webpack_require__(27);
-var GenericParamRow = __webpack_require__(28);
-var GenericParamConstraintRow = __webpack_require__(29);
-var ImplMapRow = __webpack_require__(30);
-var InterfaceImplRow = __webpack_require__(31);
-var ParserException = __webpack_require__(4);
-var ManifestResourceRow = __webpack_require__(33);
-var MetadataHeader = __webpack_require__(34);
-var MemberRefRow = __webpack_require__(36);
-var NestedClassRow = __webpack_require__(37);
-var MethodDefRow = __webpack_require__(38);
-var MethodHeader = __webpack_require__(39);
-var MethodImplRow = __webpack_require__(41);
-var MethodSemanticsRow = __webpack_require__(42);
-var ModuleRefRow = __webpack_require__(43);
-var ModuleRow = __webpack_require__(44);
-var ParamRow = __webpack_require__(45);
-var PEParser = __webpack_require__(46);
-var PropertyMapRow = __webpack_require__(54);
-var PropertyRow = __webpack_require__(55);
-var StandAloneSigRow = __webpack_require__(56);
+var RowReference = __webpack_require__(1);
 var TableIndexes = __webpack_require__(0);
-var TablesHeader = __webpack_require__(57);
-var TypeDefRow = __webpack_require__(58);
-var TypeRefRow = __webpack_require__(59);
-var TypeSpecRow = __webpack_require__(60);
+
+/**
+ * Class TypeRefRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function TypeRefRow (reader) {
+
+  'use strict';
+
+  /**
+   * The reference to the type information row.
+   *
+   * @type {RowReference}
+   */
+  this.resolutionScope = new RowReference(reader, [
+    TableIndexes.MODULE,
+    TableIndexes.MODULE_REF,
+    TableIndexes.ASSEMBLY_REF,
+    TableIndexes.TYPE_REF
+  ]);
+
+  /**
+   * The type name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.typeName = reader.readStringIndex();
+
+  /**
+   * The type namespace as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.typeNamespace = reader.readStringIndex();
+
+}
+
+module.exports = TypeRefRow;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class TypeDefRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function TypeDefRow (reader) {
+
+  'use strict';
+
+  /**
+   * The flags.
+   *
+   * @type {number}
+   */
+  this.flags = reader.readUInt(4);
+
+  /**
+   * The type name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.typeName = reader.readStringIndex();
+
+  /**
+   * The type namespace as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.typeNamespace = reader.readStringIndex();
+
+  /**
+   * The reference to the type information row.
+   *
+   * @type {RowReference}
+   */
+  this.extends = new RowReference(reader, [
+    TableIndexes.TYPE_DEF,
+    TableIndexes.TYPE_REF,
+    TableIndexes.TYPE_SPEC
+  ]);
+
+  /**
+   * The reference to the field information row.
+   *
+   * @type {RowReference}
+   */
+  this.fieldList = new RowReference(reader, [
+    TableIndexes.FIELD
+  ]);
+
+  /**
+   * The reference to the method information row.
+   *
+   * @type {RowReference}
+   */
+  this.methodList = new RowReference(reader, [
+    TableIndexes.METHOD_DEF
+  ]);
+
+}
+
+module.exports = TypeDefRow;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class TablesHeader.
+ *
+ * @param {BinaryParser} reader
+ *   The binary reader.
+ *
+ * @constructor
+ * @struct
+ */
+function TablesHeader (reader) {
+
+  'use strict';
+
+  var i1, i2;
+
+  /**
+   * The first reserved value.
+   *
+   * @type {number}
+   */
+  this.reserved1 = reader.readUInt(4);
+
+  /**
+   * The major version.
+   *
+   * @type {number}
+   */
+  this.majorVersion = reader.readUInt(1);
+
+  /**
+   * The minor version.
+   *
+   * @type {number}
+   */
+  this.minorVersion = reader.readUInt(1);
+
+  /**
+   * The size of the indexes into the different streams.
+   *
+   * @type {number}
+   */
+  this.heapOffsetSizes = reader.readUInt(1);
+
+  /**
+   * The second reserved value.
+   *
+   * @type {number}
+   */
+  this.reserved2 = reader.readUInt(1);
+
+  /**
+   * The bit-mask that indicates which of the tables that are present.
+   *
+   * @type {Array<number>}
+   */
+  this.maskValidArray = [
+    (i1 = reader.readUInt(4)),
+    (i2 = reader.readUInt(4))
+  ];
+
+  /**
+   * The bit-mask that indicates which of the tables that are present.
+   *
+   * @type {number}
+   */
+  this.maskValid = (i2 << 32) | i1;
+
+  /**
+   * The bit-mask that indicates which of the tables that are sorted.
+   *
+   * @type {Array<number>}
+   */
+  this.maskSortedArray = [
+    (i1 = reader.readUInt(4)),
+    (i2 = reader.readUInt(4))
+  ];
+
+  /**
+   * The bit-mask that indicates which of the tables that are sorted.
+   *
+   * @type {number}
+   */
+  this.maskSorted = (i2 << 32) | i1;
+
+  /**
+   * The file offset to the tables relative to the beginning of the stream.
+   *
+   * @type {number}
+   */
+  this.tablesOffset = reader.getPosition();
+
+}
+
+module.exports = TablesHeader;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class StandAloneSigRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function StandAloneSigRow (reader) {
+
+  'use strict';
+
+  /**
+   * The signature as an index into the blob heap.
+   *
+   * @type {number}
+   */
+  this.signature = reader.readBlobIndex();
+
+}
+
+module.exports = StandAloneSigRow;
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class PropertyRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function PropertyRow (reader) {
+
+  'use strict';
+
+  /**
+   * The property flags.
+   *
+   * @type {number}
+   */
+  this.flags = reader.readUInt(2);
+
+  /**
+   * The name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.name = reader.readStringIndex();
+
+  /**
+   * The type as an index into the blob heap.
+   *
+   * @type {number}
+   */
+  this.type = reader.readBlobIndex();
+
+}
+
+module.exports = PropertyRow;
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class PropertyMapRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function PropertyMapRow (reader) {
+
+  'use strict';
+
+  /**
+   * The reference to the parent row.
+   *
+   * @type {RowReference}
+   */
+  this.parent = new RowReference(reader, [
+    TableIndexes.TYPE_DEF
+  ]);
+
+  /**
+   * The reference to the first property row.
+   *
+   * @type {RowReference}
+   */
+  this.propertyList = new RowReference(reader, [
+    TableIndexes.PROPERTY
+  ]);
+
+}
+
+module.exports = PropertyMapRow;
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class SectionHeader.
+ *
+ * @param {BinaryParser} reader
+ *   The binary reader.
+ *
+ * @constructor
+ * @struct
+ */
+function SectionHeader (reader) {
+
+  'use strict';
+
+  /**
+   * The section name.
+   *
+   * @type {string}
+   */
+  this.name = reader.readUTF8String(8, true);
+
+  /**
+   * The file address or the total size of the section when loaded into memory,
+   * in bytes.
+   *
+   * @type {number}
+   */
+  this.misc = reader.readUInt(4);
+
+  /**
+   * The address of the first byte of the section when loaded into memory,
+   * relative to the image base.
+   *
+   * @type {number}
+   */
+  this.virtualAddress = reader.readUInt(4);
+
+  /**
+   * The size of the initialized data on disk, in bytes.
+   *
+   * @type {number}
+   */
+  this.sizeOfRawData = reader.readUInt(4);
+
+  /**
+   * A file pointer to the first page within the COFF file.
+   *
+   * @type {number}
+   */
+  this.pointerToRawData = reader.readUInt(4);
+
+  /**
+   * A file pointer to the beginning of the relocation entries for the section.
+   *
+   * @type {number}
+   */
+  this.pointerToRelocations = reader.readUInt(4);
+
+  /**
+   * A file pointer to the beginning of the line-number entries for the section.
+   *
+   * @type {number}
+   */
+  this.pointerToLinenumbers = reader.readUInt(4);
+
+  /**
+   * The number of relocation entries for the section.
+   *
+   * @type {number}
+   */
+  this.numberOfRelocations = reader.readUInt(2);
+
+  /**
+   * The number of line-number entries for the section.
+   *
+   * @type {number}
+   */
+  this.numberOfLinenumbers = reader.readUInt(2);
+
+  /**
+   * The characteristics of the image.
+   *
+   * @type {number}
+   */
+  this.characteristics = reader.readUInt(4);
+
+}
+
+module.exports = SectionHeader;
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class ResourceDataEntry.
+ *
+ * @param {PEParser} reader
+ *   The PE reader.
+ *
+ * @constructor
+ * @struct
+ */
+function ResourceDataEntry (reader) {
+
+  'use strict';
+
+  /**
+   * The file offset to the raw data.
+   *
+   * @type {number}
+   */
+  this.offsetToData = reader.getFileOffset(reader.readUInt(4));
+
+  /**
+   * The data size.
+   *
+   * @type {number}
+   */
+  this.size = reader.readUInt(4);
+
+  /**
+   * The code page.
+   *
+   * @type {number}
+   */
+  this.codePage = reader.readUInt(4);
+
+  /**
+   * The reserved value.
+   *
+   * @type {number}
+   */
+  this.reserved = reader.readUInt(4);
+
+}
+
+module.exports = ResourceDataEntry;
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var ResourceDataEntry = __webpack_require__(15);
+var ResourceDirectory = __webpack_require__(3);
+
+/**
+ * Class ResourceDirectoryEntry.
+ *
+ * @param {PEParser} reader
+ *   The PE reader.
+ *
+ * @constructor
+ * @struct
+ */
+function ResourceDirectoryEntry (reader) {
+
+  'use strict';
+
+  /**
+   * The name.
+   *
+   * @type {number}
+   */
+  this.name = reader.readUInt(4);
+
+  /**
+   * The file offset to the raw data.
+   *
+   * @type {number}
+   */
+  this.offsetToData = reader.readUInt(4);
+
+  /**
+   * The data entry.
+   *
+   * @type {ResourceDataEntry}
+   */
+  this.data = null;
+
+  /**
+   * The resource directory.
+   *
+   * @type {ResourceDirectory}
+   *   The resource directory or NULL if this entry does not point to one.
+   */
+  this.directory = null;
+
+  // Read either a resource directory or a data entry.
+  if (this.offsetToData >>> 31 === 1) {
+    this.offsetToData = reader.getResourceDirectoryFileOffset() +
+      (this.offsetToData << 1 >>> 1);
+    reader.setPosition(this.offsetToData);
+    this.directory = new ResourceDirectory(reader);
+  }
+  else {
+    this.offsetToData = reader.getResourceDirectoryFileOffset() +
+      this.offsetToData;
+    reader.setPosition(this.offsetToData);
+    this.data = new ResourceDataEntry(reader);
+  }
+
+}
+
+module.exports = ResourceDirectoryEntry;
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var DataDirectoryHeader = __webpack_require__(6);
+var ImageAttributes = __webpack_require__(4);
+
+/**
+ * Class OptionalHeader.
+ *
+ * @param {BinaryParser} reader
+ *   The binary reader.
+ *
+ * @constructor
+ * @struct
+ */
+function OptionalHeader (reader) {
+
+  'use strict';
+
+  /**
+   * The state of the image file.
+   *
+   * @type {number}
+   */
+  this.magic = reader.readUInt(2);
+
+  /**
+   * The major version number of the linker.
+   *
+   * @type {number}
+   */
+  this.majorLinkerVersion = reader.readUInt(1);
+
+  /**
+   * The minor version number of the linker.
+   *
+   * @type {number}
+   */
+  this.minorLinkerVersion = reader.readUInt(1);
+
+  /**
+   * The size of the code section, in bytes, or the sum of all such sections if
+   * there are multiple code sections.
+   *
+   * @type {number}
+   */
+  this.sizeOfCode = reader.readUInt(4);
+
+  /**
+   * The size of the initialized data section, in bytes, or the sum of all such
+   * sections if there are multiple initialized data sections.
+   *
+   * @type {number}
+   */
+  this.sizeOfInitializedData = reader.readUInt(4);
+
+  /**
+   * The size of the uninitialized data section, in bytes, or the sum of all
+   * such sections if there are multiple uninitialized data sections.
+   *
+   * @type {number}
+   */
+  this.sizeOfUninitializedData = reader.readUInt(4);
+
+  /**
+   * A pointer to the entry point function, relative to the image base address.
+   *
+   * @type {number}
+   */
+  this.addressOfEntryPoint = reader.readUInt(4);
+
+  /**
+   * A pointer to the beginning of the code section, relative to the image base.
+   *
+   * @type {number}
+   */
+  this.baseOfCode = reader.readUInt(4);
+
+  /**
+   * A pointer to the beginning of the data section, relative to the image base.
+   *
+   * @type {number}
+   */
+  this.baseOfData = reader.readUInt(
+    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 0 : 4);
+
+  /**
+   * The preferred address of the first byte of the image when it is loaded in
+   * memory.
+   *
+   * @type {number}
+   */
+  this.imageBase = reader.readUInt(
+    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
+
+  /**
+   * The alignment of sections loaded in memory, in bytes.
+   *
+   * @type {number}
+   */
+  this.sectionAlignment = reader.readUInt(4);
+
+  /**
+   * The alignment of the raw data of sections in the image file, in bytes.
+   *
+   * @type {number}
+   */
+  this.fileAlignment = reader.readUInt(4);
+
+  /**
+   * The major version number of the required operating system.
+   *
+   * @type {number}
+   */
+  this.majorOperatingSystemVersion = reader.readUInt(2);
+
+  /**
+   * The minor version number of the required operating system.
+   *
+   * @type {number}
+   */
+  this.minorOperatingSystemVersion = reader.readUInt(2);
+
+  /**
+   * The major version number of the image.
+   *
+   * @type {number}
+   */
+  this.majorImageVersion = reader.readUInt(2);
+
+  /**
+   * The minor version number of the image.
+   *
+   * @type {number}
+   */
+  this.minorImageVersion = reader.readUInt(2);
+
+  /**
+   * The major version number of the subsystem.
+   *
+   * @type {number}
+   */
+  this.majorSubsystemVersion = reader.readUInt(2);
+
+  /**
+   * The minor version number of the subsystem.
+   *
+   * @type {number}
+   */
+  this.minorSubsystemVersion = reader.readUInt(2);
+
+  /**
+   * This member is reserved and must be 0.
+   *
+   * @type {number}
+   */
+  this.win32VersionValue = reader.readUInt(4);
+
+  /**
+   * The size of the image, in bytes, including all headers.
+   *
+   * @type {number}
+   */
+  this.sizeOfImage = reader.readUInt(4);
+
+  /**
+   * The combined size of the following items, rounded to a multiple of the
+   * value specified in the fileAlignment member.
+   *
+   * @type {number}
+   */
+  this.sizeOfHeaders = reader.readUInt(4);
+
+  /**
+   * The image file checksum.
+   *
+   * @type {number}
+   */
+  this.checkSum = reader.readUInt(4);
+
+  /**
+   * The subsystem required to run this image.
+   *
+   * @type {number}
+   */
+  this.subsystem = reader.readUInt(2);
+
+  /**
+   * The DLL characteristics of the image.
+   *
+   * @type {number}
+   */
+  this.dllCharacteristics = reader.readUInt(2);
+
+  /**
+   * The number of bytes to reserve for the stack.
+   *
+   * @type {number}
+   */
+  this.sizeOfStackReserve = reader.readUInt(
+    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
+
+  /**
+   * The number of bytes to commit for the stack.
+   *
+   * @type {number}
+   */
+  this.sizeOfStackCommit = reader.readUInt(
+    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
+
+  /**
+   * The number of bytes to reserve for the local heap.
+   *
+   * @type {number}
+   */
+  this.sizeOfHeapReserve = reader.readUInt(
+    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
+
+  /**
+   * The number of bytes to commit for the local heap.
+   *
+   * @type {number}
+   */
+  this.sizeOfHeapCommit = reader.readUInt(
+    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
+
+  /**
+   * This member is obsolete.
+   *
+   * @type {number}
+   */
+  this.loaderFlags = reader.readUInt(4);
+
+  /**
+   * The number of directory entries in the remainder of the optional header.
+   *
+   * @type {number}
+   */
+  this.numberOfRvaAndSizes = reader.readUInt(4);
+
+  /**
+   * The array of data directory headers.
+   *
+   * @type {Array<DataDirectoryHeader>}
+   */
+  this.dataDirectory = new Array(this.numberOfRvaAndSizes);
+
+  // Read the data directory headers.
+  for (var i = 0; i < this.dataDirectory.length; i++) {
+    this.dataDirectory[i] = new DataDirectoryHeader(reader);
+  }
+
+}
+
+module.exports = OptionalHeader;
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class DOSHeader.
+ *
+ * @param {BinaryParser} reader
+ *   The binary reader.
+ *
+ * @constructor
+ * @struct
+ */
+function DOSHeader (reader) {
+
+  'use strict';
+
+  /**
+   * The magic number.
+   *
+   * @type {number}
+   */
+  this.magic = reader.readUInt(2);
+
+  /**
+   * The number of bytes on the last page in the file.
+   *
+   * @type {number}
+   */
+  this.cblp = reader.readUInt(2);
+
+  /**
+   * The number of pages in the file.
+   *
+   * @type {number}
+   */
+  this.cp = reader.readUInt(2);
+
+  /**
+   * The number of relocations.
+   *
+   * @type {number}
+   */
+  this.crlc = reader.readUInt(2);
+
+  /**
+   * The size of the header in paragraphs.
+   *
+   * @type {number}
+   */
+  this.cparhdr = reader.readUInt(2);
+
+  /**
+   * The minimum number of extra paragraphs which are needed.
+   *
+   * @type {number}
+   */
+  this.minAlloc = reader.readUInt(2);
+
+  /**
+   * The maximum number of extra paragraphs which are needed.
+   *
+   * @type {number}
+   */
+  this.maxAlloc = reader.readUInt(2);
+
+  /**
+   * The initial (relative) SS value.
+   *
+   * @type {number}
+   */
+  this.ss = reader.readUInt(2);
+
+  /**
+   * The initial SP value.
+   *
+   * @type {number}
+   */
+  this.sp = reader.readUInt(2);
+
+  /**
+   * The checksum.
+   *
+   * @type {number}
+   */
+  this.csum = reader.readUInt(2);
+
+  /**
+   * The initial IP value.
+   *
+   * @type {number}
+   */
+  this.ip = reader.readUInt(2);
+
+  /**
+   * The initial (relative) CS value.
+   *
+   * @type {number}
+   */
+  this.cs = reader.readUInt(2);
+
+  /**
+   * The file address of the relocation table.
+   *
+   * @type {number}
+   */
+  this.lfarlc = reader.readUInt(2);
+
+  /**
+   * The overlay number.
+   *
+   * @type {number}
+   */
+  this.ovno = reader.readUInt(2);
+
+  /**
+   * The first reserved words.
+   *
+   * @type {Array<number>}
+   */
+  this.res1 = reader.readUIntArray(2, 4);
+
+  /**
+   * The OEM identifier.
+   *
+   * @type {number}
+   */
+  this.oemid = reader.readUInt(2);
+
+  /**
+   * The OEM information.
+   *
+   * @type {number}
+   */
+  this.oeminfo = reader.readUInt(2);
+
+  /**
+   * The second reserved words.
+   *
+   * @type {Array<number>}
+   */
+  this.res2 = reader.readUIntArray(2, 10);
+
+  /**
+   * The file address of the new EXE header.
+   *
+   * @type {number}
+   */
+  this.lfanew = reader.readUInt(4);
+
+}
+
+module.exports = DOSHeader;
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class COFFHeader.
+ *
+ * @param {BinaryParser} reader
+ *   The binary reader.
+ *
+ * @constructor
+ * @struct
+ */
+function COFFHeader (reader) {
+
+  'use strict';
+
+  /**
+   * The signature.
+   *
+   * @type {number}
+   */
+  this.signature = reader.readUInt(4);
+
+  /**
+   * The architecture type of the computer.
+   *
+   * @type {number}
+   */
+  this.machine = reader.readUInt(2);
+
+  /**
+   * The number of sections.
+   *
+   * @type {number}
+   */
+  this.numberOfSections = reader.readUInt(2);
+
+  /**
+   * The low 32 bits of the time stamp of the image.
+   *
+   * @type {number}
+   */
+  this.timeDateStamp = reader.readUInt(4);
+
+  /**
+   * The offset of the symbol table, in bytes, or zero if no COFF symbol table
+   * exists.
+   *
+   * @type {number}
+   */
+  this.pointerToSymbolTable = reader.readUInt(4);
+
+  /**
+   * The number of symbols in the symbol table.
+   *
+   * @type {number}
+   */
+  this.numberOfSymbols = reader.readUInt(4);
+
+  /**
+   * The size of the optional header, in bytes. This value should be 0 for
+   * object files.
+   *
+   * @type {number}
+   */
+  this.sizeOfOptionalHeader = reader.readUInt(2);
+
+  /**
+   * The characteristics of the image. This member can be one or more of the
+   * following values.
+   *
+   * @type {number}
+   */
+  this.characteristics = reader.readUInt(2);
+
+}
+
+module.exports = COFFHeader;
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class BinaryParser.
+ *
+ * @param {string} path
+ *   The file path.
+ * @param {ArrayBuffer} [data]
+ *   The file contents.
+ *
+ * @constructor
+ */
+function BinaryParser (path, data) {
+
+  'use strict';
+
+  /**
+   * The file contents.
+   *
+   * @type {ArrayBuffer}
+   *
+   * @protected
+   */
+  this._data = (typeof data !== 'undefined') ? new Uint8Array(data) : null;
+
+  /**
+   * The file path.
+   *
+   * @type {string}
+   *
+   * @protected
+   */
+  this._path = path;
+
+  /**
+   * The file position.
+   *
+   * @type {number}
+   *
+   * @protected
+   */
+  this._position = 0;
+
+  /**
+   * Retrieves the file path.
+   *
+   * @return {string}
+   *   Returns a path.
+   */
+  this.getPath = function () {
+    return this._path;
+  };
+
+  /**
+   * Retrieves the buffer position.
+   *
+   * @return {number}
+   *   Returns the buffer position.
+   */
+  this.getPosition = function () {
+    return this._position;
+  };
+
+  /**
+   * Retrieves the buffer size.
+   *
+   * @return {number}
+   *   Returns the buffer size.
+   */
+  this.getSize = function () {
+    return this._data.byteLength;
+  };
+
+  /**
+   * Loads the file contents.
+   *
+   * @param {Function} success
+   *   The success callback.
+   * @param {Function} error
+   *   The error callback.
+   *
+   * @return {BinaryParser}
+   *   Returns this instance.
+   */
+  this.loadFile = function (success, error) {
+    var request = new XMLHttpRequest();
+    request.open('GET', this.getPath(), true);
+    request.responseType = 'arraybuffer';
+    request.onreadystatechange = (function (reader) {
+      return function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+          if (request.status === 200) {
+            // Store the data as an UInt8 array and reset the position.
+            reader._data = new Uint8Array(request.response);
+            reader._position = 0;
+
+            // Invoke the success callback in order for the invoker to proceed.
+            success(reader);
+          }
+          else {
+            error(reader);
+          }
+        }
+      };
+    })(this);
+    request.send(null);
+    return this;
+  };
+
+  /**
+   * Reads the next bytes from the buffer.
+   *
+   * @param {number} count
+   *   The number of bytes to read.
+   *
+   * @return {Array<number>}
+   *   Returns an array of bytes.
+   */
+  this.readBytes = function (count) {
+    var bytes = [];
+
+    for (var i = 0; i < count; i++) {
+      if (this._position >= this.getSize()) {
+        break;
+      }
+
+      bytes.push(this._data[this._position++]);
+    }
+
+    return bytes;
+  };
+
+  /**
+   * Reads an ASCII string from the buffer.
+   *
+   * @param {number} length
+   *   The length of the string. Specify 0 to have the function look for a NULL
+   *   terminator.
+   * @param {boolean} terminate
+   *   Whether to look for a NULL terminator after the string has been read in
+   *   which case the string will be terminated.
+   * @param {number} boundary
+   *   The string boundary in bytes.
+   *
+   * @return {string}
+   *   Returns an ASCII string.
+   */
+  this.readString = function (length, terminate, boundary) {
+    var i, s = '';
+
+    while ((i = this.readUInt(1)) !== null) {
+      s += String.fromCharCode(i);
+
+      if (length > 0) {
+        if (s.length === length) {
+          break;
+        }
+      }
+      else if (((!boundary) || (s.length % boundary === 0)) &&
+        (s.endsWith(String.fromCharCode(0)))) {
+        break;
+      }
+    }
+
+    if ((terminate) && ((i = s.indexOf(String.fromCharCode(0))) > -1)) {
+      s = s.substring(0, i);
+    }
+
+    return s;
+  };
+
+  /**
+   * Reads the next unsigned integer from the buffer.
+   *
+   * @param {number} size
+   *   The integer size in bytes.
+   *
+   * @return {number|null}
+   *   Returns the integer or NULL if the end is reached.
+   */
+  this.readUInt = function (size) {
+    var bytes = this.readBytes(size);
+    var integer = 0;
+
+    if (bytes.length != size) {
+      return null;
+    }
+
+    for (var i = size - 1; i > -1; i--) {
+      integer |= (bytes[i] << (8 * i));
+    }
+
+    return integer;
+  };
+
+  /**
+   * Reads the next unsigned integers.
+   *
+   * @param {number} size
+   *   The integer size in bytes.
+   * @param {number} count
+   *   The number of integers to read.
+   *
+   * @return {Array<number>}
+   *   Returns an array of integers.
+   */
+  this.readUIntArray = function (size, count) {
+    var integers = [];
+
+    for (var i = 0; i < count; i++) {
+      var integer = this.readUInt(size);
+
+      if (integer === null) {
+        break;
+      }
+
+      integers.push(integer);
+    }
+
+    return integers;
+  };
+
+  /**
+   * Reads a UTF-8 string from the buffer.
+   *
+   * @param {number} length
+   *   The length of the string. Specify 0 to have the function look for a
+   *   string terminator.
+   * @param {boolean} terminate
+   *   Whether to look for a string terminator after the string has been read in
+   *   which case the string will always be terminated.
+   *
+   * @return {string}
+   *   Returns a UTF-8 string.
+   */
+  this.readUTF8String = function (length, terminate) {
+    var i, s = '';
+
+    while ((i = this.readUInt(1)) !== null) {
+      s += String.fromCharCode(i);
+
+      if (length > 0) {
+        if (s.length === length) {
+          break;
+        }
+      }
+      else if (s.endsWith(String.fromCharCode(0, 0))) {
+        break;
+      }
+    }
+
+    if ((terminate) && ((i = s.indexOf(String.fromCharCode(0, 0))) > -1)) {
+      s = s.substring(0, i);
+    }
+
+    return decodeURI(encodeURIComponent(s));
+  };
+
+  /**
+   * Sets the file path.
+   *
+   * @param {string} path
+   *   The file path.
+   *
+   * @return {BinaryParser}
+   *   Returns this instance.
+   *
+   * @modifies {this}
+   */
+  this.setPath = function (path) {
+    this._path = path;
+    return this;
+  };
+
+  /**
+   * Sets the buffer position.
+   *
+   * @param {number} position
+   *   The new position.
+   *
+   * @return {BinaryParser}
+   *   Returns this instance.
+   *
+   * @modifies {this}
+   */
+  this.setPosition = function (position) {
+    this._position = position;
+    return this;
+  };
+
+}
+
+module.exports = BinaryParser;
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var BinaryParser = __webpack_require__(20);
+var COFFHeader = __webpack_require__(19);
+var DOSHeader = __webpack_require__(18);
+var Extend = __webpack_require__(2);
+var ImageAttributes = __webpack_require__(4);
+var ParserException = __webpack_require__(5);
+var OptionalHeader = __webpack_require__(17);
+var ResourceDirectory = __webpack_require__(3);
+var SectionHeader = __webpack_require__(14);
+
+/**
+ * Class PEParser.
+ *
+ * @param {string} path
+ *   The file path.
+ * @param {ArrayBuffer} [data]
+ *   The file contents.
+ *
+ * @constructor
+ * @extends {BinaryParser}
+ */
+function PEParser (path, data) {
+
+  'use strict';
+
+  // Invoke the parent constructor.
+  Extend(true, this, new BinaryParser(path, data));
+
+  /**
+   * The COFF header.
+   *
+   * @type {COFFHeader}
+   *
+   * @protected
+   */
+  this._coffHeader = null;
+
+  /**
+   * The DOS header.
+   *
+   * @type {DOSHeader}
+   *
+   * @protected
+   */
+  this._dosHeader = null;
+
+  /**
+   * The optional header.
+   *
+   * @type {OptionalHeader}
+   *
+   * @protected
+   */
+  this._optionalHeader = null;
+
+  /**
+   * The resource directory.
+   *
+   * @type {ResourceDirectory}
+   *
+   * @protected
+   */
+  this._resourceDirectory = null;
+
+  /**
+   * The resource directory file offset.
+   *
+   * @type {number}
+   *
+   * @protected
+   */
+  this._resourceDirectoryFileOffset = null;
+
+  /**
+   * The section headers.
+   *
+   * @type {Array<SectionHeader>}
+   *
+   * @protected
+   */
+  this._sectionHeaders = null;
+
+  /**
+   * Calculates the file offset for a relative virtual address.
+   *
+   * @param {number} rva
+   *   The relative virtual address.
+   *
+   * @return {number}
+   *   Returns a file offset.
+   */
+  this.getFileOffset = function (rva) {
+    // Determine which section the address belongs to and convert it to a file
+    // offset.
+    var sectionHeaders = this.readSectionHeaders();
+
+    for (var i = 0; i < sectionHeaders.length; i++) {
+      if ((rva >= sectionHeaders[i].virtualAddress) &&
+        (rva <= sectionHeaders[i].virtualAddress +
+        sectionHeaders[i].sizeOfRawData)) {
+        return sectionHeaders[i].pointerToRawData +
+          (rva - sectionHeaders[i].virtualAddress);
+      }
+    }
+
+    return -1;
+  };
+
+  /**
+   * Retrieves the resource directory file offset.
+   *
+   * @return {number}
+   *   Returns the file offset or -1 if the resource directory is empty.
+   */
+  this.getResourceDirectoryFileOffset = function () {
+    if (!this._resourceDirectoryFileOffset) {
+      // Locate the resource section in order to determine the file offset.
+      var sectionHeaders = this.readSectionHeaders();
+      var sectionHeader = null;
+
+      for (var i = 0; i < sectionHeaders.length; i++) {
+        if (sectionHeaders[i].name === '.rsrc') {
+          sectionHeader = sectionHeaders[i];
+          break;
+        }
+      }
+
+      if (sectionHeader) {
+        this._resourceDirectoryFileOffset = sectionHeader.pointerToRawData;
+      }
+      else {
+        this._resourceDirectoryFileOffset = -1;
+      }
+    }
+
+    return this._resourceDirectoryFileOffset;
+  };
+
+  /**
+   * Reads the COFF header.
+   *
+   * @return {COFFHeader}
+   *   Returns the header as an object.
+   *
+   * @throws {ParserException}
+   *   Thrown if the header is invalid.
+   */
+  this.readCOFFHeader = function () {
+    if (!this._coffHeader) {
+      // Move the stream cursor to the position of the COFF header as specified
+      // by the DOS header.
+      this.setPosition(this.readDOSHeader().lfanew);
+
+      // Read the header and throw an exception if the header seems to be
+      // invalid.
+      this._coffHeader = new COFFHeader(this);
+
+      if (this._coffHeader.signature !== ImageAttributes.IMAGE_NT_SIGNATURE) {
+        throw new ParserException('Invalid COFF header');
+      }
+    }
+
+    return this._coffHeader;
+  };
+
+  /**
+   * Reads the DOS header.
+   *
+   * @return {DOSHeader}
+   *   Returns the header as an object.
+   *
+   * @throws {ParserException}
+   *   Thrown if the header is invalid.
+   */
+  this.readDOSHeader = function () {
+    if (!this._dosHeader) {
+      // Reset the position to the beginning of the stream.
+      this.setPosition(0);
+
+      // Read the header from the buffer and throw an exception if the header is
+      // invalid.
+      this._dosHeader = new DOSHeader(this);
+
+      if (this._dosHeader.magic !== ImageAttributes.IMAGE_DOS_SIGNATURE) {
+        throw new ParserException('Invalid DOS header');
+      }
+    }
+
+    return this._dosHeader;
+  };
+
+  /**
+   * Reads the optional header.
+   *
+   * @return {OptionalHeader}
+   *   Returns the header values.
+   *
+   * @throws {ParserException}
+   *   Thrown if the header is invalid.
+   */
+  this.readOptionalHeader = function () {
+    if ((!this._optionalHeader) &&
+      (this.readCOFFHeader().sizeOfOptionalHeader > 0)) {
+      // Move the stream cursor to the position of the optional header as
+      // specified by the DOS header and the size of the COFF header.
+      this.setPosition(this.readDOSHeader().lfanew + 24);
+
+      // Read the entire header including the data directories.
+      this._optionalHeader = new OptionalHeader(this);
+
+      if ((this._optionalHeader.magic !==
+        ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) &&
+        (this._optionalHeader.magic !==
+        ImageAttributes.IMAGE_NT_OPTIONAL_HDR32_MAGIC) &&
+        (this._optionalHeader.magic !==
+        ImageAttributes.IMAGE_ROM_OPTIONAL_HDR_MAGIC)) {
+        throw new ParserException('Invalid optional header');
+      }
+    }
+
+    return this._optionalHeader;
+  };
+
+  /**
+   * Reads the resource directory.
+   *
+   * @return {ResourceDirectory}
+   *   Returns the resource directory.
+   */
+  this.readResourceDirectory = function () {
+    if (this.getResourceDirectoryFileOffset() < 1) {
+      return this._resourceDirectory;
+    }
+
+    this.setPosition(this.getResourceDirectoryFileOffset());
+    this._resourceDirectory = new ResourceDirectory(this);
+    return this._resourceDirectory;
+  };
+
+  /**
+   * Reads the section headers.
+   *
+   * @return {Array<SectionHeader>}
+   *   Returns an array of section headers.
+   */
+  this.readSectionHeaders = function () {
+    if (!this._sectionHeaders) {
+      // Move the stream cursor to the position of the section headers.
+      this.setPosition(this.readDOSHeader().lfanew + 24 +
+        this.readCOFFHeader().sizeOfOptionalHeader);
+
+      // Read each of the section headers.
+      this._sectionHeaders = new Array(this.readCOFFHeader().numberOfSections);
+
+      for (var i = 0; i < this._sectionHeaders.length; i++) {
+        this._sectionHeaders[i] = new SectionHeader(this);
+      }
+    }
+
+    return this._sectionHeaders;
+  };
+
+}
+
+module.exports = PEParser;
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class ParamRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function ParamRow (reader) {
+
+  'use strict';
+
+  /**
+   * The flags.
+   *
+   * @type {number}
+   */
+  this.flags = reader.readUInt(2);
+
+  /**
+   * The sequence.
+   *
+   * @type {number}
+   */
+  this.sequence = reader.readUInt(2);
+
+  /**
+   * The name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.name = reader.readStringIndex();
+
+}
+
+module.exports = ParamRow;
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class ModuleRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function ModuleRow (reader) {
+
+  'use strict';
+
+  /**
+   * The generation.
+   *
+   * This value should always be zero.
+   *
+   * @type {number}
+   */
+  this.generation = reader.readUInt(2);
+
+  /**
+   * The name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.name = reader.readStringIndex();
+
+  /**
+   * The module id as an index into the GUID heap.
+   *
+   * @type {number}
+   */
+  this.mvid = reader.readGUIDIndex();
+
+  /**
+   * The encryption id as an index into the GUID heap.
+   *
+   * This value should always be zero.
+   *
+   * @type {number}
+   */
+  this.encId = reader.readGUIDIndex();
+
+  /**
+   * The base encryption id as an index into the GUID heap.
+   *
+   * This value should always be zero.
+   *
+   * @type {number}
+   */
+  this.encBaseId = reader.readGUIDIndex();
+
+}
+
+module.exports = ModuleRow;
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class ModuleRefRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function ModuleRefRow (reader) {
+
+  'use strict';
+
+  /**
+   * The name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.name = reader.readStringIndex();
+
+}
+
+module.exports = ModuleRefRow;
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class MethodSemanticsRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function MethodSemanticsRow (reader) {
+
+  'use strict';
+
+  /**
+   * The semantics.
+   *
+   * @type {number}
+   */
+  this.semantics = reader.readUInt(2);
+
+  /**
+   * The reference to the method row.
+   *
+   * @type {RowReference}
+   */
+  this.method = new RowReference(reader, [
+    TableIndexes.METHOD_DEF
+  ]);
+
+  /**
+   * The reference to the associated row.
+   *
+   * @type {RowReference}
+   */
+  this.association = new RowReference(reader, [
+    TableIndexes.EVENT,
+    TableIndexes.PROPERTY
+  ]);
+
+}
+
+module.exports = MethodSemanticsRow;
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class MethodImplRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function MethodImplRow (reader) {
+
+  'use strict';
+
+  /**
+   * The reference to the class definition row.
+   *
+   * @type {RowReference}
+   */
+  this.class = new RowReference(reader, [
+    TableIndexes.TYPE_DEF
+  ]);
+
+  /**
+   * The reference to the method body row.
+   *
+   * @type {RowReference}
+   */
+  this.methodBody = new RowReference(reader, [
+    TableIndexes.METHOD_DEF,
+    TableIndexes.MEMBER_REF
+  ]);
+
+  /**
+   * The reference to the method declaration row.
+   *
+   * @type {RowReference}
+   */
+  this.methodDeclaration = new RowReference(reader, [
+    TableIndexes.METHOD_DEF,
+    TableIndexes.MEMBER_REF
+  ]);
+
+}
+
+module.exports = MethodImplRow;
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class MethodFlags.
+ *
+ * @constructor
+ * @struct
+ */
+function MethodFlags () {
+
+  'use strict';
+
+  /**
+   * The fat format flag.
+   *
+   * @const {number}
+   */
+  this.FAT_FORMAT = 0x3;
+
+  /**
+   * The initialize locals flag.
+   *
+   * @const {number}
+   */
+  this.INITIALIZE_LOCALS = 0x10;
+
+  /**
+   * The more sections flag.
+   *
+   * @const {number}
+   */
+  this.MORE_SECTIONS = 0x8;
+
+  /**
+   * The tiny format flag.
+   *
+   * @const {number}
+   */
+  this.TINY_FORMAT = 0x2;
+
+}
+
+module.exports = new MethodFlags();
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var MethodFlags = __webpack_require__(27);
+
+/**
+ * Class MethodHeader.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function MethodHeader (reader) {
+
+  'use strict';
+
+  // Retrieve the first one or two bytes specifying the flags and header size.
+  var flagsAndSize = reader.readUInt(1);
+  var tiny = true;
+
+  if ((flagsAndSize & MethodFlags.TINY_FORMAT) === 0) {
+    reader.setPosition(reader.getPosition() - 1);
+    flagsAndSize = reader.readUInt(2);
+    tiny = false;
+  }
+
+  /**
+   * The flags.
+   *
+   * @type {number}
+   */
+  this.flags = tiny ? flagsAndSize & 0x03 : flagsAndSize & 0xFFF;
+
+  /**
+   * The header size.
+   *
+   * @type {number}
+   */
+  this.headerSize = tiny ? 1 : flagsAndSize >> 12;
+
+  /**
+   * The maximum number of items on the operand stack.
+   *
+   * @return {number}
+   */
+  this.maxStack = tiny ? 0 : reader.readUInt(2);
+
+  /**
+   * The size in bytes of the actual method body.
+   *
+   * @return {number}
+   */
+  this.codeSize = tiny ? flagsAndSize >> 2 : reader.readUInt(4);
+
+  /**
+   * The metadata token for a signature describing the layout of the local
+   * variables for the method
+   *
+   * @return {number}
+   */
+  this.localVarSigTok = tiny ? 0 : reader.readUInt(4);
+
+  /**
+   * The file offset to the code.
+   *
+   * @type {number}
+   */
+  this.codeOffset = reader.getPosition();
+
+}
+
+module.exports = MethodHeader;
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class MethodDefRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function MethodDefRow (reader) {
+
+  'use strict';
+
+  /**
+   * The relative virtual address.
+   *
+   * @type {number}
+   */
+  this.rva = reader.readUInt(4);
+
+  /**
+   * The implementation flags.
+   *
+   * @type {number}
+   */
+  this.implFlags = reader.readUInt(2);
+
+  /**
+   * The method flags.
+   *
+   * @type {number}
+   */
+  this.flags = reader.readUInt(2);
+
+  /**
+   * The name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.name = reader.readStringIndex();
+
+  /**
+   * The signature as an index into the blob heap.
+   *
+   * @type {number}
+   */
+  this.signature = reader.readBlobIndex();
+
+  /**
+   * The reference to the param definition row.
+   *
+   * @type {RowReference}
+   */
+  this.paramList = new RowReference(reader, [
+    TableIndexes.PARAM
+  ]);
+
+}
+
+module.exports = MethodDefRow;
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class NestedClassRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function NestedClassRow (reader) {
+
+  'use strict';
+
+  /**
+   * The reference to the nested class information row.
+   *
+   * @type {RowReference}
+   */
+  this.nestedClass = new RowReference(reader, [
+    TableIndexes.TYPE_DEF
+  ]);
+
+  /**
+   * The reference to the enclosing class information row.
+   *
+   * @type {RowReference}
+   */
+  this.enclosingClass = new RowReference(reader, [
+    TableIndexes.TYPE_DEF
+  ]);
+
+}
+
+module.exports = NestedClassRow;
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class MemberRefRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function MemberRefRow (reader) {
+
+  'use strict';
+
+  /**
+   * The reference to the class definition row.
+   *
+   * @type {RowReference}
+   */
+  this.class = new RowReference(reader, [
+    TableIndexes.TYPE_DEF,
+    TableIndexes.TYPE_REF,
+    TableIndexes.MODULE_REF,
+    TableIndexes.METHOD_DEF,
+    TableIndexes.TYPE_SPEC
+  ]);
+
+  /**
+   * The name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.name = reader.readStringIndex();
+
+  /**
+   * The signature as an index into the blob heap.
+   *
+   * @type {number}
+   */
+  this.signature = reader.readBlobIndex();
+
+}
+
+module.exports = MemberRefRow;
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class StreamHeader.
+ *
+ * @param {BinaryParser} reader
+ *   The binary reader.
+ *
+ * @constructor
+ * @struct
+ */
+function StreamHeader (reader) {
+
+  'use strict';
+
+  /**
+   * The file offset to the stream relative to the metadata header.
+   *
+   * @type {number}
+   */
+  this.offset = reader.readUInt(4);
+
+  /**
+   * The size of the stream, in bytes.
+   *
+   * @type {number}
+   */
+  this.size = reader.readUInt(4);
+
+  /**
+   * The name of the stream.
+   *
+   * @type {string}
+   */
+  this.name = reader.readString(0, true, 4);
+
+}
+
+module.exports = StreamHeader;
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var StreamHeader = __webpack_require__(32);
+
+/**
+ * Class MetadataHeader.
+ *
+ * @param {BinaryParser} reader
+ *   The binary reader.
+ *
+ * @constructor
+ * @struct
+ */
+function MetadataHeader (reader) {
+
+  'use strict';
+
+  var i;
+
+  /**
+   * The file offset to the header relative to the beginning of the stream.
+   *
+   * @type {number}
+   */
+  this.offset = reader.getPosition();
+
+  /**
+   * The signature.
+   *
+   * This value should always equal 0x424A5342.
+   *
+   * @type {number}
+   */
+  this.signature = reader.readUInt(4);
+
+  /**
+   * The major version.
+   *
+   * @type {number}
+   */
+  this.majorVersion = reader.readUInt(2);
+
+  /**
+   * The minor version.
+   *
+   * @type {number}
+   */
+  this.minorVersion = reader.readUInt(2);
+
+  /**
+   * A reserved value.
+   *
+   * This value should always equal 0x00.
+   *
+   * @type {number}
+   */
+  this.reserved = reader.readUInt(4);
+
+  /**
+   * The length of the version string.
+   *
+   * @type {number}
+   */
+  this.versionLength = (i = (i = reader.readUInt(4)) + (i % 4));
+
+  /**
+   * The version string.
+   *
+   * @type {string}
+   */
+  this.version = reader.readUTF8String(i, true);
+
+  /**
+   * The flags.
+   *
+   * This value should always equal 0x00.
+   *
+   * @type {number}
+   */
+  this.flags = reader.readUInt(2);
+
+  /**
+   * The number of streams.
+   *
+   * @type {number}
+   */
+  this.streams = reader.readUInt(2);
+
+  /**
+   * The stream headers.
+   *
+   * @type {Array<StreamHeader>}
+   */
+  this.streamHeaders = new Array(this.streams);
+
+  // Read the stream headers.
+  for (i = 0; i < this.streamHeaders.length; i++) {
+    this.streamHeaders[i] = new StreamHeader(reader);
+  }
+
+}
+
+module.exports = MetadataHeader;
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class ManifestResourceRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function ManifestResourceRow (reader) {
+
+  'use strict';
+
+  /**
+   * The offset.
+   *
+   * @type {number}
+   */
+  this.offset = reader.readUInt(4);
+
+  /**
+   * The flags.
+   *
+   * @type {number}
+   */
+  this.flags = reader.readUInt(4);
+
+  /**
+   * The name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.name = reader.readStringIndex();
+
+  /**
+   * The reference to the type information row.
+   *
+   * @type {RowReference}
+   */
+  this.implementation = new RowReference(reader, [
+    TableIndexes.FILE,
+    TableIndexes.ASSEMBLY_REF,
+    TableIndexes.EXPORTED_TYPE
+  ]);
+
+}
+
+module.exports = ManifestResourceRow;
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class CustomException.
+ *
+ * @param {string} message
+ *   The message.
+ * @param {string} type
+ *   The type of exception.
+ *
+ * @constructor
+ */
+function CustomException (message, type) {
+
+  'use strict';
+
+  /**
+   * The exception message.
+   *
+   * @type {string}
+   *
+   * @private
+   */
+  this._message = message;
+
+  /**
+   * The exception type.
+   *
+   * @type {string}
+   *
+   * @private
+   */
+  this._type = (typeof type !== 'undefined') ? type : 'CustomException';
+
+  /**
+   * Retrieves the exception message.
+   *
+   * @return {string}
+   */
+  this.getMessage = function () {
+    return this._message;
+  };
+
+  /**
+   * Retrieves the exception type.
+   *
+   * @return {string}
+   */
+  this.getType = function () {
+    return this._type;
+  };
+
+  /**
+   * Converts the exception to a string.
+   *
+   * @return {string}
+   */
+  this.toString = function () {
+    return this.getMessage();
+  };
+
+}
+
+module.exports = CustomException;
+
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class InterfaceImplRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function InterfaceImplRow (reader) {
+
+  'use strict';
+
+  /**
+   * The reference to the class definition row.
+   *
+   * @type {RowReference}
+   */
+  this.class = new RowReference(reader, [
+    TableIndexes.TYPE_DEF
+  ]);
+
+  /**
+   * The reference to the interface definition row.
+   *
+   * @type {RowReference}
+   */
+  this.interface = new RowReference(reader, [
+    TableIndexes.TYPE_DEF,
+    TableIndexes.TYPE_REF,
+    TableIndexes.TYPE_SPEC
+  ]);
+
+}
+
+module.exports = InterfaceImplRow;
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class ImplMapRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function ImplMapRow (reader) {
+
+  'use strict';
+
+  /**
+   * The mapping flags.
+   *
+   * @type {number}
+   */
+  this.mappingFlags = reader.readUInt(2);
+
+  /**
+   * The forwarded member as a reference to a Field or MethodDef row.
+   *
+   * @type {RowReference}
+   */
+  this.memberForwarded = new RowReference(reader, [
+    TableIndexes.FIELD,
+    TableIndexes.METHOD_DEF
+  ]);
+
+  /**
+   * The import name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.importName = reader.readStringIndex();
+
+  /**
+   * The import scope as a reference to a ModuleRef row.
+   *
+   * @type {RowReference}
+   */
+  this.importScope = new RowReference(reader, [
+    TableIndexes.MODULE
+  ]);
+
+}
+
+module.exports = ImplMapRow;
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class GenericParamConstraintRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function GenericParamConstraintRow (reader) {
+
+  'use strict';
+
+  /**
+   * The reference to the owner row.
+   *
+   * @type {RowReference}
+   */
+  this.owner = new RowReference(reader, [
+    TableIndexes.GENERIC_PARAM
+  ]);
+
+  /**
+   * The reference to the class row.
+   *
+   * @type {RowReference}
+   */
+  this.constraint = new RowReference(reader, [
+    TableIndexes.TYPE_DEF,
+    TableIndexes.TYPE_REF,
+    TableIndexes.TYPE_SPEC
+  ]);
+
+}
+
+module.exports = GenericParamConstraintRow;
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class GenericParamRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function GenericParamRow (reader) {
+
+  'use strict';
+
+  /**
+   * The index of the generic parameter.
+   *
+   * @type {number}
+   */
+  this.number = reader.readUInt(2);
+
+  /**
+   * The flags.
+   *
+   * @type {number}
+   */
+  this.flags = reader.readUInt(2);
+
+  /**
+   * The reference to the owner of the generic parameter.
+   *
+   * @type {RowReference}
+   */
+  this.owner = new RowReference(reader, [
+    TableIndexes.TYPE_DEF,
+    TableIndexes.METHOD_DEF
+  ]);
+
+  /**
+   * The name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.name = reader.readStringIndex();
+
+}
+
+module.exports = GenericParamRow;
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class FileRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function FileRow (reader) {
+
+  'use strict';
+
+  /**
+   * The OS platform id.
+   *
+   * @type {number}
+   */
+  this.flags = reader.readUInt(4);
+
+  /**
+   * The name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.name = reader.readStringIndex();
+
+  /**
+   * The hash value as an index into the blob heap.
+   *
+   * @type {number}
+   */
+  this.hashValue = reader.readBlobIndex();
+
+}
+
+module.exports = FileRow;
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class FieldMarshalRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function FieldMarshalRow (reader) {
+
+  'use strict';
+
+  /**
+   * The reference to the parent row.
+   *
+   * @type {RowReference}
+   */
+  this.parent = new RowReference(reader, [
+    TableIndexes.FIELD,
+    TableIndexes.PARAM
+  ]);
+
+  /**
+   * The native type as an index into the blob heap.
+   *
+   * @type {number}
+   */
+  this.nativeType = reader.readBlobIndex();
+
+}
+
+module.exports = FieldMarshalRow;
+
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class FieldLayoutRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function FieldLayoutRow (reader) {
+
+  'use strict';
+
+  /**
+   * The offset.
+   *
+   * @type {number}
+   */
+  this.offset = reader.readUInt(4);
+
+  /**
+   * The reference to the parent row.
+   *
+   * @type {RowReference}
+   */
+  this.field = new RowReference(reader, [
+    TableIndexes.FIELD
+  ]);
+
+}
+
+module.exports = FieldLayoutRow;
+
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class FieldRVARow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function FieldRVARow (reader) {
+
+  'use strict';
+
+  /**
+   * The relative virtual address of the initial value.
+   *
+   * @type {number}
+   */
+  this.rva = reader.readUInt(4);
+
+  /**
+   * The field as a reference to a Field row.
+   *
+   * @type {RowReference}
+   */
+  this.field = new RowReference(reader, [
+    TableIndexes.FIELD
+  ]);
+
+}
+
+module.exports = FieldRVARow;
+
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class FieldRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function FieldRow (reader) {
+
+  'use strict';
+
+  /**
+   * The flags.
+   *
+   * @type {number}
+   */
+  this.type = reader.readUInt(2);
+
+  /**
+   * The name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.name = reader.readStringIndex();
+
+  /**
+   * The signature as an index into the blob heap.
+   *
+   * @type {number}
+   */
+  this.signature = reader.readBlobIndex();
+
+}
+
+module.exports = FieldRow;
+
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class ExportedTypeRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function ExportedTypeRow (reader) {
+
+  'use strict';
+
+  /**
+   * The flags.
+   *
+   * @type {number}
+   */
+  this.flags = reader.readUInt(4);
+
+  /**
+   * The type definition id.
+   *
+   * @type {number}
+   */
+  this.typeDefId = reader.readUInt(4);
+
+  /**
+   * The type name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.typeName = reader.readStringIndex();
+
+  /**
+   * The type namespace as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.typeNamespace = reader.readStringIndex();
+
+  /**
+   * The reference to the type information row.
+   *
+   * @type {RowReference}
+   */
+  this.implementation = new RowReference(reader, [
+    TableIndexes.FILE,
+    TableIndexes.EXPORTED_TYPE
+  ]);
+
+}
+
+module.exports = ExportedTypeRow;
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class EventRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function EventRow (reader) {
+
+  'use strict';
+
+  /**
+   * The event flags.
+   *
+   * @type {number}
+   */
+  this.eventFlags = reader.readUInt(2);
+
+  /**
+   * The name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.name = reader.readStringIndex();
+
+  /**
+   * The event type as a reference to a TypeDef, TypeRef or TypeSpec row.
+   *
+   * @type {RowReference}
+   */
+  this.eventType = new RowReference(reader, [
+    TableIndexes.TYPE_DEF,
+    TableIndexes.TYPE_REF,
+    TableIndexes.TYPE_SPEC
+  ]);
+
+}
+
+module.exports = EventRow;
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class EventMapRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function EventMapRow (reader) {
+
+  'use strict';
+
+  /**
+   * The reference to the parent row.
+   *
+   * @type {RowReference}
+   */
+  this.parent = new RowReference(reader, [
+    TableIndexes.TYPE_DEF
+  ]);
+
+  /**
+   * The reference to the first event row.
+   *
+   * @type {RowReference}
+   */
+  this.eventList = new RowReference(reader, [
+    TableIndexes.EVENT
+  ]);
+
+}
+
+module.exports = EventMapRow;
+
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class DeclSecurityRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function DeclSecurityRow (reader) {
+
+  'use strict';
+
+  /**
+   * The action.
+   *
+   * @type {number}
+   */
+  this.action = reader.readUInt(2);
+
+  /**
+   * The reference to the parent row.
+   *
+   * @type {RowReference}
+   */
+  this.parent = new RowReference(reader, [
+    TableIndexes.TYPE_DEF,
+    TableIndexes.METHOD_DEF,
+    TableIndexes.ASSEMBLY
+  ]);
+
+  /**
+   * The native type as an index into the blob heap.
+   *
+   * @type {number}
+   */
+  this.permissionSet = reader.readBlobIndex();
+
+}
+
+module.exports = DeclSecurityRow;
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class ConstantRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function CustomAttributeRow (reader) {
+
+  'use strict';
+
+  /**
+   * The reference to the parent row.
+   *
+   * @type {RowReference}
+   */
+  this.parent = new RowReference(reader, [
+    TableIndexes.METHOD_DEF,
+    TableIndexes.FIELD,
+    TableIndexes.TYPE_REF,
+    TableIndexes.TYPE_DEF,
+    TableIndexes.PARAM,
+    TableIndexes.INTERFACE_IMPL,
+    TableIndexes.MEMBER_REF,
+    TableIndexes.MODULE,
+    -1,
+    TableIndexes.PROPERTY,
+    TableIndexes.EVENT,
+    TableIndexes.STAND_ALONE_SIG,
+    TableIndexes.MODULE_REF,
+    TableIndexes.TYPE_SPEC,
+    TableIndexes.ASSEMBLY,
+    TableIndexes.ASSEMBLY_REF,
+    TableIndexes.FILE,
+    TableIndexes.EXPORTED_TYPE,
+    TableIndexes.MANIFEST_RESOURCE
+  ]);
+
+  /**
+   * The reference to the type row.
+   *
+   * @type {RowReference}
+   */
+  this.type = new RowReference(reader, [
+    -1,
+    -1,
+    TableIndexes.METHOD_DEF,
+    TableIndexes.MEMBER_REF,
+    -1
+  ]);
+
+  /**
+   * The value as an index into the blob heap.
+   *
+   * @type {number}
+   */
+  this.value = reader.readBlobIndex();
+
+}
+
+module.exports = CustomAttributeRow;
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var DataDirectoryHeader = __webpack_require__(6);
+
+/**
+ * Class CORHeader.
+ *
+ * @param {BinaryParser} reader
+ *   The binary reader.
+ *
+ * @constructor
+ * @struct
+ */
+function CORHeader (reader) {
+
+  'use strict';
+
+  /**
+   * The size of the header, in bytes.
+   *
+   * @type {number}
+   */
+  this.sizeOfHeader = reader.readUInt(4);
+
+  /**
+   * The major runtime version.
+   *
+   * @type {number}
+   */
+  this.majorRuntimeVersion = reader.readUInt(2);
+
+  /**
+   * The minor runtime version.
+   *
+   * @type {number}
+   */
+  this.minorRuntimeVersion = reader.readUInt(2);
+
+  /**
+   * The metadata directory header.
+   *
+   * @type {DataDirectoryHeader}
+   */
+  this.metadata = new DataDirectoryHeader(reader);
+
+  /**
+   * The runtime flags.
+   *
+   * @type {number}
+   */
+  this.flags = reader.readUInt(4);
+
+  /**
+   * The entry point address or token.
+   *
+   * @type {number}
+   */
+  this.entryPoint = reader.readUInt(4);
+
+  /**
+   * The resources directory header.
+   *
+   * @type {DataDirectoryHeader}
+   */
+  this.resources = new DataDirectoryHeader(reader);
+
+  /**
+   * The strong name signature directory header.
+   *
+   * @type {DataDirectoryHeader}
+   */
+  this.strongNameSignature = new DataDirectoryHeader(reader);
+
+  /**
+   * The code manager table directory header.
+   *
+   * @type {DataDirectoryHeader}
+   */
+  this.codeManagerTable = new DataDirectoryHeader(reader);
+
+  /**
+   * The VTable fix-ups directory header.
+   *
+   * @type {DataDirectoryHeader}
+   */
+  this.vTableFixups = new DataDirectoryHeader(reader);
+
+  /**
+   * The exported address table jumps directory header.
+   *
+   * @type {DataDirectoryHeader}
+   */
+  this.exportAddressTableJumps = new DataDirectoryHeader(reader);
+
+  /**
+   * The managed native header directory header.
+   *
+   * @type {DataDirectoryHeader}
+   */
+  this.managedNativeHeader = new DataDirectoryHeader(reader);
+
+}
+
+module.exports = CORHeader;
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class ConstantRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function ConstantRow (reader) {
+
+  'use strict';
+
+  /**
+   * The type.
+   *
+   * @type {number}
+   */
+  this.type = reader.readUInt(1) + reader.readUInt(1);
+
+  /**
+   * The reference to the parent row.
+   *
+   * @type {RowReference}
+   */
+  this.parent = new RowReference(reader, [
+    TableIndexes.FIELD,
+    TableIndexes.PARAM,
+    TableIndexes.PROPERTY
+  ]);
+
+  /**
+   * The value as an index into the Blob heap.
+   *
+   * @type {number}
+   */
+  this.value = reader.readBlobIndex();
+
+}
+
+module.exports = ConstantRow;
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class ClassLayoutRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function ClassLayoutRow (reader) {
+
+  'use strict';
+
+  /**
+   * The packing size.
+   *
+   * @type {number}
+   */
+  this.packingSize = reader.readUInt(2);
+
+  /**
+   * The class size.
+   *
+   * @type {number}
+   */
+  this.classSize = reader.readUInt(4);
+
+  /**
+   * The reference to the parent row.
+   *
+   * @type {RowReference}
+   */
+  this.parent = new RowReference(reader, [
+    TableIndexes.TYPE_DEF
+  ]);
+
+}
+
+module.exports = ClassLayoutRow;
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class AssemblyRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function AssemblyRow (reader) {
+
+  'use strict';
+
+  /**
+   * The id of the hashing algorithm.
+   *
+   * @type {number}
+   */
+  this.hashAlgId = reader.readUInt(4);
+
+  /**
+   * The major version.
+   *
+   * @type {number}
+   */
+  this.majorVersion = reader.readUInt(2);
+
+  /**
+   * The minor version.
+   *
+   * @type {number}
+   */
+  this.minorVersion = reader.readUInt(2);
+
+  /**
+   * The build number.
+   *
+   * @type {number}
+   */
+  this.buildNumber = reader.readUInt(2);
+
+  /**
+   * The revision number.
+   *
+   * @type {number}
+   */
+  this.revisionNumber = reader.readUInt(2);
+
+  /**
+   * The flags.
+   *
+   * @type {number}
+   */
+  this.flags = reader.readUInt(4);
+
+  /**
+   * The public key as an index into the blob heap.
+   *
+   * @type {number}
+   */
+  this.publicKey = reader.readBlobIndex();
+
+  /**
+   * The name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.name = reader.readStringIndex();
+
+  /**
+   * The culture as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.culture = reader.readStringIndex();
+
+}
+
+module.exports = AssemblyRow;
+
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class AssemblyRefRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function AssemblyRefRow (reader) {
+
+  'use strict';
+
+  /**
+   * The major version.
+   *
+   * @type {number}
+   */
+  this.majorVersion = reader.readUInt(2);
+
+  /**
+   * The minor version.
+   *
+   * @type {number}
+   */
+  this.minorVersion = reader.readUInt(2);
+
+  /**
+   * The build number.
+   *
+   * @type {number}
+   */
+  this.buildNumber = reader.readUInt(2);
+
+  /**
+   * The revision number.
+   *
+   * @type {number}
+   */
+  this.revisionNumber = reader.readUInt(2);
+
+  /**
+   * The flags.
+   *
+   * @type {number}
+   */
+  this.flags = reader.readUInt(4);
+
+  /**
+   * The public key or token as an index into the blob heap.
+   *
+   * @type {number}
+   */
+  this.publicKeyOrToken = reader.readBlobIndex();
+
+  /**
+   * The name as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.name = reader.readStringIndex();
+
+  /**
+   * The culture as an index into the string heap.
+   *
+   * @type {number}
+   */
+  this.culture = reader.readStringIndex();
+
+  /**
+   * The hash value as an index into the blob heap.
+   *
+   * @type {number}
+   */
+  this.hashValue = reader.readBlobIndex();
+
+}
+
+module.exports = AssemblyRefRow;
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class AssemblyRefProcessorRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function AssemblyRefProcessorRow (reader) {
+
+  'use strict';
+
+  /**
+   * The processor type.
+   *
+   * @type {number}
+   */
+  this.processor = reader.readUInt(4);
+
+  /**
+   * The reference to the assembly reference row.
+   *
+   * @type {RowReference}
+   */
+  this.assemblyRef = new RowReference(reader, [
+    TableIndexes.ASSEMBLY_REF
+  ]);
+
+}
+
+module.exports = AssemblyRefProcessorRow;
+
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var RowReference = __webpack_require__(1);
+var TableIndexes = __webpack_require__(0);
+
+/**
+ * Class AssemblyRefOSRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function AssemblyRefOSRow (reader) {
+
+  'use strict';
+
+  /**
+   * The OS platform id.
+   *
+   * @type {number}
+   */
+  this.osPlatformID = reader.readUInt(4);
+
+  /**
+   * The OS major version.
+   *
+   * @type {number}
+   */
+  this.osMajorVersion = reader.readUInt(4);
+
+  /**
+   * The OS minor version.
+   *
+   * @type {number}
+   */
+  this.osMinorVersion = reader.readUInt(4);
+
+  /**
+   * The reference to the assembly reference row.
+   *
+   * @type {RowReference}
+   */
+  this.assemblyRef = new RowReference(reader, [
+    TableIndexes.ASSEMBLY_REF
+  ]);
+
+}
+
+module.exports = AssemblyRefOSRow;
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class AssemblyProcessorRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function AssemblyProcessorRow (reader) {
+
+  'use strict';
+
+  /**
+   * The processor type.
+   *
+   * @type {number}
+   */
+  this.processor = reader.readUInt(4);
+
+}
+
+module.exports = AssemblyProcessorRow;
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Class AssemblyOSRow.
+ *
+ * @param {CILParser} reader
+ *   The CIL reader.
+ *
+ * @constructor
+ * @struct
+ */
+function AssemblyOSRow (reader) {
+
+  'use strict';
+
+  /**
+   * The OS platform id.
+   *
+   * @type {number}
+   */
+  this.osPlatformID = reader.readUInt(4);
+
+  /**
+   * The OS major version.
+   *
+   * @type {number}
+   */
+  this.osMajorVersion = reader.readUInt(4);
+
+  /**
+   * The OS minor version.
+   *
+   * @type {number}
+   */
+  this.osMinorVersion = reader.readUInt(4);
+
+}
+
+module.exports = AssemblyOSRow;
+
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var AssemblyOSRow = __webpack_require__(58);
+var AssemblyProcessorRow = __webpack_require__(57);
+var AssemblyRefOSRow = __webpack_require__(56);
+var AssemblyRefProcessorRow = __webpack_require__(55);
+var AssemblyRefRow = __webpack_require__(54);
+var AssemblyRow = __webpack_require__(53);
+var ClassLayoutRow = __webpack_require__(52);
+var ConstantRow = __webpack_require__(51);
+var CORHeader = __webpack_require__(50);
+var CustomAttributeRow = __webpack_require__(49);
+var DeclSecurityRow = __webpack_require__(48);
+var EventMapRow = __webpack_require__(47);
+var EventRow = __webpack_require__(46);
+var ExportedTypeRow = __webpack_require__(45);
+var Extend = __webpack_require__(2);
+var FieldRow = __webpack_require__(44);
+var FieldRVARow = __webpack_require__(43);
+var FieldLayoutRow = __webpack_require__(42);
+var FieldMarshalRow = __webpack_require__(41);
+var FileRow = __webpack_require__(40);
+var GenericParamRow = __webpack_require__(39);
+var GenericParamConstraintRow = __webpack_require__(38);
+var ImplMapRow = __webpack_require__(37);
+var InterfaceImplRow = __webpack_require__(36);
+var ParserException = __webpack_require__(5);
+var ManifestResourceRow = __webpack_require__(34);
+var MetadataHeader = __webpack_require__(33);
+var MemberRefRow = __webpack_require__(31);
+var NestedClassRow = __webpack_require__(30);
+var MethodDefRow = __webpack_require__(29);
+var MethodHeader = __webpack_require__(28);
+var MethodImplRow = __webpack_require__(26);
+var MethodSemanticsRow = __webpack_require__(25);
+var ModuleRefRow = __webpack_require__(24);
+var ModuleRow = __webpack_require__(23);
+var ParamRow = __webpack_require__(22);
+var PEParser = __webpack_require__(21);
+var PropertyMapRow = __webpack_require__(13);
+var PropertyRow = __webpack_require__(12);
+var StandAloneSigRow = __webpack_require__(11);
+var TableIndexes = __webpack_require__(0);
+var TablesHeader = __webpack_require__(10);
+var TypeDefRow = __webpack_require__(9);
+var TypeRefRow = __webpack_require__(8);
+var TypeSpecRow = __webpack_require__(7);
 
 /**
  * Class CILParser.
@@ -1474,113 +5979,7 @@ module.exports = CILParser;
 
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class AssemblyOSRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function AssemblyOSRow (reader) {
-
-  'use strict';
-
-  /**
-   * The OS platform id.
-   *
-   * @type {number}
-   */
-  this.osPlatformID = reader.readUInt(4);
-
-  /**
-   * The OS major version.
-   *
-   * @type {number}
-   */
-  this.osMajorVersion = reader.readUInt(4);
-
-  /**
-   * The OS minor version.
-   *
-   * @type {number}
-   */
-  this.osMinorVersion = reader.readUInt(4);
-
-}
-
-module.exports = AssemblyOSRow;
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class AssemblyProcessorRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function AssemblyProcessorRow (reader) {
-
-  'use strict';
-
-  /**
-   * The processor type.
-   *
-   * @type {number}
-   */
-  this.processor = reader.readUInt(4);
-
-}
-
-module.exports = AssemblyProcessorRow;
-
-
-/***/ }),
-/* 11 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1600,4444 +5999,48 @@ module.exports = AssemblyProcessorRow;
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
+var CILParser = __webpack_require__(59);
 
 /**
- * Class AssemblyRefOSRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
+ * Class Main.
  *
  * @constructor
- * @struct
+ * @final
  */
-function AssemblyRefOSRow (reader) {
+function Main () {
 
   'use strict';
 
   /**
-   * The OS platform id.
-   *
-   * @type {number}
-   */
-  this.osPlatformID = reader.readUInt(4);
-
-  /**
-   * The OS major version.
-   *
-   * @type {number}
-   */
-  this.osMajorVersion = reader.readUInt(4);
-
-  /**
-   * The OS minor version.
-   *
-   * @type {number}
-   */
-  this.osMinorVersion = reader.readUInt(4);
-
-  /**
-   * The reference to the assembly reference row.
-   *
-   * @type {RowReference}
-   */
-  this.assemblyRef = new RowReference(reader, [
-    TableIndexes.ASSEMBLY_REF
-  ]);
-
-}
-
-module.exports = AssemblyRefOSRow;
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class AssemblyRefProcessorRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function AssemblyRefProcessorRow (reader) {
-
-  'use strict';
-
-  /**
-   * The processor type.
-   *
-   * @type {number}
-   */
-  this.processor = reader.readUInt(4);
-
-  /**
-   * The reference to the assembly reference row.
-   *
-   * @type {RowReference}
-   */
-  this.assemblyRef = new RowReference(reader, [
-    TableIndexes.ASSEMBLY_REF
-  ]);
-
-}
-
-module.exports = AssemblyRefProcessorRow;
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class AssemblyRefRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function AssemblyRefRow (reader) {
-
-  'use strict';
-
-  /**
-   * The major version.
-   *
-   * @type {number}
-   */
-  this.majorVersion = reader.readUInt(2);
-
-  /**
-   * The minor version.
-   *
-   * @type {number}
-   */
-  this.minorVersion = reader.readUInt(2);
-
-  /**
-   * The build number.
-   *
-   * @type {number}
-   */
-  this.buildNumber = reader.readUInt(2);
-
-  /**
-   * The revision number.
-   *
-   * @type {number}
-   */
-  this.revisionNumber = reader.readUInt(2);
-
-  /**
-   * The flags.
-   *
-   * @type {number}
-   */
-  this.flags = reader.readUInt(4);
-
-  /**
-   * The public key or token as an index into the blob heap.
-   *
-   * @type {number}
-   */
-  this.publicKeyOrToken = reader.readBlobIndex();
-
-  /**
-   * The name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.name = reader.readStringIndex();
-
-  /**
-   * The culture as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.culture = reader.readStringIndex();
-
-  /**
-   * The hash value as an index into the blob heap.
-   *
-   * @type {number}
-   */
-  this.hashValue = reader.readBlobIndex();
-
-}
-
-module.exports = AssemblyRefRow;
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class AssemblyRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function AssemblyRow (reader) {
-
-  'use strict';
-
-  /**
-   * The id of the hashing algorithm.
-   *
-   * @type {number}
-   */
-  this.hashAlgId = reader.readUInt(4);
-
-  /**
-   * The major version.
-   *
-   * @type {number}
-   */
-  this.majorVersion = reader.readUInt(2);
-
-  /**
-   * The minor version.
-   *
-   * @type {number}
-   */
-  this.minorVersion = reader.readUInt(2);
-
-  /**
-   * The build number.
-   *
-   * @type {number}
-   */
-  this.buildNumber = reader.readUInt(2);
-
-  /**
-   * The revision number.
-   *
-   * @type {number}
-   */
-  this.revisionNumber = reader.readUInt(2);
-
-  /**
-   * The flags.
-   *
-   * @type {number}
-   */
-  this.flags = reader.readUInt(4);
-
-  /**
-   * The public key as an index into the blob heap.
-   *
-   * @type {number}
-   */
-  this.publicKey = reader.readBlobIndex();
-
-  /**
-   * The name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.name = reader.readStringIndex();
-
-  /**
-   * The culture as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.culture = reader.readStringIndex();
-
-}
-
-module.exports = AssemblyRow;
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class ClassLayoutRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function ClassLayoutRow (reader) {
-
-  'use strict';
-
-  /**
-   * The packing size.
-   *
-   * @type {number}
-   */
-  this.packingSize = reader.readUInt(2);
-
-  /**
-   * The class size.
-   *
-   * @type {number}
-   */
-  this.classSize = reader.readUInt(4);
-
-  /**
-   * The reference to the parent row.
-   *
-   * @type {RowReference}
-   */
-  this.parent = new RowReference(reader, [
-    TableIndexes.TYPE_DEF
-  ]);
-
-}
-
-module.exports = ClassLayoutRow;
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class ConstantRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function ConstantRow (reader) {
-
-  'use strict';
-
-  /**
-   * The type.
-   *
-   * @type {number}
-   */
-  this.type = reader.readUInt(1) + reader.readUInt(1);
-
-  /**
-   * The reference to the parent row.
-   *
-   * @type {RowReference}
-   */
-  this.parent = new RowReference(reader, [
-    TableIndexes.FIELD,
-    TableIndexes.PARAM,
-    TableIndexes.PROPERTY
-  ]);
-
-  /**
-   * The value as an index into the Blob heap.
-   *
-   * @type {number}
-   */
-  this.value = reader.readBlobIndex();
-
-}
-
-module.exports = ConstantRow;
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var DataDirectoryHeader = __webpack_require__(3);
-
-/**
- * Class CORHeader.
- *
- * @param {BinaryParser} reader
- *   The binary reader.
- *
- * @constructor
- * @struct
- */
-function CORHeader (reader) {
-
-  'use strict';
-
-  /**
-   * The size of the header, in bytes.
-   *
-   * @type {number}
-   */
-  this.sizeOfHeader = reader.readUInt(4);
-
-  /**
-   * The major runtime version.
-   *
-   * @type {number}
-   */
-  this.majorRuntimeVersion = reader.readUInt(2);
-
-  /**
-   * The minor runtime version.
-   *
-   * @type {number}
-   */
-  this.minorRuntimeVersion = reader.readUInt(2);
-
-  /**
-   * The metadata directory header.
-   *
-   * @type {DataDirectoryHeader}
-   */
-  this.metadata = new DataDirectoryHeader(reader);
-
-  /**
-   * The runtime flags.
-   *
-   * @type {number}
-   */
-  this.flags = reader.readUInt(4);
-
-  /**
-   * The entry point address or token.
-   *
-   * @type {number}
-   */
-  this.entryPoint = reader.readUInt(4);
-
-  /**
-   * The resources directory header.
-   *
-   * @type {DataDirectoryHeader}
-   */
-  this.resources = new DataDirectoryHeader(reader);
-
-  /**
-   * The strong name signature directory header.
-   *
-   * @type {DataDirectoryHeader}
-   */
-  this.strongNameSignature = new DataDirectoryHeader(reader);
-
-  /**
-   * The code manager table directory header.
-   *
-   * @type {DataDirectoryHeader}
-   */
-  this.codeManagerTable = new DataDirectoryHeader(reader);
-
-  /**
-   * The VTable fix-ups directory header.
-   *
-   * @type {DataDirectoryHeader}
-   */
-  this.vTableFixups = new DataDirectoryHeader(reader);
-
-  /**
-   * The exported address table jumps directory header.
-   *
-   * @type {DataDirectoryHeader}
-   */
-  this.exportAddressTableJumps = new DataDirectoryHeader(reader);
-
-  /**
-   * The managed native header directory header.
-   *
-   * @type {DataDirectoryHeader}
-   */
-  this.managedNativeHeader = new DataDirectoryHeader(reader);
-
-}
-
-module.exports = CORHeader;
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class ConstantRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function CustomAttributeRow (reader) {
-
-  'use strict';
-
-  /**
-   * The reference to the parent row.
-   *
-   * @type {RowReference}
-   */
-  this.parent = new RowReference(reader, [
-    TableIndexes.METHOD_DEF,
-    TableIndexes.FIELD,
-    TableIndexes.TYPE_REF,
-    TableIndexes.TYPE_DEF,
-    TableIndexes.PARAM,
-    TableIndexes.INTERFACE_IMPL,
-    TableIndexes.MEMBER_REF,
-    TableIndexes.MODULE,
-    -1,
-    TableIndexes.PROPERTY,
-    TableIndexes.EVENT,
-    TableIndexes.STAND_ALONE_SIG,
-    TableIndexes.MODULE_REF,
-    TableIndexes.TYPE_SPEC,
-    TableIndexes.ASSEMBLY,
-    TableIndexes.ASSEMBLY_REF,
-    TableIndexes.FILE,
-    TableIndexes.EXPORTED_TYPE,
-    TableIndexes.MANIFEST_RESOURCE
-  ]);
-
-  /**
-   * The reference to the type row.
-   *
-   * @type {RowReference}
-   */
-  this.type = new RowReference(reader, [
-    -1,
-    -1,
-    TableIndexes.METHOD_DEF,
-    TableIndexes.MEMBER_REF,
-    -1
-  ]);
-
-  /**
-   * The value as an index into the blob heap.
-   *
-   * @type {number}
-   */
-  this.value = reader.readBlobIndex();
-
-}
-
-module.exports = CustomAttributeRow;
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class DeclSecurityRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function DeclSecurityRow (reader) {
-
-  'use strict';
-
-  /**
-   * The action.
-   *
-   * @type {number}
-   */
-  this.action = reader.readUInt(2);
-
-  /**
-   * The reference to the parent row.
-   *
-   * @type {RowReference}
-   */
-  this.parent = new RowReference(reader, [
-    TableIndexes.TYPE_DEF,
-    TableIndexes.METHOD_DEF,
-    TableIndexes.ASSEMBLY
-  ]);
-
-  /**
-   * The native type as an index into the blob heap.
-   *
-   * @type {number}
-   */
-  this.permissionSet = reader.readBlobIndex();
-
-}
-
-module.exports = DeclSecurityRow;
-
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class EventMapRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function EventMapRow (reader) {
-
-  'use strict';
-
-  /**
-   * The reference to the parent row.
-   *
-   * @type {RowReference}
-   */
-  this.parent = new RowReference(reader, [
-    TableIndexes.TYPE_DEF
-  ]);
-
-  /**
-   * The reference to the first event row.
-   *
-   * @type {RowReference}
-   */
-  this.eventList = new RowReference(reader, [
-    TableIndexes.EVENT
-  ]);
-
-}
-
-module.exports = EventMapRow;
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class EventRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function EventRow (reader) {
-
-  'use strict';
-
-  /**
-   * The event flags.
-   *
-   * @type {number}
-   */
-  this.eventFlags = reader.readUInt(2);
-
-  /**
-   * The name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.name = reader.readStringIndex();
-
-  /**
-   * The event type as a reference to a TypeDef, TypeRef or TypeSpec row.
-   *
-   * @type {RowReference}
-   */
-  this.eventType = new RowReference(reader, [
-    TableIndexes.TYPE_DEF,
-    TableIndexes.TYPE_REF,
-    TableIndexes.TYPE_SPEC
-  ]);
-
-}
-
-module.exports = EventRow;
-
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class ExportedTypeRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function ExportedTypeRow (reader) {
-
-  'use strict';
-
-  /**
-   * The flags.
-   *
-   * @type {number}
-   */
-  this.flags = reader.readUInt(4);
-
-  /**
-   * The type definition id.
-   *
-   * @type {number}
-   */
-  this.typeDefId = reader.readUInt(4);
-
-  /**
-   * The type name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.typeName = reader.readStringIndex();
-
-  /**
-   * The type namespace as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.typeNamespace = reader.readStringIndex();
-
-  /**
-   * The reference to the type information row.
-   *
-   * @type {RowReference}
-   */
-  this.implementation = new RowReference(reader, [
-    TableIndexes.FILE,
-    TableIndexes.EXPORTED_TYPE
-  ]);
-
-}
-
-module.exports = ExportedTypeRow;
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class FieldRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function FieldRow (reader) {
-
-  'use strict';
-
-  /**
-   * The flags.
-   *
-   * @type {number}
-   */
-  this.type = reader.readUInt(2);
-
-  /**
-   * The name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.name = reader.readStringIndex();
-
-  /**
-   * The signature as an index into the blob heap.
-   *
-   * @type {number}
-   */
-  this.signature = reader.readBlobIndex();
-
-}
-
-module.exports = FieldRow;
-
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class FieldRVARow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function FieldRVARow (reader) {
-
-  'use strict';
-
-  /**
-   * The relative virtual address of the initial value.
-   *
-   * @type {number}
-   */
-  this.rva = reader.readUInt(4);
-
-  /**
-   * The field as a reference to a Field row.
-   *
-   * @type {RowReference}
-   */
-  this.field = new RowReference(reader, [
-    TableIndexes.FIELD
-  ]);
-
-}
-
-module.exports = FieldRVARow;
-
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class FieldLayoutRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function FieldLayoutRow (reader) {
-
-  'use strict';
-
-  /**
-   * The offset.
-   *
-   * @type {number}
-   */
-  this.offset = reader.readUInt(4);
-
-  /**
-   * The reference to the parent row.
-   *
-   * @type {RowReference}
-   */
-  this.field = new RowReference(reader, [
-    TableIndexes.FIELD
-  ]);
-
-}
-
-module.exports = FieldLayoutRow;
-
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class FieldMarshalRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function FieldMarshalRow (reader) {
-
-  'use strict';
-
-  /**
-   * The reference to the parent row.
-   *
-   * @type {RowReference}
-   */
-  this.parent = new RowReference(reader, [
-    TableIndexes.FIELD,
-    TableIndexes.PARAM
-  ]);
-
-  /**
-   * The native type as an index into the blob heap.
-   *
-   * @type {number}
-   */
-  this.nativeType = reader.readBlobIndex();
-
-}
-
-module.exports = FieldMarshalRow;
-
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class FileRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function FileRow (reader) {
-
-  'use strict';
-
-  /**
-   * The OS platform id.
-   *
-   * @type {number}
-   */
-  this.flags = reader.readUInt(4);
-
-  /**
-   * The name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.name = reader.readStringIndex();
-
-  /**
-   * The hash value as an index into the blob heap.
-   *
-   * @type {number}
-   */
-  this.hashValue = reader.readBlobIndex();
-
-}
-
-module.exports = FileRow;
-
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class GenericParamRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function GenericParamRow (reader) {
-
-  'use strict';
-
-  /**
-   * The index of the generic parameter.
-   *
-   * @type {number}
-   */
-  this.number = reader.readUInt(2);
-
-  /**
-   * The flags.
-   *
-   * @type {number}
-   */
-  this.flags = reader.readUInt(2);
-
-  /**
-   * The reference to the owner of the generic parameter.
-   *
-   * @type {RowReference}
-   */
-  this.owner = new RowReference(reader, [
-    TableIndexes.TYPE_DEF,
-    TableIndexes.METHOD_DEF
-  ]);
-
-  /**
-   * The name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.name = reader.readStringIndex();
-
-}
-
-module.exports = GenericParamRow;
-
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class GenericParamConstraintRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function GenericParamConstraintRow (reader) {
-
-  'use strict';
-
-  /**
-   * The reference to the owner row.
-   *
-   * @type {RowReference}
-   */
-  this.owner = new RowReference(reader, [
-    TableIndexes.GENERIC_PARAM
-  ]);
-
-  /**
-   * The reference to the class row.
-   *
-   * @type {RowReference}
-   */
-  this.constraint = new RowReference(reader, [
-    TableIndexes.TYPE_DEF,
-    TableIndexes.TYPE_REF,
-    TableIndexes.TYPE_SPEC
-  ]);
-
-}
-
-module.exports = GenericParamConstraintRow;
-
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class ImplMapRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function ImplMapRow (reader) {
-
-  'use strict';
-
-  /**
-   * The mapping flags.
-   *
-   * @type {number}
-   */
-  this.mappingFlags = reader.readUInt(2);
-
-  /**
-   * The forwarded member as a reference to a Field or MethodDef row.
-   *
-   * @type {RowReference}
-   */
-  this.memberForwarded = new RowReference(reader, [
-    TableIndexes.FIELD,
-    TableIndexes.METHOD_DEF
-  ]);
-
-  /**
-   * The import name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.importName = reader.readStringIndex();
-
-  /**
-   * The import scope as a reference to a ModuleRef row.
-   *
-   * @type {RowReference}
-   */
-  this.importScope = new RowReference(reader, [
-    TableIndexes.MODULE
-  ]);
-
-}
-
-module.exports = ImplMapRow;
-
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class InterfaceImplRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function InterfaceImplRow (reader) {
-
-  'use strict';
-
-  /**
-   * The reference to the class definition row.
-   *
-   * @type {RowReference}
-   */
-  this.class = new RowReference(reader, [
-    TableIndexes.TYPE_DEF
-  ]);
-
-  /**
-   * The reference to the interface definition row.
-   *
-   * @type {RowReference}
-   */
-  this.interface = new RowReference(reader, [
-    TableIndexes.TYPE_DEF,
-    TableIndexes.TYPE_REF,
-    TableIndexes.TYPE_SPEC
-  ]);
-
-}
-
-module.exports = InterfaceImplRow;
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class CustomException.
- *
- * @param {string} message
- *   The message.
- * @param {string} type
- *   The type of exception.
- *
- * @constructor
- */
-function CustomException (message, type) {
-
-  'use strict';
-
-  /**
-   * The exception message.
-   *
-   * @type {string}
-   *
-   * @private
-   */
-  this._message = message;
-
-  /**
-   * The exception type.
-   *
-   * @type {string}
-   *
-   * @private
-   */
-  this._type = (typeof type !== 'undefined') ? type : 'CustomException';
-
-  /**
-   * Retrieves the exception message.
-   *
-   * @return {string}
-   */
-  this.getMessage = function () {
-    return this._message;
-  };
-
-  /**
-   * Retrieves the exception type.
-   *
-   * @return {string}
-   */
-  this.getType = function () {
-    return this._type;
-  };
-
-  /**
-   * Converts the exception to a string.
-   *
-   * @return {string}
-   */
-  this.toString = function () {
-    return this.getMessage();
-  };
-
-}
-
-module.exports = CustomException;
-
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class ManifestResourceRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function ManifestResourceRow (reader) {
-
-  'use strict';
-
-  /**
-   * The offset.
-   *
-   * @type {number}
-   */
-  this.offset = reader.readUInt(4);
-
-  /**
-   * The flags.
-   *
-   * @type {number}
-   */
-  this.flags = reader.readUInt(4);
-
-  /**
-   * The name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.name = reader.readStringIndex();
-
-  /**
-   * The reference to the type information row.
-   *
-   * @type {RowReference}
-   */
-  this.implementation = new RowReference(reader, [
-    TableIndexes.FILE,
-    TableIndexes.ASSEMBLY_REF,
-    TableIndexes.EXPORTED_TYPE
-  ]);
-
-}
-
-module.exports = ManifestResourceRow;
-
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var StreamHeader = __webpack_require__(35);
-
-/**
- * Class MetadataHeader.
- *
- * @param {BinaryParser} reader
- *   The binary reader.
- *
- * @constructor
- * @struct
- */
-function MetadataHeader (reader) {
-
-  'use strict';
-
-  var i;
-
-  /**
-   * The file offset to the header relative to the beginning of the stream.
-   *
-   * @type {number}
-   */
-  this.offset = reader.getPosition();
-
-  /**
-   * The signature.
-   *
-   * This value should always equal 0x424A5342.
-   *
-   * @type {number}
-   */
-  this.signature = reader.readUInt(4);
-
-  /**
-   * The major version.
-   *
-   * @type {number}
-   */
-  this.majorVersion = reader.readUInt(2);
-
-  /**
-   * The minor version.
-   *
-   * @type {number}
-   */
-  this.minorVersion = reader.readUInt(2);
-
-  /**
-   * A reserved value.
-   *
-   * This value should always equal 0x00.
-   *
-   * @type {number}
-   */
-  this.reserved = reader.readUInt(4);
-
-  /**
-   * The length of the version string.
-   *
-   * @type {number}
-   */
-  this.versionLength = (i = (i = reader.readUInt(4)) + (i % 4));
-
-  /**
-   * The version string.
-   *
-   * @type {string}
-   */
-  this.version = reader.readUTF8String(i, true);
-
-  /**
-   * The flags.
-   *
-   * This value should always equal 0x00.
-   *
-   * @type {number}
-   */
-  this.flags = reader.readUInt(2);
-
-  /**
-   * The number of streams.
-   *
-   * @type {number}
-   */
-  this.streams = reader.readUInt(2);
-
-  /**
-   * The stream headers.
-   *
-   * @type {Array<StreamHeader>}
-   */
-  this.streamHeaders = new Array(this.streams);
-
-  // Read the stream headers.
-  for (i = 0; i < this.streamHeaders.length; i++) {
-    this.streamHeaders[i] = new StreamHeader(reader);
-  }
-
-}
-
-module.exports = MetadataHeader;
-
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class StreamHeader.
- *
- * @param {BinaryParser} reader
- *   The binary reader.
- *
- * @constructor
- * @struct
- */
-function StreamHeader (reader) {
-
-  'use strict';
-
-  /**
-   * The file offset to the stream relative to the metadata header.
-   *
-   * @type {number}
-   */
-  this.offset = reader.readUInt(4);
-
-  /**
-   * The size of the stream, in bytes.
-   *
-   * @type {number}
-   */
-  this.size = reader.readUInt(4);
-
-  /**
-   * The name of the stream.
-   *
-   * @type {string}
-   */
-  this.name = reader.readString(0, true, 4);
-
-}
-
-module.exports = StreamHeader;
-
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class MemberRefRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function MemberRefRow (reader) {
-
-  'use strict';
-
-  /**
-   * The reference to the class definition row.
-   *
-   * @type {RowReference}
-   */
-  this.class = new RowReference(reader, [
-    TableIndexes.TYPE_DEF,
-    TableIndexes.TYPE_REF,
-    TableIndexes.MODULE_REF,
-    TableIndexes.METHOD_DEF,
-    TableIndexes.TYPE_SPEC
-  ]);
-
-  /**
-   * The name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.name = reader.readStringIndex();
-
-  /**
-   * The signature as an index into the blob heap.
-   *
-   * @type {number}
-   */
-  this.signature = reader.readBlobIndex();
-
-}
-
-module.exports = MemberRefRow;
-
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class NestedClassRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function NestedClassRow (reader) {
-
-  'use strict';
-
-  /**
-   * The reference to the nested class information row.
-   *
-   * @type {RowReference}
-   */
-  this.nestedClass = new RowReference(reader, [
-    TableIndexes.TYPE_DEF
-  ]);
-
-  /**
-   * The reference to the enclosing class information row.
-   *
-   * @type {RowReference}
-   */
-  this.enclosingClass = new RowReference(reader, [
-    TableIndexes.TYPE_DEF
-  ]);
-
-}
-
-module.exports = NestedClassRow;
-
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class MethodDefRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function MethodDefRow (reader) {
-
-  'use strict';
-
-  /**
-   * The relative virtual address.
-   *
-   * @type {number}
-   */
-  this.rva = reader.readUInt(4);
-
-  /**
-   * The implementation flags.
-   *
-   * @type {number}
-   */
-  this.implFlags = reader.readUInt(2);
-
-  /**
-   * The method flags.
-   *
-   * @type {number}
-   */
-  this.flags = reader.readUInt(2);
-
-  /**
-   * The name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.name = reader.readStringIndex();
-
-  /**
-   * The signature as an index into the blob heap.
-   *
-   * @type {number}
-   */
-  this.signature = reader.readBlobIndex();
-
-  /**
-   * The reference to the param definition row.
-   *
-   * @type {RowReference}
-   */
-  this.paramList = new RowReference(reader, [
-    TableIndexes.PARAM
-  ]);
-
-}
-
-module.exports = MethodDefRow;
-
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var MethodFlags = __webpack_require__(40);
-
-/**
- * Class MethodHeader.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function MethodHeader (reader) {
-
-  'use strict';
-
-  // Retrieve the first one or two bytes specifying the flags and header size.
-  var flagsAndSize = reader.readUInt(1);
-  var tiny = true;
-
-  if ((flagsAndSize & MethodFlags.TINY_FORMAT) === 0) {
-    reader.setPosition(reader.getPosition() - 1);
-    flagsAndSize = reader.readUInt(2);
-    tiny = false;
-  }
-
-  /**
-   * The flags.
-   *
-   * @type {number}
-   */
-  this.flags = tiny ? flagsAndSize & 0x03 : flagsAndSize & 0xFFF;
-
-  /**
-   * The header size.
-   *
-   * @type {number}
-   */
-  this.headerSize = tiny ? 1 : flagsAndSize >> 12;
-
-  /**
-   * The maximum number of items on the operand stack.
-   *
-   * @return {number}
-   */
-  this.maxStack = tiny ? 0 : reader.readUInt(2);
-
-  /**
-   * The size in bytes of the actual method body.
-   *
-   * @return {number}
-   */
-  this.codeSize = tiny ? flagsAndSize >> 2 : reader.readUInt(4);
-
-  /**
-   * The metadata token for a signature describing the layout of the local
-   * variables for the method
-   *
-   * @return {number}
-   */
-  this.localVarSigTok = tiny ? 0 : reader.readUInt(4);
-
-  /**
-   * The file offset to the code.
-   *
-   * @type {number}
-   */
-  this.codeOffset = reader.getPosition();
-
-}
-
-module.exports = MethodHeader;
-
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class MethodFlags.
- *
- * @constructor
- * @struct
- */
-function MethodFlags () {
-
-  'use strict';
-
-  /**
-   * The fat format flag.
-   *
-   * @const {number}
-   */
-  this.FAT_FORMAT = 0x3;
-
-  /**
-   * The initialize locals flag.
-   *
-   * @const {number}
-   */
-  this.INITIALIZE_LOCALS = 0x10;
-
-  /**
-   * The more sections flag.
-   *
-   * @const {number}
-   */
-  this.MORE_SECTIONS = 0x8;
-
-  /**
-   * The tiny format flag.
-   *
-   * @const {number}
-   */
-  this.TINY_FORMAT = 0x2;
-
-}
-
-module.exports = new MethodFlags();
-
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class MethodImplRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function MethodImplRow (reader) {
-
-  'use strict';
-
-  /**
-   * The reference to the class definition row.
-   *
-   * @type {RowReference}
-   */
-  this.class = new RowReference(reader, [
-    TableIndexes.TYPE_DEF
-  ]);
-
-  /**
-   * The reference to the method body row.
-   *
-   * @type {RowReference}
-   */
-  this.methodBody = new RowReference(reader, [
-    TableIndexes.METHOD_DEF,
-    TableIndexes.MEMBER_REF
-  ]);
-
-  /**
-   * The reference to the method declaration row.
-   *
-   * @type {RowReference}
-   */
-  this.methodDeclaration = new RowReference(reader, [
-    TableIndexes.METHOD_DEF,
-    TableIndexes.MEMBER_REF
-  ]);
-
-}
-
-module.exports = MethodImplRow;
-
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class MethodSemanticsRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function MethodSemanticsRow (reader) {
-
-  'use strict';
-
-  /**
-   * The semantics.
-   *
-   * @type {number}
-   */
-  this.semantics = reader.readUInt(2);
-
-  /**
-   * The reference to the method row.
-   *
-   * @type {RowReference}
-   */
-  this.method = new RowReference(reader, [
-    TableIndexes.METHOD_DEF
-  ]);
-
-  /**
-   * The reference to the associated row.
-   *
-   * @type {RowReference}
-   */
-  this.association = new RowReference(reader, [
-    TableIndexes.EVENT,
-    TableIndexes.PROPERTY
-  ]);
-
-}
-
-module.exports = MethodSemanticsRow;
-
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class ModuleRefRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function ModuleRefRow (reader) {
-
-  'use strict';
-
-  /**
-   * The name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.name = reader.readStringIndex();
-
-}
-
-module.exports = ModuleRefRow;
-
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class ModuleRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function ModuleRow (reader) {
-
-  'use strict';
-
-  /**
-   * The generation.
-   *
-   * This value should always be zero.
-   *
-   * @type {number}
-   */
-  this.generation = reader.readUInt(2);
-
-  /**
-   * The name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.name = reader.readStringIndex();
-
-  /**
-   * The module id as an index into the GUID heap.
-   *
-   * @type {number}
-   */
-  this.mvid = reader.readGUIDIndex();
-
-  /**
-   * The encryption id as an index into the GUID heap.
-   *
-   * This value should always be zero.
-   *
-   * @type {number}
-   */
-  this.encId = reader.readGUIDIndex();
-
-  /**
-   * The base encryption id as an index into the GUID heap.
-   *
-   * This value should always be zero.
-   *
-   * @type {number}
-   */
-  this.encBaseId = reader.readGUIDIndex();
-
-}
-
-module.exports = ModuleRow;
-
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class ParamRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function ParamRow (reader) {
-
-  'use strict';
-
-  /**
-   * The flags.
-   *
-   * @type {number}
-   */
-  this.flags = reader.readUInt(2);
-
-  /**
-   * The sequence.
-   *
-   * @type {number}
-   */
-  this.sequence = reader.readUInt(2);
-
-  /**
-   * The name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.name = reader.readStringIndex();
-
-}
-
-module.exports = ParamRow;
-
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var BinaryParser = __webpack_require__(47);
-var COFFHeader = __webpack_require__(48);
-var DOSHeader = __webpack_require__(49);
-var Extend = __webpack_require__(2);
-var ImageAttributes = __webpack_require__(5);
-var ParserException = __webpack_require__(4);
-var OptionalHeader = __webpack_require__(50);
-var ResourceDirectory = __webpack_require__(6);
-var SectionHeader = __webpack_require__(53);
-
-/**
- * Class PEParser.
- *
- * @param {string} path
- *   The file path.
- * @param {ArrayBuffer} [data]
- *   The file contents.
- *
- * @constructor
- * @extends {BinaryParser}
- */
-function PEParser (path, data) {
-
-  'use strict';
-
-  // Invoke the parent constructor.
-  Extend(true, this, new BinaryParser(path, data));
-
-  /**
-   * The COFF header.
-   *
-   * @type {COFFHeader}
-   *
-   * @protected
-   */
-  this._coffHeader = null;
-
-  /**
-   * The DOS header.
-   *
-   * @type {DOSHeader}
-   *
-   * @protected
-   */
-  this._dosHeader = null;
-
-  /**
-   * The optional header.
-   *
-   * @type {OptionalHeader}
-   *
-   * @protected
-   */
-  this._optionalHeader = null;
-
-  /**
-   * The resource directory.
-   *
-   * @type {ResourceDirectory}
-   *
-   * @protected
-   */
-  this._resourceDirectory = null;
-
-  /**
-   * The resource directory file offset.
-   *
-   * @type {number}
-   *
-   * @protected
-   */
-  this._resourceDirectoryFileOffset = null;
-
-  /**
-   * The section headers.
-   *
-   * @type {Array<SectionHeader>}
-   *
-   * @protected
-   */
-  this._sectionHeaders = null;
-
-  /**
-   * Calculates the file offset for a relative virtual address.
-   *
-   * @param {number} rva
-   *   The relative virtual address.
-   *
-   * @return {number}
-   *   Returns a file offset.
-   */
-  this.getFileOffset = function (rva) {
-    // Determine which section the address belongs to and convert it to a file
-    // offset.
-    var sectionHeaders = this.readSectionHeaders();
-
-    for (var i = 0; i < sectionHeaders.length; i++) {
-      if ((rva >= sectionHeaders[i].virtualAddress) &&
-        (rva <= sectionHeaders[i].virtualAddress +
-        sectionHeaders[i].sizeOfRawData)) {
-        return sectionHeaders[i].pointerToRawData +
-          (rva - sectionHeaders[i].virtualAddress);
-      }
-    }
-
-    return -1;
-  };
-
-  /**
-   * Retrieves the resource directory file offset.
-   *
-   * @return {number}
-   *   Returns the file offset or -1 if the resource directory is empty.
-   */
-  this.getResourceDirectoryFileOffset = function () {
-    if (!this._resourceDirectoryFileOffset) {
-      // Locate the resource section in order to determine the file offset.
-      var sectionHeaders = this.readSectionHeaders();
-      var sectionHeader = null;
-
-      for (var i = 0; i < sectionHeaders.length; i++) {
-        if (sectionHeaders[i].name === '.rsrc') {
-          sectionHeader = sectionHeaders[i];
-          break;
-        }
-      }
-
-      if (sectionHeader) {
-        this._resourceDirectoryFileOffset = sectionHeader.pointerToRawData;
-      }
-      else {
-        this._resourceDirectoryFileOffset = -1;
-      }
-    }
-
-    return this._resourceDirectoryFileOffset;
-  };
-
-  /**
-   * Reads the COFF header.
-   *
-   * @return {COFFHeader}
-   *   Returns the header as an object.
-   *
-   * @throws {ParserException}
-   *   Thrown if the header is invalid.
-   */
-  this.readCOFFHeader = function () {
-    if (!this._coffHeader) {
-      // Move the stream cursor to the position of the COFF header as specified
-      // by the DOS header.
-      this.setPosition(this.readDOSHeader().lfanew);
-
-      // Read the header and throw an exception if the header seems to be
-      // invalid.
-      this._coffHeader = new COFFHeader(this);
-
-      if (this._coffHeader.signature !== ImageAttributes.IMAGE_NT_SIGNATURE) {
-        throw new ParserException('Invalid COFF header');
-      }
-    }
-
-    return this._coffHeader;
-  };
-
-  /**
-   * Reads the DOS header.
-   *
-   * @return {DOSHeader}
-   *   Returns the header as an object.
-   *
-   * @throws {ParserException}
-   *   Thrown if the header is invalid.
-   */
-  this.readDOSHeader = function () {
-    if (!this._dosHeader) {
-      // Reset the position to the beginning of the stream.
-      this.setPosition(0);
-
-      // Read the header from the buffer and throw an exception if the header is
-      // invalid.
-      this._dosHeader = new DOSHeader(this);
-
-      if (this._dosHeader.magic !== ImageAttributes.IMAGE_DOS_SIGNATURE) {
-        throw new ParserException('Invalid DOS header');
-      }
-    }
-
-    return this._dosHeader;
-  };
-
-  /**
-   * Reads the optional header.
-   *
-   * @return {OptionalHeader}
-   *   Returns the header values.
-   *
-   * @throws {ParserException}
-   *   Thrown if the header is invalid.
-   */
-  this.readOptionalHeader = function () {
-    if ((!this._optionalHeader) &&
-      (this.readCOFFHeader().sizeOfOptionalHeader > 0)) {
-      // Move the stream cursor to the position of the optional header as
-      // specified by the DOS header and the size of the COFF header.
-      this.setPosition(this.readDOSHeader().lfanew + 24);
-
-      // Read the entire header including the data directories.
-      this._optionalHeader = new OptionalHeader(this);
-
-      if ((this._optionalHeader.magic !==
-        ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) &&
-        (this._optionalHeader.magic !==
-        ImageAttributes.IMAGE_NT_OPTIONAL_HDR32_MAGIC) &&
-        (this._optionalHeader.magic !==
-        ImageAttributes.IMAGE_ROM_OPTIONAL_HDR_MAGIC)) {
-        throw new ParserException('Invalid optional header');
-      }
-    }
-
-    return this._optionalHeader;
-  };
-
-  /**
-   * Reads the resource directory.
-   *
-   * @return {ResourceDirectory}
-   *   Returns the resource directory.
-   */
-  this.readResourceDirectory = function () {
-    if (this.getResourceDirectoryFileOffset() < 1) {
-      return this._resourceDirectory;
-    }
-
-    this.setPosition(this.getResourceDirectoryFileOffset());
-    this._resourceDirectory = new ResourceDirectory(this);
-    return this._resourceDirectory;
-  };
-
-  /**
-   * Reads the section headers.
-   *
-   * @return {Array<SectionHeader>}
-   *   Returns an array of section headers.
-   */
-  this.readSectionHeaders = function () {
-    if (!this._sectionHeaders) {
-      // Move the stream cursor to the position of the section headers.
-      this.setPosition(this.readDOSHeader().lfanew + 24 +
-        this.readCOFFHeader().sizeOfOptionalHeader);
-
-      // Read each of the section headers.
-      this._sectionHeaders = new Array(this.readCOFFHeader().numberOfSections);
-
-      for (var i = 0; i < this._sectionHeaders.length; i++) {
-        this._sectionHeaders[i] = new SectionHeader(this);
-      }
-    }
-
-    return this._sectionHeaders;
-  };
-
-}
-
-module.exports = PEParser;
-
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class BinaryParser.
- *
- * @param {string} path
- *   The file path.
- * @param {ArrayBuffer} [data]
- *   The file contents.
- *
- * @constructor
- */
-function BinaryParser (path, data) {
-
-  'use strict';
-
-  /**
-   * The file contents.
-   *
-   * @type {ArrayBuffer}
-   *
-   * @protected
-   */
-  this._data = (typeof data !== 'undefined') ? new Uint8Array(data) : null;
-
-  /**
-   * The file path.
-   *
-   * @type {string}
-   *
-   * @protected
-   */
-  this._path = path;
-
-  /**
-   * The file position.
-   *
-   * @type {number}
-   *
-   * @protected
-   */
-  this._position = 0;
-
-  /**
-   * Retrieves the file path.
-   *
-   * @return {string}
-   *   Returns a path.
-   */
-  this.getPath = function () {
-    return this._path;
-  };
-
-  /**
-   * Retrieves the buffer position.
-   *
-   * @return {number}
-   *   Returns the buffer position.
-   */
-  this.getPosition = function () {
-    return this._position;
-  };
-
-  /**
-   * Retrieves the buffer size.
-   *
-   * @return {number}
-   *   Returns the buffer size.
-   */
-  this.getSize = function () {
-    return this._data.byteLength;
-  };
-
-  /**
-   * Loads the file contents.
-   *
-   * @param {Function} success
-   *   The success callback.
-   * @param {Function} error
-   *   The error callback.
-   *
-   * @return {BinaryParser}
-   *   Returns this instance.
-   */
-  this.loadFile = function (success, error) {
-    var request = new XMLHttpRequest();
-    request.open('GET', this.getPath(), true);
-    request.responseType = 'arraybuffer';
-    request.onreadystatechange = (function (reader) {
-      return function () {
-        if (request.readyState === XMLHttpRequest.DONE) {
-          if (request.status === 200) {
-            // Store the data as an UInt8 array and reset the position.
-            reader._data = new Uint8Array(request.response);
-            reader._position = 0;
-
-            // Invoke the success callback in order for the invoker to proceed.
-            success(reader);
-          }
-          else {
-            error(reader);
-          }
-        }
-      };
-    })(this);
-    request.send(null);
-    return this;
-  };
-
-  /**
-   * Reads the next bytes from the buffer.
-   *
-   * @param {number} count
-   *   The number of bytes to read.
-   *
-   * @return {Array<number>}
-   *   Returns an array of bytes.
-   */
-  this.readBytes = function (count) {
-    var bytes = [];
-
-    for (var i = 0; i < count; i++) {
-      if (this._position >= this.getSize()) {
-        break;
-      }
-
-      bytes.push(this._data[this._position++]);
-    }
-
-    return bytes;
-  };
-
-  /**
-   * Reads an ASCII string from the buffer.
-   *
-   * @param {number} length
-   *   The length of the string. Specify 0 to have the function look for a NULL
-   *   terminator.
-   * @param {boolean} terminate
-   *   Whether to look for a NULL terminator after the string has been read in
-   *   which case the string will be terminated.
-   * @param {number} boundary
-   *   The string boundary in bytes.
-   *
-   * @return {string}
-   *   Returns an ASCII string.
-   */
-  this.readString = function (length, terminate, boundary) {
-    var i, s = '';
-
-    while ((i = this.readUInt(1)) !== null) {
-      s += String.fromCharCode(i);
-
-      if (length > 0) {
-        if (s.length === length) {
-          break;
-        }
-      }
-      else if (((!boundary) || (s.length % boundary === 0)) &&
-        (s.endsWith(String.fromCharCode(0)))) {
-        break;
-      }
-    }
-
-    if ((terminate) && ((i = s.indexOf(String.fromCharCode(0))) > -1)) {
-      s = s.substring(0, i);
-    }
-
-    return s;
-  };
-
-  /**
-   * Reads the next unsigned integer from the buffer.
-   *
-   * @param {number} size
-   *   The integer size in bytes.
-   *
-   * @return {number|null}
-   *   Returns the integer or NULL if the end is reached.
-   */
-  this.readUInt = function (size) {
-    var bytes = this.readBytes(size);
-    var integer = 0;
-
-    if (bytes.length != size) {
-      return null;
-    }
-
-    for (var i = size - 1; i > -1; i--) {
-      integer |= (bytes[i] << (8 * i));
-    }
-
-    return integer;
-  };
-
-  /**
-   * Reads the next unsigned integers.
-   *
-   * @param {number} size
-   *   The integer size in bytes.
-   * @param {number} count
-   *   The number of integers to read.
-   *
-   * @return {Array<number>}
-   *   Returns an array of integers.
-   */
-  this.readUIntArray = function (size, count) {
-    var integers = [];
-
-    for (var i = 0; i < count; i++) {
-      var integer = this.readUInt(size);
-
-      if (integer === null) {
-        break;
-      }
-
-      integers.push(integer);
-    }
-
-    return integers;
-  };
-
-  /**
-   * Reads a UTF-8 string from the buffer.
-   *
-   * @param {number} length
-   *   The length of the string. Specify 0 to have the function look for a
-   *   string terminator.
-   * @param {boolean} terminate
-   *   Whether to look for a string terminator after the string has been read in
-   *   which case the string will always be terminated.
-   *
-   * @return {string}
-   *   Returns a UTF-8 string.
-   */
-  this.readUTF8String = function (length, terminate) {
-    var i, s = '';
-
-    while ((i = this.readUInt(1)) !== null) {
-      s += String.fromCharCode(i);
-
-      if (length > 0) {
-        if (s.length === length) {
-          break;
-        }
-      }
-      else if (s.endsWith(String.fromCharCode(0, 0))) {
-        break;
-      }
-    }
-
-    if ((terminate) && ((i = s.indexOf(String.fromCharCode(0, 0))) > -1)) {
-      s = s.substring(0, i);
-    }
-
-    return decodeURI(encodeURIComponent(s));
-  };
-
-  /**
-   * Sets the file path.
+   * Runs an executable.
    *
    * @param {string} path
-   *   The file path.
-   *
-   * @return {BinaryParser}
-   *   Returns this instance.
-   *
-   * @modifies {this}
+   *   The path.
    */
-  this.setPath = function (path) {
-    this._path = path;
-    return this;
-  };
+  this.run = function (path) {
+    console.log('#### This library is not yet able to run applications ####');
+    console.log('----------------------------------------------------------');
+    console.log('Dumping information about the executable:');
 
-  /**
-   * Sets the buffer position.
-   *
-   * @param {number} position
-   *   The new position.
-   *
-   * @return {BinaryParser}
-   *   Returns this instance.
-   *
-   * @modifies {this}
-   */
-  this.setPosition = function (position) {
-    this._position = position;
-    return this;
+    (new CILParser(path)).loadFile(function (reader) {
+      console.log(reader.readDOSHeader());
+      console.log(reader.readCOFFHeader());
+      console.log(reader.readOptionalHeader());
+      console.log(reader.readSectionHeaders());
+      console.log(reader.readResourceDirectory());
+      console.log(reader.readCORHeader());
+      console.log(reader.readMetadataHeader());
+      console.log(reader.readTablesHeader());
+      console.log(reader.readTables());
+      console.log(reader.readMethodHeaders());
+    }, function () {
+      console.log('Failed to load the file');
+    });
   };
 
 }
 
-module.exports = BinaryParser;
-
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class COFFHeader.
- *
- * @param {BinaryParser} reader
- *   The binary reader.
- *
- * @constructor
- * @struct
- */
-function COFFHeader (reader) {
-
-  'use strict';
-
-  /**
-   * The signature.
-   *
-   * @type {number}
-   */
-  this.signature = reader.readUInt(4);
-
-  /**
-   * The architecture type of the computer.
-   *
-   * @type {number}
-   */
-  this.machine = reader.readUInt(2);
-
-  /**
-   * The number of sections.
-   *
-   * @type {number}
-   */
-  this.numberOfSections = reader.readUInt(2);
-
-  /**
-   * The low 32 bits of the time stamp of the image.
-   *
-   * @type {number}
-   */
-  this.timeDateStamp = reader.readUInt(4);
-
-  /**
-   * The offset of the symbol table, in bytes, or zero if no COFF symbol table
-   * exists.
-   *
-   * @type {number}
-   */
-  this.pointerToSymbolTable = reader.readUInt(4);
-
-  /**
-   * The number of symbols in the symbol table.
-   *
-   * @type {number}
-   */
-  this.numberOfSymbols = reader.readUInt(4);
-
-  /**
-   * The size of the optional header, in bytes. This value should be 0 for
-   * object files.
-   *
-   * @type {number}
-   */
-  this.sizeOfOptionalHeader = reader.readUInt(2);
-
-  /**
-   * The characteristics of the image. This member can be one or more of the
-   * following values.
-   *
-   * @type {number}
-   */
-  this.characteristics = reader.readUInt(2);
-
-}
-
-module.exports = COFFHeader;
-
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class DOSHeader.
- *
- * @param {BinaryParser} reader
- *   The binary reader.
- *
- * @constructor
- * @struct
- */
-function DOSHeader (reader) {
-
-  'use strict';
-
-  /**
-   * The magic number.
-   *
-   * @type {number}
-   */
-  this.magic = reader.readUInt(2);
-
-  /**
-   * The number of bytes on the last page in the file.
-   *
-   * @type {number}
-   */
-  this.cblp = reader.readUInt(2);
-
-  /**
-   * The number of pages in the file.
-   *
-   * @type {number}
-   */
-  this.cp = reader.readUInt(2);
-
-  /**
-   * The number of relocations.
-   *
-   * @type {number}
-   */
-  this.crlc = reader.readUInt(2);
-
-  /**
-   * The size of the header in paragraphs.
-   *
-   * @type {number}
-   */
-  this.cparhdr = reader.readUInt(2);
-
-  /**
-   * The minimum number of extra paragraphs which are needed.
-   *
-   * @type {number}
-   */
-  this.minAlloc = reader.readUInt(2);
-
-  /**
-   * The maximum number of extra paragraphs which are needed.
-   *
-   * @type {number}
-   */
-  this.maxAlloc = reader.readUInt(2);
-
-  /**
-   * The initial (relative) SS value.
-   *
-   * @type {number}
-   */
-  this.ss = reader.readUInt(2);
-
-  /**
-   * The initial SP value.
-   *
-   * @type {number}
-   */
-  this.sp = reader.readUInt(2);
-
-  /**
-   * The checksum.
-   *
-   * @type {number}
-   */
-  this.csum = reader.readUInt(2);
-
-  /**
-   * The initial IP value.
-   *
-   * @type {number}
-   */
-  this.ip = reader.readUInt(2);
-
-  /**
-   * The initial (relative) CS value.
-   *
-   * @type {number}
-   */
-  this.cs = reader.readUInt(2);
-
-  /**
-   * The file address of the relocation table.
-   *
-   * @type {number}
-   */
-  this.lfarlc = reader.readUInt(2);
-
-  /**
-   * The overlay number.
-   *
-   * @type {number}
-   */
-  this.ovno = reader.readUInt(2);
-
-  /**
-   * The first reserved words.
-   *
-   * @type {Array<number>}
-   */
-  this.res1 = reader.readUIntArray(2, 4);
-
-  /**
-   * The OEM identifier.
-   *
-   * @type {number}
-   */
-  this.oemid = reader.readUInt(2);
-
-  /**
-   * The OEM information.
-   *
-   * @type {number}
-   */
-  this.oeminfo = reader.readUInt(2);
-
-  /**
-   * The second reserved words.
-   *
-   * @type {Array<number>}
-   */
-  this.res2 = reader.readUIntArray(2, 10);
-
-  /**
-   * The file address of the new EXE header.
-   *
-   * @type {number}
-   */
-  this.lfanew = reader.readUInt(4);
-
-}
-
-module.exports = DOSHeader;
-
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var DataDirectoryHeader = __webpack_require__(3);
-var ImageAttributes = __webpack_require__(5);
-
-/**
- * Class OptionalHeader.
- *
- * @param {BinaryParser} reader
- *   The binary reader.
- *
- * @constructor
- * @struct
- */
-function OptionalHeader (reader) {
-
-  'use strict';
-
-  /**
-   * The state of the image file.
-   *
-   * @type {number}
-   */
-  this.magic = reader.readUInt(2);
-
-  /**
-   * The major version number of the linker.
-   *
-   * @type {number}
-   */
-  this.majorLinkerVersion = reader.readUInt(1);
-
-  /**
-   * The minor version number of the linker.
-   *
-   * @type {number}
-   */
-  this.minorLinkerVersion = reader.readUInt(1);
-
-  /**
-   * The size of the code section, in bytes, or the sum of all such sections if
-   * there are multiple code sections.
-   *
-   * @type {number}
-   */
-  this.sizeOfCode = reader.readUInt(4);
-
-  /**
-   * The size of the initialized data section, in bytes, or the sum of all such
-   * sections if there are multiple initialized data sections.
-   *
-   * @type {number}
-   */
-  this.sizeOfInitializedData = reader.readUInt(4);
-
-  /**
-   * The size of the uninitialized data section, in bytes, or the sum of all
-   * such sections if there are multiple uninitialized data sections.
-   *
-   * @type {number}
-   */
-  this.sizeOfUninitializedData = reader.readUInt(4);
-
-  /**
-   * A pointer to the entry point function, relative to the image base address.
-   *
-   * @type {number}
-   */
-  this.addressOfEntryPoint = reader.readUInt(4);
-
-  /**
-   * A pointer to the beginning of the code section, relative to the image base.
-   *
-   * @type {number}
-   */
-  this.baseOfCode = reader.readUInt(4);
-
-  /**
-   * A pointer to the beginning of the data section, relative to the image base.
-   *
-   * @type {number}
-   */
-  this.baseOfData = reader.readUInt(
-    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 0 : 4);
-
-  /**
-   * The preferred address of the first byte of the image when it is loaded in
-   * memory.
-   *
-   * @type {number}
-   */
-  this.imageBase = reader.readUInt(
-    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
-
-  /**
-   * The alignment of sections loaded in memory, in bytes.
-   *
-   * @type {number}
-   */
-  this.sectionAlignment = reader.readUInt(4);
-
-  /**
-   * The alignment of the raw data of sections in the image file, in bytes.
-   *
-   * @type {number}
-   */
-  this.fileAlignment = reader.readUInt(4);
-
-  /**
-   * The major version number of the required operating system.
-   *
-   * @type {number}
-   */
-  this.majorOperatingSystemVersion = reader.readUInt(2);
-
-  /**
-   * The minor version number of the required operating system.
-   *
-   * @type {number}
-   */
-  this.minorOperatingSystemVersion = reader.readUInt(2);
-
-  /**
-   * The major version number of the image.
-   *
-   * @type {number}
-   */
-  this.majorImageVersion = reader.readUInt(2);
-
-  /**
-   * The minor version number of the image.
-   *
-   * @type {number}
-   */
-  this.minorImageVersion = reader.readUInt(2);
-
-  /**
-   * The major version number of the subsystem.
-   *
-   * @type {number}
-   */
-  this.majorSubsystemVersion = reader.readUInt(2);
-
-  /**
-   * The minor version number of the subsystem.
-   *
-   * @type {number}
-   */
-  this.minorSubsystemVersion = reader.readUInt(2);
-
-  /**
-   * This member is reserved and must be 0.
-   *
-   * @type {number}
-   */
-  this.win32VersionValue = reader.readUInt(4);
-
-  /**
-   * The size of the image, in bytes, including all headers.
-   *
-   * @type {number}
-   */
-  this.sizeOfImage = reader.readUInt(4);
-
-  /**
-   * The combined size of the following items, rounded to a multiple of the
-   * value specified in the fileAlignment member.
-   *
-   * @type {number}
-   */
-  this.sizeOfHeaders = reader.readUInt(4);
-
-  /**
-   * The image file checksum.
-   *
-   * @type {number}
-   */
-  this.checkSum = reader.readUInt(4);
-
-  /**
-   * The subsystem required to run this image.
-   *
-   * @type {number}
-   */
-  this.subsystem = reader.readUInt(2);
-
-  /**
-   * The DLL characteristics of the image.
-   *
-   * @type {number}
-   */
-  this.dllCharacteristics = reader.readUInt(2);
-
-  /**
-   * The number of bytes to reserve for the stack.
-   *
-   * @type {number}
-   */
-  this.sizeOfStackReserve = reader.readUInt(
-    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
-
-  /**
-   * The number of bytes to commit for the stack.
-   *
-   * @type {number}
-   */
-  this.sizeOfStackCommit = reader.readUInt(
-    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
-
-  /**
-   * The number of bytes to reserve for the local heap.
-   *
-   * @type {number}
-   */
-  this.sizeOfHeapReserve = reader.readUInt(
-    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
-
-  /**
-   * The number of bytes to commit for the local heap.
-   *
-   * @type {number}
-   */
-  this.sizeOfHeapCommit = reader.readUInt(
-    (this.magic === ImageAttributes.IMAGE_NT_OPTIONAL_HDR64_MAGIC) ? 8 : 4);
-
-  /**
-   * This member is obsolete.
-   *
-   * @type {number}
-   */
-  this.loaderFlags = reader.readUInt(4);
-
-  /**
-   * The number of directory entries in the remainder of the optional header.
-   *
-   * @type {number}
-   */
-  this.numberOfRvaAndSizes = reader.readUInt(4);
-
-  /**
-   * The array of data directory headers.
-   *
-   * @type {Array<DataDirectoryHeader>}
-   */
-  this.dataDirectory = new Array(this.numberOfRvaAndSizes);
-
-  // Read the data directory headers.
-  for (var i = 0; i < this.dataDirectory.length; i++) {
-    this.dataDirectory[i] = new DataDirectoryHeader(reader);
-  }
-
-}
-
-module.exports = OptionalHeader;
-
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var ResourceDataEntry = __webpack_require__(52);
-var ResourceDirectory = __webpack_require__(6);
-
-/**
- * Class ResourceDirectoryEntry.
- *
- * @param {PEParser} reader
- *   The PE reader.
- *
- * @constructor
- * @struct
- */
-function ResourceDirectoryEntry (reader) {
-
-  'use strict';
-
-  /**
-   * The name.
-   *
-   * @type {number}
-   */
-  this.name = reader.readUInt(4);
-
-  /**
-   * The file offset to the raw data.
-   *
-   * @type {number}
-   */
-  this.offsetToData = reader.readUInt(4);
-
-  /**
-   * The data entry.
-   *
-   * @type {ResourceDataEntry}
-   */
-  this.data = null;
-
-  /**
-   * The resource directory.
-   *
-   * @type {ResourceDirectory}
-   *   The resource directory or NULL if this entry does not point to one.
-   */
-  this.directory = null;
-
-  // Read either a resource directory or a data entry.
-  if (this.offsetToData >>> 31 === 1) {
-    this.offsetToData = reader.getResourceDirectoryFileOffset() +
-      (this.offsetToData << 1 >>> 1);
-    reader.setPosition(this.offsetToData);
-    this.directory = new ResourceDirectory(reader);
-  }
-  else {
-    this.offsetToData = reader.getResourceDirectoryFileOffset() +
-      this.offsetToData;
-    reader.setPosition(this.offsetToData);
-    this.data = new ResourceDataEntry(reader);
-  }
-
-}
-
-module.exports = ResourceDirectoryEntry;
-
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class ResourceDataEntry.
- *
- * @param {PEParser} reader
- *   The PE reader.
- *
- * @constructor
- * @struct
- */
-function ResourceDataEntry (reader) {
-
-  'use strict';
-
-  /**
-   * The file offset to the raw data.
-   *
-   * @type {number}
-   */
-  this.offsetToData = reader.getFileOffset(reader.readUInt(4));
-
-  /**
-   * The data size.
-   *
-   * @type {number}
-   */
-  this.size = reader.readUInt(4);
-
-  /**
-   * The code page.
-   *
-   * @type {number}
-   */
-  this.codePage = reader.readUInt(4);
-
-  /**
-   * The reserved value.
-   *
-   * @type {number}
-   */
-  this.reserved = reader.readUInt(4);
-
-}
-
-module.exports = ResourceDataEntry;
-
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class SectionHeader.
- *
- * @param {BinaryParser} reader
- *   The binary reader.
- *
- * @constructor
- * @struct
- */
-function SectionHeader (reader) {
-
-  'use strict';
-
-  /**
-   * The section name.
-   *
-   * @type {string}
-   */
-  this.name = reader.readUTF8String(8, true);
-
-  /**
-   * The file address or the total size of the section when loaded into memory,
-   * in bytes.
-   *
-   * @type {number}
-   */
-  this.misc = reader.readUInt(4);
-
-  /**
-   * The address of the first byte of the section when loaded into memory,
-   * relative to the image base.
-   *
-   * @type {number}
-   */
-  this.virtualAddress = reader.readUInt(4);
-
-  /**
-   * The size of the initialized data on disk, in bytes.
-   *
-   * @type {number}
-   */
-  this.sizeOfRawData = reader.readUInt(4);
-
-  /**
-   * A file pointer to the first page within the COFF file.
-   *
-   * @type {number}
-   */
-  this.pointerToRawData = reader.readUInt(4);
-
-  /**
-   * A file pointer to the beginning of the relocation entries for the section.
-   *
-   * @type {number}
-   */
-  this.pointerToRelocations = reader.readUInt(4);
-
-  /**
-   * A file pointer to the beginning of the line-number entries for the section.
-   *
-   * @type {number}
-   */
-  this.pointerToLinenumbers = reader.readUInt(4);
-
-  /**
-   * The number of relocation entries for the section.
-   *
-   * @type {number}
-   */
-  this.numberOfRelocations = reader.readUInt(2);
-
-  /**
-   * The number of line-number entries for the section.
-   *
-   * @type {number}
-   */
-  this.numberOfLinenumbers = reader.readUInt(2);
-
-  /**
-   * The characteristics of the image.
-   *
-   * @type {number}
-   */
-  this.characteristics = reader.readUInt(4);
-
-}
-
-module.exports = SectionHeader;
-
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class PropertyMapRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function PropertyMapRow (reader) {
-
-  'use strict';
-
-  /**
-   * The reference to the parent row.
-   *
-   * @type {RowReference}
-   */
-  this.parent = new RowReference(reader, [
-    TableIndexes.TYPE_DEF
-  ]);
-
-  /**
-   * The reference to the first property row.
-   *
-   * @type {RowReference}
-   */
-  this.propertyList = new RowReference(reader, [
-    TableIndexes.PROPERTY
-  ]);
-
-}
-
-module.exports = PropertyMapRow;
-
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class PropertyRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function PropertyRow (reader) {
-
-  'use strict';
-
-  /**
-   * The property flags.
-   *
-   * @type {number}
-   */
-  this.flags = reader.readUInt(2);
-
-  /**
-   * The name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.name = reader.readStringIndex();
-
-  /**
-   * The type as an index into the blob heap.
-   *
-   * @type {number}
-   */
-  this.type = reader.readBlobIndex();
-
-}
-
-module.exports = PropertyRow;
-
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class StandAloneSigRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function StandAloneSigRow (reader) {
-
-  'use strict';
-
-  /**
-   * The signature as an index into the blob heap.
-   *
-   * @type {number}
-   */
-  this.signature = reader.readBlobIndex();
-
-}
-
-module.exports = StandAloneSigRow;
-
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class TablesHeader.
- *
- * @param {BinaryParser} reader
- *   The binary reader.
- *
- * @constructor
- * @struct
- */
-function TablesHeader (reader) {
-
-  'use strict';
-
-  var i1, i2;
-
-  /**
-   * The first reserved value.
-   *
-   * @type {number}
-   */
-  this.reserved1 = reader.readUInt(4);
-
-  /**
-   * The major version.
-   *
-   * @type {number}
-   */
-  this.majorVersion = reader.readUInt(1);
-
-  /**
-   * The minor version.
-   *
-   * @type {number}
-   */
-  this.minorVersion = reader.readUInt(1);
-
-  /**
-   * The size of the indexes into the different streams.
-   *
-   * @type {number}
-   */
-  this.heapOffsetSizes = reader.readUInt(1);
-
-  /**
-   * The second reserved value.
-   *
-   * @type {number}
-   */
-  this.reserved2 = reader.readUInt(1);
-
-  /**
-   * The bit-mask that indicates which of the tables that are present.
-   *
-   * @type {Array<number>}
-   */
-  this.maskValidArray = [
-    (i1 = reader.readUInt(4)),
-    (i2 = reader.readUInt(4))
-  ];
-
-  /**
-   * The bit-mask that indicates which of the tables that are present.
-   *
-   * @type {number}
-   */
-  this.maskValid = (i2 << 32) | i1;
-
-  /**
-   * The bit-mask that indicates which of the tables that are sorted.
-   *
-   * @type {Array<number>}
-   */
-  this.maskSortedArray = [
-    (i1 = reader.readUInt(4)),
-    (i2 = reader.readUInt(4))
-  ];
-
-  /**
-   * The bit-mask that indicates which of the tables that are sorted.
-   *
-   * @type {number}
-   */
-  this.maskSorted = (i2 << 32) | i1;
-
-  /**
-   * The file offset to the tables relative to the beginning of the stream.
-   *
-   * @type {number}
-   */
-  this.tablesOffset = reader.getPosition();
-
-}
-
-module.exports = TablesHeader;
-
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class TypeDefRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function TypeDefRow (reader) {
-
-  'use strict';
-
-  /**
-   * The flags.
-   *
-   * @type {number}
-   */
-  this.flags = reader.readUInt(4);
-
-  /**
-   * The type name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.typeName = reader.readStringIndex();
-
-  /**
-   * The type namespace as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.typeNamespace = reader.readStringIndex();
-
-  /**
-   * The reference to the type information row.
-   *
-   * @type {RowReference}
-   */
-  this.extends = new RowReference(reader, [
-    TableIndexes.TYPE_DEF,
-    TableIndexes.TYPE_REF,
-    TableIndexes.TYPE_SPEC
-  ]);
-
-  /**
-   * The reference to the field information row.
-   *
-   * @type {RowReference}
-   */
-  this.fieldList = new RowReference(reader, [
-    TableIndexes.FIELD
-  ]);
-
-  /**
-   * The reference to the method information row.
-   *
-   * @type {RowReference}
-   */
-  this.methodList = new RowReference(reader, [
-    TableIndexes.METHOD_DEF
-  ]);
-
-}
-
-module.exports = TypeDefRow;
-
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-var RowReference = __webpack_require__(1);
-var TableIndexes = __webpack_require__(0);
-
-/**
- * Class TypeRefRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function TypeRefRow (reader) {
-
-  'use strict';
-
-  /**
-   * The reference to the type information row.
-   *
-   * @type {RowReference}
-   */
-  this.resolutionScope = new RowReference(reader, [
-    TableIndexes.MODULE,
-    TableIndexes.MODULE_REF,
-    TableIndexes.ASSEMBLY_REF,
-    TableIndexes.TYPE_REF
-  ]);
-
-  /**
-   * The type name as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.typeName = reader.readStringIndex();
-
-  /**
-   * The type namespace as an index into the string heap.
-   *
-   * @type {number}
-   */
-  this.typeNamespace = reader.readStringIndex();
-
-}
-
-module.exports = TypeRefRow;
-
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class TypeSpecRow.
- *
- * @param {CILParser} reader
- *   The CIL reader.
- *
- * @constructor
- * @struct
- */
-function TypeSpecRow (reader) {
-
-  'use strict';
-
-  /**
-   * The signature as an index into the blob heap.
-   *
-   * @type {number}
-   */
-  this.signature = reader.readBlobIndex();
-
-}
-
-module.exports = TypeSpecRow;
+module.exports = new Main();
 
 
 /***/ })

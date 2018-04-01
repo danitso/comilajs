@@ -19,11 +19,9 @@
   "disallowTrailingComma": true,
   "disallowTrailingWhitespace": true,
   "disallowYodaConditions": true,
-  "emitErrors": true,
   "excludeFiles": [
     "node_modules/**"
   ],
-  "failOnHint": true,
   "maximumLineLength": 80,
   "requireBlocksOnNewline": 1,
   "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
