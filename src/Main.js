@@ -16,6 +16,7 @@
  */
 
 var CILParser = require('./Parser/CILParser');
+var Compiler = require('./Compiler/Compiler');
 
 /**
  * Class Main.
@@ -32,26 +33,42 @@ function Main () {
    *
    * @param {string} path
    *   The path.
+   *
+   * @return {Main}
+   *   Returns this instance.
    */
   this.run = function (path) {
-    console.log('#### This library is not yet able to run applications ####');
-    console.log('----------------------------------------------------------');
-    console.log('Dumping information about the executable:');
+    console.info('Downloading application \'' + path + '\'');
 
-    (new CILParser(path)).loadFile(function (reader) {
-      console.log(reader.readDOSHeader());
-      console.log(reader.readCOFFHeader());
-      console.log(reader.readOptionalHeader());
-      console.log(reader.readSectionHeaders());
-      console.log(reader.readResourceDirectory());
-      console.log(reader.readCORHeader());
-      console.log(reader.readMetadataHeader());
-      console.log(reader.readTablesHeader());
-      console.log(reader.readTables());
-      console.log(reader.readMethodHeaders());
-    }, function () {
-      console.log('Failed to load the file');
+    (new CILParser(path)).loadFile(function (parser) {
+      console.info('Compiling application \'' + parser.getPath() + '\'');
+
+      var compiler;
+      var module;
+
+      try {
+        compiler = new Compiler(parser);
+        module = compiler.compile();
+      }
+      catch (ex) {
+        console.error('Failed to compile the application \'' +
+          parser.getPath() + '\': ' + ex.getMessage());
+        return;
+      }
+
+      try {
+        module.run();
+      }
+      catch (ex) {
+        console.error('Failed to run the application \'' +
+          parser.getPath() + '\': ' + ex.getMessage());
+      }
+    }, function (parser, status) {
+      console.error('Failed to download the application \'' + parser.getPath() +
+        '\' (HTTP ' + status + ')');
     });
+
+    return this;
   };
 
 }

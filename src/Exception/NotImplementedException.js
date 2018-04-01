@@ -15,63 +15,25 @@
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
+var CustomException = require('./CustomException');
+var Extend = require('extend');
+
 /**
- * Class Module.
+ * Class NotImplementedException.
  *
- * @param {CILParser} reader
- *   The CLR reader.
+ * @param {string} message
+ *   The message.
  *
  * @constructor
+ * @extends {CustomException}
  */
-function Module (reader) {
+function NotImplementedException (message) {
 
   'use strict';
 
-  /**
-   * The blobs.
-   *
-   * @type {Object<number, Blob>}
-   *
-   * @protected
-   */
-  this._blob = {};
-
-  /**
-   * The GUIDs.
-   *
-   * @type {Object<number, string>}
-   *
-   * @protected
-   */
-  this._guid = {};
-
-  /**
-   * The ANSI strings.
-   *
-   * @type {Object<number, string>}
-   *
-   * @protected
-   */
-  this._strings = {};
-
-  /**
-   * The tables.
-   *
-   * @type {Object<number, *>}
-   *
-   * @protected
-   */
-  this._tables = {};
-
-  /**
-   * The unicode strings.
-   *
-   * @type {Object<number, string>}
-   *
-   * @protected
-   */
-  this._unicodeStrings = {};
+  // Invoke the parent constructor.
+  Extend(true, this, new CustomException(message, 'NotImplementedException'));
 
 }
 
-module.exports = Module;
+module.exports = NotImplementedException;

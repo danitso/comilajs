@@ -94,7 +94,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 60);
+/******/ 	return __webpack_require__(__webpack_require__.s = 63);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -589,6 +589,96 @@ module.exports = function extend() {
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
+var CustomException = __webpack_require__(7);
+var Extend = __webpack_require__(2);
+
+/**
+ * Class ParserException.
+ *
+ * @param {string} message
+ *   The message.
+ *
+ * @constructor
+ * @extends {CustomException}
+ */
+function ParserException (message) {
+
+  'use strict';
+
+  // Invoke the parent constructor.
+  Extend(true, this, new CustomException(message, 'ParserException'));
+
+}
+
+module.exports = ParserException;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var CustomException = __webpack_require__(7);
+var Extend = __webpack_require__(2);
+
+/**
+ * Class NotImplementedException.
+ *
+ * @param {string} message
+ *   The message.
+ *
+ * @constructor
+ * @extends {CustomException}
+ */
+function NotImplementedException (message) {
+
+  'use strict';
+
+  // Invoke the parent constructor.
+  Extend(true, this, new CustomException(message, 'NotImplementedException'));
+
+}
+
+module.exports = NotImplementedException;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 /**
  * Class ResourceDirectory.
  *
@@ -664,11 +754,11 @@ function ResourceDirectory (reader) {
 
 module.exports = ResourceDirectory;
 
-var ResourceDirectoryEntry = __webpack_require__(16);
+var ResourceDirectoryEntry = __webpack_require__(20);
 
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports) {
 
 /**
@@ -739,8 +829,8 @@ module.exports = new ImageAttributes();
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 7 */
+/***/ (function(module, exports) {
 
 /**
  * This file is part of ComlaJS.
@@ -759,32 +849,72 @@ module.exports = new ImageAttributes();
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var CustomException = __webpack_require__(35);
-var Extend = __webpack_require__(2);
-
 /**
- * Class ParserException.
+ * Class CustomException.
  *
  * @param {string} message
  *   The message.
+ * @param {string} type
+ *   The type of exception.
  *
  * @constructor
- * @extends {CustomException}
  */
-function ParserException (message) {
+function CustomException (message, type) {
 
   'use strict';
 
-  // Invoke the parent constructor.
-  Extend(true, this, new CustomException(message, 'ParserException'));
+  /**
+   * The exception message.
+   *
+   * @type {string}
+   *
+   * @private
+   */
+  this._message = message;
+
+  /**
+   * The exception type.
+   *
+   * @type {string}
+   *
+   * @private
+   */
+  this._type = (typeof type !== 'undefined') ? type : 'CustomException';
+
+  /**
+   * Retrieves the exception message.
+   *
+   * @return {string}
+   */
+  this.getMessage = function () {
+    return this._message;
+  };
+
+  /**
+   * Retrieves the exception type.
+   *
+   * @return {string}
+   */
+  this.getType = function () {
+    return this._type;
+  };
+
+  /**
+   * Converts the exception to a string.
+   *
+   * @return {string}
+   */
+  this.toString = function () {
+    return this.getMessage();
+  };
 
 }
 
-module.exports = ParserException;
+module.exports = CustomException;
 
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports) {
 
 /**
@@ -837,7 +967,168 @@ module.exports = DataDirectoryHeader;
 
 
 /***/ }),
-/* 7 */
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var NotImplementedException = __webpack_require__(4);
+
+/**
+ * Class Module.
+ *
+ * @param {CILParser} reader
+ *   The CLR reader.
+ *
+ * @constructor
+ */
+function Module (reader) {
+
+  'use strict';
+
+  /**
+   * The blobs.
+   *
+   * @type {Object<number, Blob>}
+   *
+   * @protected
+   */
+  this._blob = {};
+
+  /**
+   * The GUIDs.
+   *
+   * @type {Object<number, string>}
+   *
+   * @protected
+   */
+  this._guid = {};
+
+  /**
+   * The ANSI strings.
+   *
+   * @type {Object<number, string>}
+   *
+   * @protected
+   */
+  this._strings = {};
+
+  /**
+   * The tables.
+   *
+   * @type {Object<number, *>}
+   *
+   * @protected
+   */
+  this._tables = {};
+
+  /**
+   * The unicode strings.
+   *
+   * @type {Object<number, string>}
+   *
+   * @protected
+   */
+  this._unicodeStrings = {};
+
+  /**
+   * Runs the module.
+   */
+  this.run = function () {
+    throw new NotImplementedException(
+      'The run() function has not been implemented');
+  };
+
+}
+
+module.exports = Module;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * This file is part of ComlaJS.
+ *
+ * ComlaJS is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ComlaJS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+var Module = __webpack_require__(9);
+var NotImplementedException = __webpack_require__(4);
+
+/**
+ * Class Compiler.
+ *
+ * @param {CILParser} parser
+ *   The CLR parser.
+ *
+ * @constructor
+ */
+function Compiler (parser) {
+
+  'use strict';
+
+  /**
+   * Compiles CIL to JavaScript.
+   *
+   * @return {Module}
+   *   Returns the compiled module object.
+   *
+   * @throws {NotImplementedException}
+   *   Thrown as long as the function has not been fully implemented.
+   */
+  this.compile = function () {
+    // Log some information about the executable.
+    console.log(parser.readDOSHeader());
+    console.log(parser.readCOFFHeader());
+    console.log(parser.readOptionalHeader());
+    console.log(parser.readSectionHeaders());
+    console.log(parser.readResourceDirectory());
+    console.log(parser.readCORHeader());
+    console.log(parser.readMetadataHeader());
+    console.log(parser.readTablesHeader());
+    console.log(parser.readTables());
+    console.log(parser.readMethodHeaders());
+
+    // Throw an exception as the compiler has not been fully implemented.
+    throw new NotImplementedException(
+      'The compile() function has not been fully implemented');
+  };
+
+}
+
+module.exports = Compiler;
+
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports) {
 
 /**
@@ -883,7 +1174,7 @@ module.exports = TypeSpecRow;
 
 
 /***/ }),
-/* 8 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -951,7 +1242,7 @@ module.exports = TypeRefRow;
 
 
 /***/ }),
-/* 9 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1043,7 +1334,7 @@ module.exports = TypeDefRow;
 
 
 /***/ }),
-/* 10 */
+/* 14 */
 /***/ (function(module, exports) {
 
 /**
@@ -1160,7 +1451,7 @@ module.exports = TablesHeader;
 
 
 /***/ }),
-/* 11 */
+/* 15 */
 /***/ (function(module, exports) {
 
 /**
@@ -1206,7 +1497,7 @@ module.exports = StandAloneSigRow;
 
 
 /***/ }),
-/* 12 */
+/* 16 */
 /***/ (function(module, exports) {
 
 /**
@@ -1266,7 +1557,7 @@ module.exports = PropertyRow;
 
 
 /***/ }),
-/* 13 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1326,7 +1617,7 @@ module.exports = PropertyMapRow;
 
 
 /***/ }),
-/* 14 */
+/* 18 */
 /***/ (function(module, exports) {
 
 /**
@@ -1437,7 +1728,7 @@ module.exports = SectionHeader;
 
 
 /***/ }),
-/* 15 */
+/* 19 */
 /***/ (function(module, exports) {
 
 /**
@@ -1504,7 +1795,7 @@ module.exports = ResourceDataEntry;
 
 
 /***/ }),
-/* 16 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1524,8 +1815,8 @@ module.exports = ResourceDataEntry;
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var ResourceDataEntry = __webpack_require__(15);
-var ResourceDirectory = __webpack_require__(3);
+var ResourceDataEntry = __webpack_require__(19);
+var ResourceDirectory = __webpack_require__(5);
 
 /**
  * Class ResourceDirectoryEntry.
@@ -1589,7 +1880,7 @@ module.exports = ResourceDirectoryEntry;
 
 
 /***/ }),
-/* 17 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1609,8 +1900,8 @@ module.exports = ResourceDirectoryEntry;
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var DataDirectoryHeader = __webpack_require__(6);
-var ImageAttributes = __webpack_require__(4);
+var DataDirectoryHeader = __webpack_require__(8);
+var ImageAttributes = __webpack_require__(6);
 
 /**
  * Class OptionalHeader.
@@ -1864,7 +2155,7 @@ module.exports = OptionalHeader;
 
 
 /***/ }),
-/* 18 */
+/* 22 */
 /***/ (function(module, exports) {
 
 /**
@@ -2036,7 +2327,7 @@ module.exports = DOSHeader;
 
 
 /***/ }),
-/* 19 */
+/* 23 */
 /***/ (function(module, exports) {
 
 /**
@@ -2134,8 +2425,8 @@ module.exports = COFFHeader;
 
 
 /***/ }),
-/* 20 */
-/***/ (function(module, exports) {
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
 
 /**
  * This file is part of ComlaJS.
@@ -2153,6 +2444,8 @@ module.exports = COFFHeader;
  * You should have received a copy of the GNU Lesser General Public License
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
+
+var ParserException = __webpack_require__(3);
 
 /**
  * Class BinaryParser.
@@ -2240,19 +2533,19 @@ function BinaryParser (path, data) {
     var request = new XMLHttpRequest();
     request.open('GET', this.getPath(), true);
     request.responseType = 'arraybuffer';
-    request.onreadystatechange = (function (reader) {
+    request.onreadystatechange = (function (parser) {
       return function () {
         if (request.readyState === XMLHttpRequest.DONE) {
           if (request.status === 200) {
             // Store the data as an UInt8 array and reset the position.
-            reader._data = new Uint8Array(request.response);
-            reader._position = 0;
+            parser._data = new Uint8Array(request.response);
+            parser._position = 0;
 
             // Invoke the success callback in order for the invoker to proceed.
-            success(reader);
+            success(parser);
           }
           else {
-            error(reader);
+            error(parser, request.status);
           }
         }
       };
@@ -2448,7 +2741,7 @@ module.exports = BinaryParser;
 
 
 /***/ }),
-/* 21 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2468,15 +2761,15 @@ module.exports = BinaryParser;
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var BinaryParser = __webpack_require__(20);
-var COFFHeader = __webpack_require__(19);
-var DOSHeader = __webpack_require__(18);
+var BinaryParser = __webpack_require__(24);
+var COFFHeader = __webpack_require__(23);
+var DOSHeader = __webpack_require__(22);
 var Extend = __webpack_require__(2);
-var ImageAttributes = __webpack_require__(4);
-var ParserException = __webpack_require__(5);
-var OptionalHeader = __webpack_require__(17);
-var ResourceDirectory = __webpack_require__(3);
-var SectionHeader = __webpack_require__(14);
+var ImageAttributes = __webpack_require__(6);
+var ParserException = __webpack_require__(3);
+var OptionalHeader = __webpack_require__(21);
+var ResourceDirectory = __webpack_require__(5);
+var SectionHeader = __webpack_require__(18);
 
 /**
  * Class PEParser.
@@ -2736,7 +3029,7 @@ module.exports = PEParser;
 
 
 /***/ }),
-/* 22 */
+/* 26 */
 /***/ (function(module, exports) {
 
 /**
@@ -2796,7 +3089,7 @@ module.exports = ParamRow;
 
 
 /***/ }),
-/* 23 */
+/* 27 */
 /***/ (function(module, exports) {
 
 /**
@@ -2876,7 +3169,7 @@ module.exports = ModuleRow;
 
 
 /***/ }),
-/* 24 */
+/* 28 */
 /***/ (function(module, exports) {
 
 /**
@@ -2922,7 +3215,7 @@ module.exports = ModuleRefRow;
 
 
 /***/ }),
-/* 25 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2990,7 +3283,7 @@ module.exports = MethodSemanticsRow;
 
 
 /***/ }),
-/* 26 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3061,7 +3354,7 @@ module.exports = MethodImplRow;
 
 
 /***/ }),
-/* 27 */
+/* 31 */
 /***/ (function(module, exports) {
 
 /**
@@ -3125,7 +3418,7 @@ module.exports = new MethodFlags();
 
 
 /***/ }),
-/* 28 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3145,7 +3438,7 @@ module.exports = new MethodFlags();
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var MethodFlags = __webpack_require__(27);
+var MethodFlags = __webpack_require__(31);
 
 /**
  * Class MethodHeader.
@@ -3219,7 +3512,7 @@ module.exports = MethodHeader;
 
 
 /***/ }),
-/* 29 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3305,7 +3598,7 @@ module.exports = MethodDefRow;
 
 
 /***/ }),
-/* 30 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3365,7 +3658,7 @@ module.exports = NestedClassRow;
 
 
 /***/ }),
-/* 31 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3434,7 +3727,7 @@ module.exports = MemberRefRow;
 
 
 /***/ }),
-/* 32 */
+/* 36 */
 /***/ (function(module, exports) {
 
 /**
@@ -3494,7 +3787,7 @@ module.exports = StreamHeader;
 
 
 /***/ }),
-/* 33 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3514,7 +3807,7 @@ module.exports = StreamHeader;
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var StreamHeader = __webpack_require__(32);
+var StreamHeader = __webpack_require__(36);
 
 /**
  * Class MetadataHeader.
@@ -3618,7 +3911,7 @@ module.exports = MetadataHeader;
 
 
 /***/ }),
-/* 34 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3692,92 +3985,7 @@ module.exports = ManifestResourceRow;
 
 
 /***/ }),
-/* 35 */
-/***/ (function(module, exports) {
-
-/**
- * This file is part of ComlaJS.
- *
- * ComlaJS is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * ComlaJS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Class CustomException.
- *
- * @param {string} message
- *   The message.
- * @param {string} type
- *   The type of exception.
- *
- * @constructor
- */
-function CustomException (message, type) {
-
-  'use strict';
-
-  /**
-   * The exception message.
-   *
-   * @type {string}
-   *
-   * @private
-   */
-  this._message = message;
-
-  /**
-   * The exception type.
-   *
-   * @type {string}
-   *
-   * @private
-   */
-  this._type = (typeof type !== 'undefined') ? type : 'CustomException';
-
-  /**
-   * Retrieves the exception message.
-   *
-   * @return {string}
-   */
-  this.getMessage = function () {
-    return this._message;
-  };
-
-  /**
-   * Retrieves the exception type.
-   *
-   * @return {string}
-   */
-  this.getType = function () {
-    return this._type;
-  };
-
-  /**
-   * Converts the exception to a string.
-   *
-   * @return {string}
-   */
-  this.toString = function () {
-    return this.getMessage();
-  };
-
-}
-
-module.exports = CustomException;
-
-
-/***/ }),
-/* 36 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3839,7 +4047,7 @@ module.exports = InterfaceImplRow;
 
 
 /***/ }),
-/* 37 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3914,7 +4122,7 @@ module.exports = ImplMapRow;
 
 
 /***/ }),
-/* 38 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3976,7 +4184,7 @@ module.exports = GenericParamConstraintRow;
 
 
 /***/ }),
-/* 39 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4049,7 +4257,7 @@ module.exports = GenericParamRow;
 
 
 /***/ }),
-/* 40 */
+/* 43 */
 /***/ (function(module, exports) {
 
 /**
@@ -4109,7 +4317,7 @@ module.exports = FileRow;
 
 
 /***/ }),
-/* 41 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4168,7 +4376,7 @@ module.exports = FieldMarshalRow;
 
 
 /***/ }),
-/* 42 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4226,7 +4434,7 @@ module.exports = FieldLayoutRow;
 
 
 /***/ }),
-/* 43 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4284,7 +4492,7 @@ module.exports = FieldRVARow;
 
 
 /***/ }),
-/* 44 */
+/* 47 */
 /***/ (function(module, exports) {
 
 /**
@@ -4344,7 +4552,7 @@ module.exports = FieldRow;
 
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4424,7 +4632,7 @@ module.exports = ExportedTypeRow;
 
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4491,7 +4699,7 @@ module.exports = EventRow;
 
 
 /***/ }),
-/* 47 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4551,7 +4759,7 @@ module.exports = EventMapRow;
 
 
 /***/ }),
-/* 48 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4618,7 +4826,7 @@ module.exports = DeclSecurityRow;
 
 
 /***/ }),
-/* 49 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4707,7 +4915,7 @@ module.exports = CustomAttributeRow;
 
 
 /***/ }),
-/* 50 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4727,7 +4935,7 @@ module.exports = CustomAttributeRow;
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var DataDirectoryHeader = __webpack_require__(6);
+var DataDirectoryHeader = __webpack_require__(8);
 
 /**
  * Class CORHeader.
@@ -4832,7 +5040,7 @@ module.exports = CORHeader;
 
 
 /***/ }),
-/* 51 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4899,7 +5107,7 @@ module.exports = ConstantRow;
 
 
 /***/ }),
-/* 52 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4964,7 +5172,7 @@ module.exports = ClassLayoutRow;
 
 
 /***/ }),
-/* 53 */
+/* 56 */
 /***/ (function(module, exports) {
 
 /**
@@ -5066,7 +5274,7 @@ module.exports = AssemblyRow;
 
 
 /***/ }),
-/* 54 */
+/* 57 */
 /***/ (function(module, exports) {
 
 /**
@@ -5168,7 +5376,7 @@ module.exports = AssemblyRefRow;
 
 
 /***/ }),
-/* 55 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -5226,7 +5434,7 @@ module.exports = AssemblyRefProcessorRow;
 
 
 /***/ }),
-/* 56 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -5298,7 +5506,7 @@ module.exports = AssemblyRefOSRow;
 
 
 /***/ }),
-/* 57 */
+/* 60 */
 /***/ (function(module, exports) {
 
 /**
@@ -5344,7 +5552,7 @@ module.exports = AssemblyProcessorRow;
 
 
 /***/ }),
-/* 58 */
+/* 61 */
 /***/ (function(module, exports) {
 
 /**
@@ -5404,7 +5612,7 @@ module.exports = AssemblyOSRow;
 
 
 /***/ }),
-/* 59 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -5424,51 +5632,51 @@ module.exports = AssemblyOSRow;
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var AssemblyOSRow = __webpack_require__(58);
-var AssemblyProcessorRow = __webpack_require__(57);
-var AssemblyRefOSRow = __webpack_require__(56);
-var AssemblyRefProcessorRow = __webpack_require__(55);
-var AssemblyRefRow = __webpack_require__(54);
-var AssemblyRow = __webpack_require__(53);
-var ClassLayoutRow = __webpack_require__(52);
-var ConstantRow = __webpack_require__(51);
-var CORHeader = __webpack_require__(50);
-var CustomAttributeRow = __webpack_require__(49);
-var DeclSecurityRow = __webpack_require__(48);
-var EventMapRow = __webpack_require__(47);
-var EventRow = __webpack_require__(46);
-var ExportedTypeRow = __webpack_require__(45);
+var AssemblyOSRow = __webpack_require__(61);
+var AssemblyProcessorRow = __webpack_require__(60);
+var AssemblyRefOSRow = __webpack_require__(59);
+var AssemblyRefProcessorRow = __webpack_require__(58);
+var AssemblyRefRow = __webpack_require__(57);
+var AssemblyRow = __webpack_require__(56);
+var ClassLayoutRow = __webpack_require__(55);
+var ConstantRow = __webpack_require__(54);
+var CORHeader = __webpack_require__(53);
+var CustomAttributeRow = __webpack_require__(52);
+var DeclSecurityRow = __webpack_require__(51);
+var EventMapRow = __webpack_require__(50);
+var EventRow = __webpack_require__(49);
+var ExportedTypeRow = __webpack_require__(48);
 var Extend = __webpack_require__(2);
-var FieldRow = __webpack_require__(44);
-var FieldRVARow = __webpack_require__(43);
-var FieldLayoutRow = __webpack_require__(42);
-var FieldMarshalRow = __webpack_require__(41);
-var FileRow = __webpack_require__(40);
-var GenericParamRow = __webpack_require__(39);
-var GenericParamConstraintRow = __webpack_require__(38);
-var ImplMapRow = __webpack_require__(37);
-var InterfaceImplRow = __webpack_require__(36);
-var ParserException = __webpack_require__(5);
-var ManifestResourceRow = __webpack_require__(34);
-var MetadataHeader = __webpack_require__(33);
-var MemberRefRow = __webpack_require__(31);
-var NestedClassRow = __webpack_require__(30);
-var MethodDefRow = __webpack_require__(29);
-var MethodHeader = __webpack_require__(28);
-var MethodImplRow = __webpack_require__(26);
-var MethodSemanticsRow = __webpack_require__(25);
-var ModuleRefRow = __webpack_require__(24);
-var ModuleRow = __webpack_require__(23);
-var ParamRow = __webpack_require__(22);
-var PEParser = __webpack_require__(21);
-var PropertyMapRow = __webpack_require__(13);
-var PropertyRow = __webpack_require__(12);
-var StandAloneSigRow = __webpack_require__(11);
+var FieldRow = __webpack_require__(47);
+var FieldRVARow = __webpack_require__(46);
+var FieldLayoutRow = __webpack_require__(45);
+var FieldMarshalRow = __webpack_require__(44);
+var FileRow = __webpack_require__(43);
+var GenericParamRow = __webpack_require__(42);
+var GenericParamConstraintRow = __webpack_require__(41);
+var ImplMapRow = __webpack_require__(40);
+var InterfaceImplRow = __webpack_require__(39);
+var ParserException = __webpack_require__(3);
+var ManifestResourceRow = __webpack_require__(38);
+var MetadataHeader = __webpack_require__(37);
+var MemberRefRow = __webpack_require__(35);
+var NestedClassRow = __webpack_require__(34);
+var MethodDefRow = __webpack_require__(33);
+var MethodHeader = __webpack_require__(32);
+var MethodImplRow = __webpack_require__(30);
+var MethodSemanticsRow = __webpack_require__(29);
+var ModuleRefRow = __webpack_require__(28);
+var ModuleRow = __webpack_require__(27);
+var ParamRow = __webpack_require__(26);
+var PEParser = __webpack_require__(25);
+var PropertyMapRow = __webpack_require__(17);
+var PropertyRow = __webpack_require__(16);
+var StandAloneSigRow = __webpack_require__(15);
 var TableIndexes = __webpack_require__(0);
-var TablesHeader = __webpack_require__(10);
-var TypeDefRow = __webpack_require__(9);
-var TypeRefRow = __webpack_require__(8);
-var TypeSpecRow = __webpack_require__(7);
+var TablesHeader = __webpack_require__(14);
+var TypeDefRow = __webpack_require__(13);
+var TypeRefRow = __webpack_require__(12);
+var TypeSpecRow = __webpack_require__(11);
 
 /**
  * Class CILParser.
@@ -5979,7 +6187,7 @@ module.exports = CILParser;
 
 
 /***/ }),
-/* 60 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -5999,7 +6207,8 @@ module.exports = CILParser;
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var CILParser = __webpack_require__(59);
+var CILParser = __webpack_require__(62);
+var Compiler = __webpack_require__(10);
 
 /**
  * Class Main.
@@ -6016,26 +6225,42 @@ function Main () {
    *
    * @param {string} path
    *   The path.
+   *
+   * @return {Main}
+   *   Returns this instance.
    */
   this.run = function (path) {
-    console.log('#### This library is not yet able to run applications ####');
-    console.log('----------------------------------------------------------');
-    console.log('Dumping information about the executable:');
+    console.info('Downloading application \'' + path + '\'');
 
-    (new CILParser(path)).loadFile(function (reader) {
-      console.log(reader.readDOSHeader());
-      console.log(reader.readCOFFHeader());
-      console.log(reader.readOptionalHeader());
-      console.log(reader.readSectionHeaders());
-      console.log(reader.readResourceDirectory());
-      console.log(reader.readCORHeader());
-      console.log(reader.readMetadataHeader());
-      console.log(reader.readTablesHeader());
-      console.log(reader.readTables());
-      console.log(reader.readMethodHeaders());
-    }, function () {
-      console.log('Failed to load the file');
+    (new CILParser(path)).loadFile(function (parser) {
+      console.info('Compiling application \'' + parser.getPath() + '\'');
+
+      var compiler;
+      var module;
+
+      try {
+        compiler = new Compiler(parser);
+        module = compiler.compile();
+      }
+      catch (ex) {
+        console.error('Failed to compile the application \'' +
+          parser.getPath() + '\': ' + ex.getMessage());
+        return;
+      }
+
+      try {
+        module.run();
+      }
+      catch (ex) {
+        console.error('Failed to run the application \'' +
+          parser.getPath() + '\': ' + ex.getMessage());
+      }
+    }, function (parser, status) {
+      console.error('Failed to download the application \'' + parser.getPath() +
+        '\' (HTTP ' + status + ')');
     });
+
+    return this;
   };
 
 }

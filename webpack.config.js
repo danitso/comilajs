@@ -15,12 +15,13 @@
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
-const FileHeader = require('./src/FileHeader');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const Webpack = require('webpack');
+var FileHeader = require('./src/FileHeader');
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+var Webpack = require('webpack');
 
 // Export the webpack configuration.
 module.exports = function (env, options) {
+
   'use strict';
 
   return {
@@ -57,15 +58,18 @@ module.exports = function (env, options) {
       'minimizer': [
         new UglifyJSPlugin({
           'include': /\.min\.js$/,
+          'sourceMap': true,
           'uglifyOptions': {
             'compress': {
+              'pure_funcs': (options.mode === 'production' ? [
+                'console.debug'
+              ] : null),
               'warnings': false
             },
             'mangle': true,
             'mangle.properties': {
               'regex': /^_/
             },
-            'sourceMap': true
           }
         })
       ]
@@ -92,4 +96,5 @@ module.exports = function (env, options) {
       })
     ]
   }
+
 };

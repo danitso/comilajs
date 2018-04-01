@@ -15,6 +15,8 @@
  * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
+var ParserException = require('./Exception/ParserException');
+
 /**
  * Class BinaryParser.
  *
@@ -101,19 +103,19 @@ function BinaryParser (path, data) {
     var request = new XMLHttpRequest();
     request.open('GET', this.getPath(), true);
     request.responseType = 'arraybuffer';
-    request.onreadystatechange = (function (reader) {
+    request.onreadystatechange = (function (parser) {
       return function () {
         if (request.readyState === XMLHttpRequest.DONE) {
           if (request.status === 200) {
             // Store the data as an UInt8 array and reset the position.
-            reader._data = new Uint8Array(request.response);
-            reader._position = 0;
+            parser._data = new Uint8Array(request.response);
+            parser._position = 0;
 
             // Invoke the success callback in order for the invoker to proceed.
-            success(reader);
+            success(parser);
           }
           else {
-            error(reader);
+            error(parser, request.status);
           }
         }
       };
