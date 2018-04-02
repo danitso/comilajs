@@ -3,6 +3,10 @@
   "curly": true,
   "devel": true,
   "freeze": true,
+  "globals": {
+    "module": false,
+    "require": false
+  },
   "nonbsp": true,
   "nonew": true,
   "strict": true,

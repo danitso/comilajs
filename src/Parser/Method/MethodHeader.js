@@ -20,24 +20,24 @@ var MethodFlags = require('../Constant/MethodFlags');
 /**
  * Class MethodHeader.
  *
- * @param {CILParser} reader
- *   The CIL reader.
+ * @param {CILParser} parser
+ *   The CIL parser.
  *
  * @constructor
  * @struct
  */
-function MethodHeader (reader) {
+function MethodHeader (parser) {
 
   'use strict';
 
   // Retrieve the first one or two bytes specifying the flags and header size.
-  var flagsAndSize = reader.readUInt(1);
-  var tiny = true;
+  var flagsAndSize = parser.readUInt(1);
+  var thin = true;
 
   if ((flagsAndSize & MethodFlags.TINY_FORMAT) === 0) {
-    reader.setPosition(reader.getPosition() - 1);
-    flagsAndSize = reader.readUInt(2);
-    tiny = false;
+    parser.setPosition(parser.getPosition() - 1);
+    flagsAndSize = parser.readUInt(2);
+    thin = false;
   }
 
   /**
@@ -45,28 +45,28 @@ function MethodHeader (reader) {
    *
    * @type {number}
    */
-  this.flags = tiny ? flagsAndSize & 0x03 : flagsAndSize & 0xFFF;
+  this.flags = thin ? flagsAndSize & 0x03 : flagsAndSize & 0xFFF;
 
   /**
    * The header size.
    *
    * @type {number}
    */
-  this.headerSize = tiny ? 1 : flagsAndSize >> 12;
+  this.headerSize = thin ? 1 : flagsAndSize >> 12;
 
   /**
    * The maximum number of items on the operand stack.
    *
    * @return {number}
    */
-  this.maxStack = tiny ? 0 : reader.readUInt(2);
+  this.maxStack = thin ? 8 : parser.readUInt(2);
 
   /**
-   * The size in bytes of the actual method body.
+   * The size in bytes of the operations.
    *
    * @return {number}
    */
-  this.codeSize = tiny ? flagsAndSize >> 2 : reader.readUInt(4);
+  this.operationsSize = thin ? flagsAndSize >> 2 : parser.readUInt(4);
 
   /**
    * The metadata token for a signature describing the layout of the local
@@ -74,14 +74,14 @@ function MethodHeader (reader) {
    *
    * @return {number}
    */
-  this.localVarSigTok = tiny ? 0 : reader.readUInt(4);
+  this.localVarSigTok = thin ? 0 : parser.readUInt(4);
 
   /**
-   * The file offset to the code.
+   * The file offset to the operations.
    *
    * @type {number}
    */
-  this.codeOffset = reader.getPosition();
+  this.operationsOffset = parser.getPosition();
 
 }
 

@@ -50,7 +50,7 @@ function Compiler (parser) {
     console.log(parser.readMetadataHeader());
     console.log(parser.readTablesHeader());
     console.log(parser.readTables());
-    console.log(parser.readMethodHeaders());
+    console.log(parser.readMethodBodies());
 
     // Throw an exception as the compiler has not been fully implemented.
     throw new NotImplementedException(

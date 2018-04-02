@@ -45,7 +45,7 @@ var MetadataHeader = require('./Header/MetadataHeader');
 var MemberRefRow = require('./Row/MemberRefRow');
 var NestedClassRow = require('./Row/NestedClassRow');
 var MethodDefRow = require('./Row/MethodDefRow');
-var MethodHeader = require('./Header/MethodHeader');
+var MethodBody = require('./Method/MethodBody');
 var MethodImplRow = require('./Row/MethodImplRow');
 var MethodSemanticsRow = require('./Row/MethodSemanticsRow');
 var ModuleRefRow = require('./Row/ModuleRefRow');
@@ -100,11 +100,11 @@ function CILParser (path, data) {
   /**
    * The method headers.
    *
-   * @type {Array<MethodHeader>}
+   * @type {Array<MethodBody>}
    *
    * @protected
    */
-  this._methodHeaders = null;
+  this._methodBodies = null;
 
   /**
    * The metadata tables.
@@ -278,27 +278,27 @@ function CILParser (path, data) {
   };
 
   /**
-   * Reads the CLR method headers.
+   * Reads the CLR method bodies.
    *
-   * @return {Array<MethodHeader>}
-   *   Returns an array of headers.
+   * @return {Array<MethodBody>}
+   *   Returns an array of method bodies.
    */
-  this.readMethodHeaders = function () {
-    if (!this._methodHeaders) {
+  this.readMethodBodies = function () {
+    if (!this._methodBodies) {
       var tables = this.readTables();
 
       // Initialize the array of method headers.
-      this._methodHeaders = new Array(tables[TableIndexes.METHOD_DEF].length);
+      this._methodBodies = new Array(tables[TableIndexes.METHOD_DEF].length);
 
       // Parse the method headers referenced by the MethodDef table.
       for (var i = 0; i < tables[TableIndexes.METHOD_DEF].length; i++) {
         this.setPosition(this.getFileOffset(tables[TableIndexes.METHOD_DEF][i]
           .rva));
-        this._methodHeaders[i] = new MethodHeader(this);
+        this._methodBodies[i] = new MethodBody(this);
       }
     }
 
-    return this._methodHeaders;
+    return this._methodBodies;
   };
 
   /**
