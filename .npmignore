@@ -1,6 +1,7 @@
 # Directories to ignore
 
 /.idea
+/build
 /demo/project/bin/*
 /demo/project/obj
 /demo/project/.vs
