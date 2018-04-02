@@ -1,7 +1,7 @@
 /*!
- * ComlaJS v0.3.0
+ * ComilaJS v0.3.0
  * Copyright (c) 2018 Danitso
- * http://www.comlajs.org/
+ * http://www.comilajs.org/
  * 
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU Lesser General Public License as published by
@@ -20,11 +20,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("comlajs", [], factory);
+		define("comilajs", [], factory);
 	else if(typeof exports === 'object')
-		exports["comlajs"] = factory();
+		exports["comilajs"] = factory();
 	else
-		root["comlajs"] = factory();
+		root["comilajs"] = factory();
 })(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -102,20 +102,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -397,20 +397,20 @@ module.exports = new TableIndexes();
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -573,20 +573,20 @@ module.exports = function extend() {
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var CustomException = __webpack_require__(7);
@@ -618,20 +618,20 @@ module.exports = ParserException;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var CustomException = __webpack_require__(7);
@@ -663,20 +663,20 @@ module.exports = NotImplementedException;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -762,20 +762,20 @@ var ResourceDirectoryEntry = __webpack_require__(20);
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -833,20 +833,20 @@ module.exports = new ImageAttributes();
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -918,20 +918,20 @@ module.exports = CustomException;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -971,20 +971,20 @@ module.exports = DataDirectoryHeader;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var NotImplementedException = __webpack_require__(4);
@@ -1064,20 +1064,20 @@ module.exports = Module;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var Module = __webpack_require__(9);
@@ -1132,20 +1132,20 @@ module.exports = Compiler;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -1178,20 +1178,20 @@ module.exports = TypeSpecRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -1246,20 +1246,20 @@ module.exports = TypeRefRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -1338,20 +1338,20 @@ module.exports = TypeDefRow;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -1455,20 +1455,20 @@ module.exports = TablesHeader;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -1501,20 +1501,20 @@ module.exports = StandAloneSigRow;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -1561,20 +1561,20 @@ module.exports = PropertyRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -1621,20 +1621,20 @@ module.exports = PropertyMapRow;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -1732,20 +1732,20 @@ module.exports = SectionHeader;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -1799,20 +1799,20 @@ module.exports = ResourceDataEntry;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var ResourceDataEntry = __webpack_require__(19);
@@ -1884,20 +1884,20 @@ module.exports = ResourceDirectoryEntry;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var DataDirectoryHeader = __webpack_require__(8);
@@ -2159,20 +2159,20 @@ module.exports = OptionalHeader;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -2331,20 +2331,20 @@ module.exports = DOSHeader;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -2429,20 +2429,20 @@ module.exports = COFFHeader;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var ParserException = __webpack_require__(3);
@@ -2745,20 +2745,20 @@ module.exports = BinaryParser;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var BinaryParser = __webpack_require__(24);
@@ -3033,20 +3033,20 @@ module.exports = PEParser;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -3093,20 +3093,20 @@ module.exports = ParamRow;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -3173,20 +3173,20 @@ module.exports = ModuleRow;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -3219,20 +3219,20 @@ module.exports = ModuleRefRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -3287,20 +3287,20 @@ module.exports = MethodSemanticsRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -3358,20 +3358,20 @@ module.exports = MethodImplRow;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -3422,20 +3422,20 @@ module.exports = new MethodFlags();
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var MethodFlags = __webpack_require__(31);
@@ -3516,20 +3516,20 @@ module.exports = MethodHeader;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -3602,20 +3602,20 @@ module.exports = MethodDefRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -3662,20 +3662,20 @@ module.exports = NestedClassRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -3731,20 +3731,20 @@ module.exports = MemberRefRow;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -3791,20 +3791,20 @@ module.exports = StreamHeader;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var StreamHeader = __webpack_require__(36);
@@ -3915,20 +3915,20 @@ module.exports = MetadataHeader;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -3989,20 +3989,20 @@ module.exports = ManifestResourceRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -4051,20 +4051,20 @@ module.exports = InterfaceImplRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -4126,20 +4126,20 @@ module.exports = ImplMapRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -4188,20 +4188,20 @@ module.exports = GenericParamConstraintRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -4261,20 +4261,20 @@ module.exports = GenericParamRow;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -4321,20 +4321,20 @@ module.exports = FileRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -4380,20 +4380,20 @@ module.exports = FieldMarshalRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -4438,20 +4438,20 @@ module.exports = FieldLayoutRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -4496,20 +4496,20 @@ module.exports = FieldRVARow;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -4556,20 +4556,20 @@ module.exports = FieldRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -4636,20 +4636,20 @@ module.exports = ExportedTypeRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -4703,20 +4703,20 @@ module.exports = EventRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -4763,20 +4763,20 @@ module.exports = EventMapRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -4830,20 +4830,20 @@ module.exports = DeclSecurityRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -4919,20 +4919,20 @@ module.exports = CustomAttributeRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var DataDirectoryHeader = __webpack_require__(8);
@@ -5044,20 +5044,20 @@ module.exports = CORHeader;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -5111,20 +5111,20 @@ module.exports = ConstantRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -5176,20 +5176,20 @@ module.exports = ClassLayoutRow;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -5278,20 +5278,20 @@ module.exports = AssemblyRow;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -5380,20 +5380,20 @@ module.exports = AssemblyRefRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -5438,20 +5438,20 @@ module.exports = AssemblyRefProcessorRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var RowReference = __webpack_require__(1);
@@ -5510,20 +5510,20 @@ module.exports = AssemblyRefOSRow;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -5556,20 +5556,20 @@ module.exports = AssemblyProcessorRow;
 /***/ (function(module, exports) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -5616,20 +5616,20 @@ module.exports = AssemblyOSRow;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var AssemblyOSRow = __webpack_require__(61);
@@ -6196,20 +6196,20 @@ module.exports = CILParser;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var CILParser = __webpack_require__(62);

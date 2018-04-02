@@ -1,5 +1,5 @@
 {
-  "name": "ComlaJS",
+  "name": "ComilaJS",
   "version": "0.3.0",
   "description": "A lightweight Common Language Runtime for web applications",
   "author": {
@@ -19,7 +19,7 @@
     "webpack-cli": "2.0.13",
     "webpack-dev-server": "3.1.1"
   },
-  "homepage": "http://www.comlajs.org/",
+  "homepage": "http://www.comilajs.org/",
   "keywords": [
     "cil",
     "clr",
@@ -31,7 +31,7 @@
   "main": "src/Main.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/danitso/comlajs.git"
+    "url": "https://github.com/danitso/comilajs.git"
   },
   "scripts": {
     "build": "webpack --mode production",

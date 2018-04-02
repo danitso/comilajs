@@ -1,18 +1,18 @@
 /**
- * This file is part of ComlaJS.
+ * This file is part of ComilaJS.
  *
- * ComlaJS is free software: you can redistribute it and/or modify it
+ * ComilaJS is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ComlaJS is distributed in the hope that it will be useful,
+ * ComilaJS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ComlaJS. If not, see <http://www.gnu.org/licenses/>.
+ * along with ComilaJS. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var FileHeader = require('./src/FileHeader');
@@ -33,8 +33,8 @@ module.exports = function (env, options) {
       'port': 4768
     },
     'entry': {
-      'comla': __dirname + '/src/Main.js',
-      'comla.min': __dirname + '/src/Main.js'
+      'comila': __dirname + '/src/Main.js',
+      'comila.min': __dirname + '/src/Main.js'
     },
     'mode': 'production',
     'module': {
@@ -76,7 +76,7 @@ module.exports = function (env, options) {
     },
     'output': {
       'filename': '[name].js',
-      'library': 'comlajs',
+      'library': 'comilajs',
       'libraryTarget': 'umd',
       'path': __dirname + '/' + (options.mode === 'production' ? 'dist' :
         'build'),

@@ -6,7 +6,7 @@ namespace demo
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("This is a ComlaJS demo");
+            Console.WriteLine("This is a ComilaJS demo");
         }
     }
 }
