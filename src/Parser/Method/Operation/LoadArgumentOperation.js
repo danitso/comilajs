@@ -16,10 +16,11 @@
  */
 
 var Extend = require('extend');
-var TokenOperation = require('./TokenOperation');
+var MethodOperation = require('../MethodOperation');
+var OpCodes = require('../../Constant/OpCodes');
 
 /**
- * Class CallOperation.
+ * Class LoadArgumentOperation.
  *
  * @param {CILParser} parser
  *   The CIL parser.
@@ -29,15 +30,32 @@ var TokenOperation = require('./TokenOperation');
  *   The operation name.
  *
  * @constructor
- * @extends {TokenOperation}
+ * @extends {MethodOperation}
  */
-function CallOperation (parser, code, name) {
+function LoadArgumentOperation (parser, code, name) {
 
   'use strict';
 
   // Invoke the parent constructor.
-  Extend(true, this, new TokenOperation(parser, code, name));
+  Extend(true, this, new MethodOperation(parser, code, name));
+
+  /**
+   * The argument index.
+   *
+   * @type {number}
+   */
+  this.index = (
+    (code >= OpCodes.LDARG_0) && (code <= OpCodes.LDARG_3) ?
+      code - OpCodes.LDARG_0 : (
+        (code === OpCodes.LDARG) ?
+          parser.readUInt(2) : (
+            (code === OpCodes.LDARG_S) ?
+              parser.readUInt(1) :
+              -1
+          )
+      )
+  );
 
 }
 
-module.exports = CallOperation;
+module.exports = LoadArgumentOperation;

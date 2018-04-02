@@ -16,7 +16,7 @@
  */
 
 var CallOperation = require('./Operation/CallOperation');
-var LoadArgument0Operation = require('./Operation/LoadArgument0Operation');
+var LoadArgumentOperation = require('./Operation/LoadArgumentOperation');
 var LoadStringOperation = require('./Operation/LoadStringOperation');
 var MethodOperation = require('./MethodOperation');
 var NoOperation = require('./Operation/NoOperation');
@@ -74,8 +74,13 @@ function MethodOperationFactory () {
 
   // Register the supported operations.
   this.register(OpCodes.CALL, CallOperation);
+  this.register(OpCodes.LDARG, LoadArgumentOperation);
+  this.register(OpCodes.LDARG_0, LoadArgumentOperation);
+  this.register(OpCodes.LDARG_1, LoadArgumentOperation);
+  this.register(OpCodes.LDARG_2, LoadArgumentOperation);
+  this.register(OpCodes.LDARG_3, LoadArgumentOperation);
+  this.register(OpCodes.LDARG_S, LoadArgumentOperation);
   this.register(OpCodes.LDSTR, LoadStringOperation);
-  this.register(OpCodes.LDARG_0, LoadArgument0Operation);
   this.register(OpCodes.NOP, NoOperation);
   this.register(OpCodes.RET, ReturnOperation);
 }

@@ -16,7 +16,7 @@
  */
 
 var Extend = require('extend');
-var MethodOperation = require('../MethodOperation');
+var TokenOperation = require('./TokenOperation');
 
 /**
  * Class LoadStringOperation.
@@ -29,21 +29,14 @@ var MethodOperation = require('../MethodOperation');
  *   The operation name.
  *
  * @constructor
- * @extends {MethodOperation}
+ * @extends {TokenOperation}
  */
 function LoadStringOperation (parser, code, name) {
 
   'use strict';
 
   // Invoke the parent constructor.
-  Extend(true, this, new MethodOperation(parser, code, name));
-
-  /**
-   * The token.
-   *
-   * @type {number}
-   */
-  this.token = parser.readUInt(4);
+  Extend(true, this, new TokenOperation(parser, code, name));
 
 }
 

@@ -18,24 +18,17 @@
 /**
  * Class RowReference.
  *
- * @param {CILParser} reader
- *   The CIL reader.
+ * @param {CILParser} parser
+ *   The CIL parser.
  * @param {Array<number>} tableIndexes
  *   The table indexes.
  *
  * @constructor
  * @struct
  */
-function RowReference (reader, tableIndexes) {
+function RowReference (parser, tableIndexes) {
 
   'use strict';
-
-  /**
-   * The table index.
-   *
-   * @type {number}
-   */
-  this.tableIndex = -1;
 
   /**
    * The row index.
@@ -44,33 +37,46 @@ function RowReference (reader, tableIndexes) {
    */
   this.rowIndex = -1;
 
+  /**
+   * The table index.
+   *
+   * @type {number}
+   */
+  this.tableIndex = -1;
+
   // Initialize the object.
-  (function (object, reader, tableIndexes) {
+  (function (object, parser, tableIndexes) {
 
-    var bc = 1, bv, size = 2, tables = reader.readTables();
-
-    // Determine how many bits are required to represent the table index.
-    while ((bv = Math.pow(2, bc - 1)) < tableIndexes.length) {
-      bc++;
+    if (tableIndexes.length === 0) {
+      object.rowIndex = parser.readUInt(3) - 1;
+      object.tableIndex = parser.readUInt(1);
     }
+    else {
+      var bc = 1, bv, size = 2, tables = parser.readTables();
 
-    // Determine if the index is represented as a 16-bit or 32-bit integer.
-    for (var i = 0; i < tableIndexes.length; i++) {
-      if ((tables[tableIndexes[i]]) &&
-        (tables[tableIndexes[i]].length > 0xFFFF)) {
-        size = 4;
-        break;
+      // Determine how many bits are required to represent the table index.
+      while ((bv = Math.pow(2, bc - 1)) < tableIndexes.length) {
+        bc++;
       }
+
+      // Determine if the index is represented as a 16-bit or 32-bit integer.
+      for (var i = 0; i < tableIndexes.length; i++) {
+        if ((tables[tableIndexes[i]]) &&
+          (tables[tableIndexes[i]].length > 0xFFFF)) {
+          size = 4;
+          break;
+        }
+      }
+
+      // Read the integer that contains both the table index and the row index.
+      var tableRowIndex = parser.readUInt(size);
+
+      // Split the integer into two separate values and update the properties.
+      object.tableIndex = tableIndexes[tableRowIndex & (bv - 1)];
+      object.rowIndex = tableRowIndex >> bc;
     }
 
-    // Read the integer that contains both the table index and the row index.
-    var tableRowIndex = reader.readUInt(size);
-
-    // Split the integer into two separate values and update the properties.
-    object.tableIndex = tableIndexes[tableRowIndex & (bv - 1)];
-    object.rowIndex = tableRowIndex >> bc;
-
-  }(this, reader, tableIndexes));
+  }(this, parser, tableIndexes));
 
 }
 

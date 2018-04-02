@@ -17,9 +17,10 @@
 
 var Extend = require('extend');
 var MethodOperation = require('../MethodOperation');
+var RowReference = require('../../Reference/RowReference');
 
 /**
- * Class LoadArgument0Operation.
+ * Class TokenOperation.
  *
  * @param {CILParser} parser
  *   The CIL parser.
@@ -31,13 +32,20 @@ var MethodOperation = require('../MethodOperation');
  * @constructor
  * @extends {MethodOperation}
  */
-function LoadArgument0Operation (parser, code, name) {
+function TokenOperation (parser, code, name) {
 
   'use strict';
 
   // Invoke the parent constructor.
   Extend(true, this, new MethodOperation(parser, code, name));
 
+  /**
+   * The token.
+   *
+   * @type {number}
+   */
+  this.token = new RowReference(parser, []);
+
 }
 
-module.exports = LoadArgument0Operation;
+module.exports = TokenOperation;
